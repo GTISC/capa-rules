@@ -1,0 +1,42 @@
+{
+  "schema": 1,
+  "scope": "Evidence-backed Windows API sequences. Matches are observed trace candidates, not qualified execution coverage.",
+  "rules": [
+    {
+      "id": "sam-and-system-hive-saves",
+      "attack_id": "T1003.002",
+      "name": "OS Credential Dumping: Security Account Manager",
+      "source": "https://attack.mitre.org/techniques/T1003/002/",
+      "rationale": "MITRE describes saving both HKLM\\SAM and HKLM\\SYSTEM for offline credential extraction.",
+      "stages": ["save_sam", "save_system"],
+      "max_call_gap": 200
+    },
+    {
+      "id": "admin-share-connect-and-copy",
+      "attack_id": "T1021.002",
+      "name": "Remote Services: SMB/Windows Admin Shares",
+      "source": "https://attack.mitre.org/techniques/T1021/002/",
+      "rationale": "MITRE describes authenticated access to C$ or ADMIN$ and remote file copy. Both calls must name the same host.",
+      "stages": ["connect_admin_share", "copy_to_admin_share"],
+      "max_call_gap": 500
+    },
+    {
+      "id": "enumerate-local-groups-and-members",
+      "attack_id": "T1069.001",
+      "name": "Permission Groups Discovery: Local Groups",
+      "source": "https://attack.mitre.org/techniques/T1069/001/",
+      "rationale": "MITRE defines discovery of local groups and their memberships; require successful local NetAPI group enumeration followed by member retrieval.",
+      "stages": ["enumerate_local_groups", "read_local_group_members"],
+      "max_call_gap": 200
+    },
+    {
+      "id": "enumerate-global-network-resources",
+      "attack_id": "T1018",
+      "name": "Remote System Discovery",
+      "source": "https://attack.mitre.org/techniques/T1018/",
+      "rationale": "MITRE describes listing other network systems; a successful RESOURCE_GLOBALNET WNetOpenEnum followed by WNetEnumResource observes network resource discovery.",
+      "stages": ["open_global_network_enum", "enumerate_network_resources"],
+      "max_call_gap": 200
+    }
+  ]
+}

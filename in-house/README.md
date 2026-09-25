@@ -30,3 +30,12 @@ install, also pass `-s /path/to/capa/sigs` when signatures are not bundled.
 The local smoke test used capa 9.4.0 and observed the T1069.001 tag at
 `0x4015D0` for SHA-256
 `157cfebd0658abeac72710fbd0184cf737d0c08041ecf58f1a5e158f5136e8d3`.
+
+`api-sequences/windows-api-sequences-v1.json` is a separate catalog of four
+ordered, successful Windows API sequences for T1003.002, T1021.002,
+T1069.001, and T1018. It is **not capa YAML**: capa does not load or evaluate
+it. Mal-S2E's `ci/identify_windows_behavior.py` invokes its trace evaluator
+explicitly when given `--trace` and reports those IDs as observed API-sequence
+candidates, separately from capa's static capabilities. Call success, order,
+process scope, and object bindings are required by those rules, but trace
+identity and completed effects need separate qualification.
