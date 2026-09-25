@@ -32,7 +32,7 @@ jobs:
     - name: Checkout capa without submodules
       uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
       with:
-        repository: mandiant/capa
+        repository: GTISC/capa
     - name: Checkout capa-rules
       uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
       with:
@@ -49,6 +49,8 @@ jobs:
         python-version: 3.12
     - name: Install capa
       run: pip install -e .
+    - name: Add GTISC benign rule fixture to lint samples
+      run: cp rules/in-house/fixtures/local_group_capability.exe tests/data/
     # Regular lint is fast, so do this first
     - name: Run regular lint on all rules
       run: python scripts/lint.py rules/

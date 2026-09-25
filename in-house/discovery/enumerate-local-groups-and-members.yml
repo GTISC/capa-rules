@@ -1,0 +1,21 @@
+rule:
+  meta:
+    name: enumerate local groups and members
+    namespace: in-house/discovery
+    authors:
+      - MalwareLab
+    description: A function references both local group enumeration and local group membership enumeration APIs. Static capability only; call success, order, and local target require runtime confirmation.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+      - Discovery::Permission Groups Discovery::Local Groups [T1069.001]
+    references:
+      - https://attack.mitre.org/techniques/T1069/001/
+    examples:
+      - 157cfebd0658abeac72710fbd0184cf737d0c08041ecf58f1a5e158f5136e8d3:0x4015D0
+  features:
+    - and:
+      - os: windows
+      - api: netapi32.NetLocalGroupEnum
+      - api: netapi32.NetLocalGroupGetMembers
