@@ -1,0 +1,433 @@
+{
+  "schema": 1,
+  "scope": "Synthetic contract tests only; no sample evidence.",
+  "cases": [
+    {
+      "rule_id": "read-bound-network-share-file",
+      "attack_id": "T1039",
+      "positive": [
+        {
+          "api": "CreateFileW",
+          "arguments": {
+            "path": "\\\\fileserver\\docs\\probe.txt",
+            "handle": 40
+          }
+        },
+        {
+          "api": "ReadFile",
+          "arguments": {
+            "handle": 40,
+            "bytes_transferred": 128
+          }
+        }
+      ],
+      "negatives": [
+        [
+          {
+            "api": "CreateFileW",
+            "arguments": {
+              "path": "C:\\docs\\probe.txt",
+              "handle": 40
+            }
+          },
+          {
+            "api": "ReadFile",
+            "arguments": {
+              "handle": 40,
+              "bytes_transferred": 128
+            }
+          }
+        ],
+        [
+          {
+            "api": "CreateFileW",
+            "arguments": {
+              "path": "\\\\fileserver\\docs\\probe.txt",
+              "handle": 40
+            }
+          },
+          {
+            "api": "ReadFile",
+            "arguments": {
+              "handle": 41,
+              "bytes_transferred": 128
+            }
+          }
+        ],
+        [
+          {
+            "api": "CreateFileW",
+            "arguments": {
+              "path": "\\\\fileserver\\docs\\probe.txt",
+              "handle": 40
+            }
+          },
+          {
+            "api": "ReadFile",
+            "arguments": {
+              "handle": 40,
+              "bytes_transferred": 0
+            }
+          }
+        ]
+      ]
+    },
+    {
+      "rule_id": "delete-powershell-history-file",
+      "attack_id": "T1070.003",
+      "positive": [
+        {
+          "api": "DeleteFileW",
+          "arguments": {
+            "path": "C:\\Users\\probe\\AppData\\Roaming\\Microsoft\\Windows\\PowerShell\\PSReadLine\\ConsoleHost_history.txt"
+          }
+        }
+      ],
+      "negatives": [
+        [
+          {
+            "api": "DeleteFileW",
+            "arguments": {
+              "path": "C:\\Users\\probe\\notes\\ConsoleHost_history.txt"
+            }
+          }
+        ],
+        [
+          {
+            "api": "DeleteFileW",
+            "arguments": {
+              "path": "C:\\Users\\probe\\AppData\\Roaming\\Microsoft\\Windows\\PowerShell\\PSReadLine\\ConsoleHost_history.txt.bak"
+            }
+          }
+        ]
+      ]
+    },
+    {
+      "rule_id": "make-and-impersonate-bound-token",
+      "attack_id": "T1134.003",
+      "positive": [
+        {
+          "api": "LogonUserW",
+          "arguments": {
+            "username": "fixture-user",
+            "token_handle": 80
+          }
+        },
+        {
+          "api": "ImpersonateLoggedOnUser",
+          "arguments": {
+            "token_handle": 80
+          }
+        }
+      ],
+      "negatives": [
+        [
+          {
+            "api": "LogonUserW",
+            "arguments": {
+              "username": "fixture-user",
+              "token_handle": 80
+            }
+          },
+          {
+            "api": "ImpersonateLoggedOnUser",
+            "arguments": {
+              "token_handle": 81
+            }
+          }
+        ],
+        [
+          {
+            "api": "ImpersonateLoggedOnUser",
+            "arguments": {
+              "token_handle": 80
+            }
+          }
+        ]
+      ]
+    },
+    {
+      "rule_id": "modify-file-dacl",
+      "attack_id": "T1222.001",
+      "positive": [
+        {
+          "api": "SetNamedSecurityInfoW",
+          "arguments": {
+            "path": "C:\\docs\\probe.txt",
+            "object_type": 1,
+            "security_information": 4
+          }
+        }
+      ],
+      "negatives": [
+        [
+          {
+            "api": "SetNamedSecurityInfoW",
+            "arguments": {
+              "path": "C:\\docs\\probe.txt",
+              "object_type": 4,
+              "security_information": 4
+            }
+          }
+        ],
+        [
+          {
+            "api": "SetNamedSecurityInfoW",
+            "arguments": {
+              "path": "C:\\docs\\probe.txt",
+              "object_type": 1,
+              "security_information": 1
+            }
+          }
+        ]
+      ]
+    },
+    {
+      "rule_id": "add-certificate-to-bound-root-store",
+      "attack_id": "T1553.004",
+      "positive": [
+        {
+          "api": "CertOpenSystemStoreW",
+          "arguments": {
+            "store_name": "ROOT",
+            "handle": 90
+          }
+        },
+        {
+          "api": "CertAddCertificateContextToStore",
+          "arguments": {
+            "store_handle": 90,
+            "certificate_context": 4096
+          }
+        }
+      ],
+      "negatives": [
+        [
+          {
+            "api": "CertOpenSystemStoreW",
+            "arguments": {
+              "store_name": "MY",
+              "handle": 90
+            }
+          },
+          {
+            "api": "CertAddCertificateContextToStore",
+            "arguments": {
+              "store_handle": 90,
+              "certificate_context": 4096
+            }
+          }
+        ],
+        [
+          {
+            "api": "CertOpenSystemStoreW",
+            "arguments": {
+              "store_name": "ROOT",
+              "handle": 90
+            }
+          },
+          {
+            "api": "CertAddCertificateContextToStore",
+            "arguments": {
+              "store_handle": 91,
+              "certificate_context": 4096
+            }
+          }
+        ]
+      ]
+    },
+    {
+      "rule_id": "execute-command-through-bound-dde-conversation",
+      "attack_id": "T1559.002",
+      "positive": [
+        {
+          "api": "DdeConnect",
+          "arguments": {
+            "handle": 100
+          }
+        },
+        {
+          "api": "DdeClientTransaction",
+          "arguments": {
+            "conversation_handle": 100,
+            "transaction_type": 16464,
+            "timeout_ms": 5000,
+            "command": "[fixture-command]"
+          }
+        }
+      ],
+      "negatives": [
+        [
+          {
+            "api": "DdeConnect",
+            "arguments": {
+              "handle": 100
+            }
+          },
+          {
+            "api": "DdeClientTransaction",
+            "arguments": {
+              "conversation_handle": 101,
+              "transaction_type": 16464,
+              "timeout_ms": 5000,
+              "command": "[fixture-command]"
+            }
+          }
+        ],
+        [
+          {
+            "api": "DdeConnect",
+            "arguments": {
+              "handle": 100
+            }
+          },
+          {
+            "api": "DdeClientTransaction",
+            "arguments": {
+              "conversation_handle": 100,
+              "transaction_type": 8368,
+              "timeout_ms": 5000,
+              "command": "[fixture-command]"
+            }
+          }
+        ]
+      ]
+    },
+    {
+      "rule_id": "set-hidden-file-attribute",
+      "attack_id": "T1564.001",
+      "positive": [
+        {
+          "api": "SetFileAttributesW",
+          "arguments": {
+            "path": "C:\\docs\\probe.txt",
+            "attributes": 2
+          }
+        }
+      ],
+      "negatives": [
+        [
+          {
+            "api": "SetFileAttributesW",
+            "arguments": {
+              "path": "C:\\docs\\probe.txt",
+              "attributes": 128
+            }
+          }
+        ],
+        [
+          {
+            "api": "SetFileAttributesW",
+            "arguments": {
+              "path": "C:\\docs\\probe.txt",
+              "attributes": 1
+            }
+          }
+        ]
+      ]
+    },
+    {
+      "rule_id": "write-bound-named-ntfs-data-stream",
+      "attack_id": "T1564.004",
+      "positive": [
+        {
+          "api": "CreateFileW",
+          "arguments": {
+            "path": "C:\\docs\\probe.txt:payload",
+            "handle": 120
+          }
+        },
+        {
+          "api": "WriteFile",
+          "arguments": {
+            "handle": 120,
+            "bytes_transferred": 32
+          }
+        }
+      ],
+      "negatives": [
+        [
+          {
+            "api": "CreateFileW",
+            "arguments": {
+              "path": "C:\\docs\\probe.txt",
+              "handle": 120
+            }
+          },
+          {
+            "api": "WriteFile",
+            "arguments": {
+              "handle": 120,
+              "bytes_transferred": 32
+            }
+          }
+        ],
+        [
+          {
+            "api": "CreateFileW",
+            "arguments": {
+              "path": "C:\\docs\\probe.txt:Zone.Identifier",
+              "handle": 120
+            }
+          },
+          {
+            "api": "WriteFile",
+            "arguments": {
+              "handle": 120,
+              "bytes_transferred": 32
+            }
+          }
+        ],
+        [
+          {
+            "api": "CreateFileW",
+            "arguments": {
+              "path": "C:\\docs\\probe.txt:payload",
+              "handle": 120
+            }
+          },
+          {
+            "api": "WriteFile",
+            "arguments": {
+              "handle": 121,
+              "bytes_transferred": 32
+            }
+          }
+        ]
+      ]
+    },
+    {
+      "rule_id": "copy-local-file-to-network-share",
+      "attack_id": "T1570",
+      "positive": [
+        {
+          "api": "CopyFileW",
+          "arguments": {
+            "source_path": "C:\\stage\\probe.exe",
+            "destination_path": "\\\\fileserver\\tools\\probe.exe"
+          }
+        }
+      ],
+      "negatives": [
+        [
+          {
+            "api": "CopyFileW",
+            "arguments": {
+              "source_path": "\\\\fileserver\\tools\\probe.exe",
+              "destination_path": "C:\\stage\\probe.exe"
+            }
+          }
+        ],
+        [
+          {
+            "api": "CopyFileW",
+            "arguments": {
+              "source_path": "C:\\stage\\probe.exe",
+              "destination_path": "C:\\other\\probe.exe"
+            }
+          }
+        ]
+      ]
+    }
+  ]
+}

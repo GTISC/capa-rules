@@ -1,0 +1,94 @@
+{
+  "schema": 1,
+  "scope": "Executable typed prerequisites are observation detectors; requirement records and missing telemetry do not count as sample evidence.",
+  "frozen_gap_ids": 302,
+  "new_contract_ids": [
+    "T1039",
+    "T1070.003",
+    "T1134.003",
+    "T1222.001",
+    "T1553.004",
+    "T1559.002",
+    "T1564.001",
+    "T1564.004",
+    "T1570"
+  ],
+  "implemented_contracts": 9,
+  "remaining_unmapped_ids": 293,
+  "detector_capacity_before": {
+    "static": 169,
+    "dynamic": 153,
+    "union": 172
+  },
+  "detector_capacity_after": {
+    "static": 169,
+    "dynamic": 162,
+    "union": 181
+  },
+  "tests_passed": 61,
+  "replay": {
+    "candidate_ids": [],
+    "executable_contract_ids": 9,
+    "frozen_gap_ids": 302,
+    "input_journals": 372,
+    "qualified_runtime_gain_ids": [],
+    "rejected_journals": 0,
+    "remaining_predicate_design_ids": 293,
+    "technique_completion_gain_ids": [],
+    "validated_journals": 372
+  },
+  "database_validation": {
+    "schema": 1,
+    "scope": "Isolated in-memory SQLite import and API recalculation; no production database was changed.",
+    "bundle_sha256": "292ae4a128b32a1bc7cabe80e1e20b9857293a69304bdad107affd6ccc3c6671",
+    "dry_run_rollback_verified": true,
+    "previous_bundle_upgrade_verified": true,
+    "historical_snapshot_preserved": true,
+    "api_capacity_recalculation_matches_snapshot": true,
+    "api_evidence_recalculation_matches_snapshot": true,
+    "sqlite_import_rows": {
+      "techniques": 474,
+      "detector_records": 754,
+      "enabled_capacity_detectors": 602,
+      "active_observations": 7272,
+      "snapshots": 2
+    },
+    "capacity_counts": {
+      "static_candidate": 169,
+      "dynamic_candidate": 162,
+      "qualified_runtime_evidence": 3,
+      "technique_completed": 0,
+      "any_detector": 181
+    },
+    "evidence_counts": {
+      "static_candidate": 77,
+      "dynamic_candidate": 13,
+      "qualified_runtime_evidence": 61,
+      "technique_completed": 1,
+      "qualified_runtime_or_higher": 61
+    }
+  },
+  "source_sha256": {
+    "catalog": "5febe1a2188685b9707d498168af4e833a36c081434ccafde87ea4091e09fb6a",
+    "telemetry_specification": "ca4f1bf2362b7cb414d1eb5e7a75176e74e08a32afe91bde1e5b7f15548044e2",
+    "model_inventory": "34c771cec657b199cd06c2ae51c29489bf9f9cd9ed4b71c621daf63baa235645",
+    "engine": "ff87661b441920b63a47281bbcd1803d91e56a59f801d71d8f06bf767a97e18a",
+    "auditor": "2e93367d86afc9e598166502c1862143fdcfed9d36a1226c12076f9fa6b6dcdd",
+    "test_source": "e6942b72d1d5b96b62212fd5997bba0d9c26916f3d1682773434b6b3ba5c8452",
+    "test_cases": "6db774e58e89721d4bd1ae888efb3e856b1d33b169361d6c896e66b12a43112e",
+    "tests": "18359486bba070eb0fd4473b085a6498ba880feed578815a69e9b3973ecbc31d",
+    "mapping_audit": "55b82c72e7236b084714dd376d1d32c19b3c1680112baaf52fca56721eb60bdf",
+    "prerequisite_audit": "60e3b749b635b420316e00878e8fc09d46169553a8778400b2e893d24dce9af4",
+    "runtime_replay": "0fe9819af9c023e7bf32e9b925ad7e3343f578c16d628058069663f922ad164e",
+    "coverage_matrix": "2b257b04596751854fb669592e104f4ab1a1f4956e7f9b92d14ad24bd1feeec3",
+    "database_bundle": "292ae4a128b32a1bc7cabe80e1e20b9857293a69304bdad107affd6ccc3c6671",
+    "database_validation": "1edef9a5ff5a0b1efa99060c95c19fb316a235ae3d0b1d31e67e80a27fea8df6"
+  },
+  "limitations": [
+    "Only nine prerequisite models are executable; the other 293 are requirements pending predicate design.",
+    "The 372-journal replay produces no new contract candidates, qualified runtime IDs, or completed techniques.",
+    "ReadFile/WriteFile fields must distinguish handles and actual transferred bytes from requested capacity.",
+    "New API hooks and external artifact/network/authentication/causal or delivery context are needed for further definitions.",
+    "Database validation uses isolated in-memory SQLite; production was not changed."
+  ]
+}

@@ -1,0 +1,223 @@
+{
+  "schema": 1,
+  "scope": "Producer requirements only. These declarations never count as detectors or sample evidence.",
+  "catalog_sha256": "5febe1a2188685b9707d498168af4e833a36c081434ccafde87ea4091e09fb6a",
+  "required_identity": [
+    "instance",
+    "pid",
+    "lifetime",
+    "state",
+    "call_id",
+    "entry_time_ns",
+    "time_ns",
+    "caller_pc",
+    "tid when a contract requires same_thread"
+  ],
+  "capture_rules": [
+    "Use canonical field names with explicit string/integer types in lifecycle arguments.",
+    "Input and output values need distinct roles; never guess a missing value from a generic capacity or another argument.",
+    "Record optional output values only after successful concrete returns; omit unknown/symbolic outputs.",
+    "Maintain API-specific success semantics, resource lifetime, and process/state isolation."
+  ],
+  "apis": [
+    {
+      "api": "certaddcertificatecontexttostore",
+      "required_canonical_fields": [
+        "certificate_context",
+        "store_handle"
+      ],
+      "supporting_attack_ids": [
+        "T1553.004"
+      ],
+      "implementation_note": "Capture these exact input/output roles from the API contract; opaque pointers are not dereferenced values."
+    },
+    {
+      "api": "certclosestore",
+      "required_canonical_fields": [
+        "handle"
+      ],
+      "supporting_attack_ids": [
+        "T1553.004"
+      ],
+      "implementation_note": "Capture these exact input/output roles from the API contract; opaque pointers are not dereferenced values."
+    },
+    {
+      "api": "certopenstore",
+      "required_canonical_fields": [
+        "handle",
+        "store_name",
+        "store_provider"
+      ],
+      "supporting_attack_ids": [
+        "T1553.004"
+      ],
+      "implementation_note": "Record the concrete system store name for the supported system-store provider and the returned store handle; provider-specific parameters must not be guessed to be a store name."
+    },
+    {
+      "api": "certopensystemstore",
+      "required_canonical_fields": [
+        "handle",
+        "store_name",
+        "store_provider"
+      ],
+      "supporting_attack_ids": [
+        "T1553.004"
+      ],
+      "implementation_note": "Record the actual system store name and returned store handle."
+    },
+    {
+      "api": "closehandle",
+      "required_canonical_fields": [
+        "handle"
+      ],
+      "supporting_attack_ids": [
+        "T1039",
+        "T1134.003",
+        "T1564.004"
+      ],
+      "implementation_note": "Record the exact handle even when no named path is available; this invalidates prior bindings."
+    },
+    {
+      "api": "copyfile",
+      "required_canonical_fields": [
+        "destination_path",
+        "source_path"
+      ],
+      "supporting_attack_ids": [
+        "T1570"
+      ],
+      "implementation_note": "Preserve source versus destination roles. Legacy journal path_hex is destination and value_hex is source."
+    },
+    {
+      "api": "createfile",
+      "required_canonical_fields": [
+        "handle",
+        "path"
+      ],
+      "supporting_attack_ids": [
+        "T1039",
+        "T1564.004"
+      ],
+      "implementation_note": "Return the actual file handle and the concrete target path; an invalid handle is failure."
+    },
+    {
+      "api": "ddeclienttransaction",
+      "required_canonical_fields": [
+        "command",
+        "conversation_handle",
+        "timeout_ms",
+        "transaction_type"
+      ],
+      "supporting_attack_ids": [
+        "T1559.002"
+      ],
+      "implementation_note": "Record conversation handle, transaction type, timeout, and concrete command content for execute transactions, plus OS thread identity."
+    },
+    {
+      "api": "ddeconnect",
+      "required_canonical_fields": [
+        "handle"
+      ],
+      "supporting_attack_ids": [
+        "T1559.002"
+      ],
+      "implementation_note": "Record returned conversation handle and OS thread identity."
+    },
+    {
+      "api": "ddedisconnect",
+      "required_canonical_fields": [
+        "handle"
+      ],
+      "supporting_attack_ids": [
+        "T1559.002"
+      ],
+      "implementation_note": "Capture these exact input/output roles from the API contract; opaque pointers are not dereferenced values."
+    },
+    {
+      "api": "deletefile",
+      "required_canonical_fields": [
+        "path"
+      ],
+      "supporting_attack_ids": [
+        "T1070.003"
+      ],
+      "implementation_note": "Capture these exact input/output roles from the API contract; opaque pointers are not dereferenced values."
+    },
+    {
+      "api": "impersonateloggedonuser",
+      "required_canonical_fields": [
+        "token_handle"
+      ],
+      "supporting_attack_ids": [
+        "T1134.003"
+      ],
+      "implementation_note": "Capture these exact input/output roles from the API contract; opaque pointers are not dereferenced values."
+    },
+    {
+      "api": "logonuser",
+      "required_canonical_fields": [
+        "token_handle",
+        "username"
+      ],
+      "supporting_attack_ids": [
+        "T1134.003"
+      ],
+      "implementation_note": "Record username and the dereferenced output token handle after success. Do not record the password."
+    },
+    {
+      "api": "readfile",
+      "required_canonical_fields": [
+        "bytes_transferred",
+        "handle"
+      ],
+      "supporting_attack_ids": [
+        "T1039"
+      ],
+      "implementation_note": "Record the input handle and dereferenced output bytes actually read after a successful return. Requested bytes alone are insufficient."
+    },
+    {
+      "api": "setfileattributes",
+      "required_canonical_fields": [
+        "attributes",
+        "path"
+      ],
+      "supporting_attack_ids": [
+        "T1564.001"
+      ],
+      "implementation_note": "Record the actual named attributes bitmask separately from sizes and other numeric arguments."
+    },
+    {
+      "api": "setnamedsecurityinfo",
+      "required_canonical_fields": [
+        "object_type",
+        "path",
+        "security_information"
+      ],
+      "supporting_attack_ids": [
+        "T1222.001"
+      ],
+      "implementation_note": "Record object type, security information bitmask, and named object path; success is ERROR_SUCCESS (zero)."
+    },
+    {
+      "api": "setthreadtoken",
+      "required_canonical_fields": [
+        "token_handle"
+      ],
+      "supporting_attack_ids": [
+        "T1134.003"
+      ],
+      "implementation_note": "Capture these exact input/output roles from the API contract; opaque pointers are not dereferenced values."
+    },
+    {
+      "api": "writefile",
+      "required_canonical_fields": [
+        "bytes_transferred",
+        "handle"
+      ],
+      "supporting_attack_ids": [
+        "T1564.004"
+      ],
+      "implementation_note": "Record the input handle and dereferenced output bytes actually written after a successful return. Requested bytes alone are insufficient."
+    }
+  ]
+}

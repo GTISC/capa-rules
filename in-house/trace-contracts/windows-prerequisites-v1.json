@@ -1,0 +1,535 @@
+{
+  "schema": 1,
+  "engine": "typed_api_prerequisites_v1",
+  "evidence_level": "observation_candidate",
+  "required_trace_semantics": [
+    "paired successful API operations with contract-specific success semantics",
+    "concrete named arguments preserving input/output roles",
+    "one process lifetime and symbolic state",
+    "ordered non-overlapping stages, bounded time and call gaps",
+    "handle invalidation and same-thread scope when specified",
+    "missing fields are insufficient telemetry, never negative behavior evidence"
+  ],
+  "rules": [
+    {
+      "id": "read-bound-network-share-file",
+      "attack_id": "T1039",
+      "name": "Read data from a network-share file",
+      "source": "https://attack.mitre.org/techniques/T1039/",
+      "description": "Binds a successful nonempty read to the handle returned for a concrete UNC file. EOF, requested capacity, and unrelated file handles cannot establish collection.",
+      "same_thread": false,
+      "max_call_gap": 100,
+      "max_elapsed_ns": 60000000000,
+      "stages": [
+        {
+          "id": "open-share-file",
+          "apis": [
+            "createfile"
+          ],
+          "where": [
+            {
+              "field": "path",
+              "op": "unc_path",
+              "value": true
+            },
+            {
+              "field": "handle",
+              "op": "handle",
+              "value": true
+            }
+          ],
+          "bind": {
+            "file": "handle"
+          }
+        },
+        {
+          "id": "read-bound-file",
+          "apis": [
+            "readfile"
+          ],
+          "where": [
+            {
+              "field": "handle",
+              "op": "eq",
+              "value": {
+                "ref": "file"
+              }
+            },
+            {
+              "field": "bytes_transferred",
+              "op": "gt",
+              "value": 0
+            }
+          ],
+          "bind": {}
+        }
+      ],
+      "invalidate": [
+        {
+          "apis": [
+            "closehandle",
+            "createfile"
+          ],
+          "field": "handle",
+          "binding": "file"
+        }
+      ],
+      "qualification_required": [
+        "exact original sample and caller identity",
+        "independent target/effect qualification",
+        "adversary intent and full completion remain unproven"
+      ]
+    },
+    {
+      "id": "delete-powershell-history-file",
+      "attack_id": "T1070.003",
+      "name": "Delete the PSReadLine history file",
+      "source": "https://attack.mitre.org/techniques/T1070/003/",
+      "description": "Requires successful deletion of the exact PSReadLine history location. Disabling future history saving and deleting similarly named files are excluded.",
+      "same_thread": false,
+      "max_call_gap": 100,
+      "max_elapsed_ns": 60000000000,
+      "stages": [
+        {
+          "id": "delete-history",
+          "apis": [
+            "deletefile"
+          ],
+          "where": [
+            {
+              "field": "path",
+              "op": "local_path",
+              "value": true
+            },
+            {
+              "field": "path",
+              "op": "regex",
+              "value": "(?i)[\\\\/]Microsoft[\\\\/]Windows[\\\\/]PowerShell[\\\\/]PSReadLine[\\\\/]ConsoleHost_history\\.txt\\Z"
+            }
+          ],
+          "bind": {}
+        }
+      ],
+      "invalidate": [],
+      "qualification_required": [
+        "exact original sample and caller identity",
+        "independent target/effect qualification",
+        "adversary intent and full completion remain unproven"
+      ]
+    },
+    {
+      "id": "make-and-impersonate-bound-token",
+      "attack_id": "T1134.003",
+      "name": "Create a logon token and impersonate that token",
+      "source": "https://attack.mitre.org/techniques/T1134/003/",
+      "description": "Correlates creation of a new token with later impersonation of that exact token. No password value is required or stored. Stealing or duplicating an existing token is a different predicate.",
+      "same_thread": false,
+      "max_call_gap": 100,
+      "max_elapsed_ns": 60000000000,
+      "stages": [
+        {
+          "id": "make-token",
+          "apis": [
+            "logonuser"
+          ],
+          "where": [
+            {
+              "field": "username",
+              "op": "regex",
+              "value": "\\S"
+            },
+            {
+              "field": "token_handle",
+              "op": "handle",
+              "value": true
+            }
+          ],
+          "bind": {
+            "token": "token_handle"
+          }
+        },
+        {
+          "id": "impersonate-token",
+          "apis": [
+            "setthreadtoken",
+            "impersonateloggedonuser"
+          ],
+          "where": [
+            {
+              "field": "token_handle",
+              "op": "eq",
+              "value": {
+                "ref": "token"
+              }
+            }
+          ],
+          "bind": {}
+        }
+      ],
+      "invalidate": [
+        {
+          "apis": [
+            "closehandle"
+          ],
+          "field": "handle",
+          "binding": "token"
+        },
+        {
+          "apis": [
+            "logonuser"
+          ],
+          "field": "token_handle",
+          "binding": "token"
+        }
+      ],
+      "qualification_required": [
+        "exact original sample and caller identity",
+        "independent target/effect qualification",
+        "adversary intent and full completion remain unproven"
+      ]
+    },
+    {
+      "id": "modify-file-dacl",
+      "attack_id": "T1222.001",
+      "name": "Modify a Windows file discretionary ACL",
+      "source": "https://attack.mitre.org/techniques/T1222/001/",
+      "description": "Requires the SE_FILE_OBJECT type and DACL_SECURITY_INFORMATION bit. Registry objects and owner-only updates do not satisfy this predicate.",
+      "same_thread": false,
+      "max_call_gap": 100,
+      "max_elapsed_ns": 60000000000,
+      "stages": [
+        {
+          "id": "set-file-dacl",
+          "apis": [
+            "setnamedsecurityinfo"
+          ],
+          "where": [
+            {
+              "field": "path",
+              "op": "local_path",
+              "value": true
+            },
+            {
+              "field": "object_type",
+              "op": "eq",
+              "value": 1
+            },
+            {
+              "field": "security_information",
+              "op": "bits_all",
+              "value": 4
+            }
+          ],
+          "bind": {}
+        }
+      ],
+      "invalidate": [],
+      "qualification_required": [
+        "exact original sample and caller identity",
+        "independent target/effect qualification",
+        "adversary intent and full completion remain unproven"
+      ]
+    },
+    {
+      "id": "add-certificate-to-bound-root-store",
+      "attack_id": "T1553.004",
+      "name": "Add a certificate to a bound ROOT store",
+      "source": "https://attack.mitre.org/techniques/T1553/004/",
+      "description": "Correlates certificate insertion with the actual ROOT store handle. Arbitrary certificate-store operations and unrelated store handles are excluded; persistent trust and certificate identity require qualification.",
+      "same_thread": false,
+      "max_call_gap": 100,
+      "max_elapsed_ns": 60000000000,
+      "stages": [
+        {
+          "id": "open-root-store",
+          "apis": [
+            "certopenstore",
+            "certopensystemstore"
+          ],
+          "where": [
+            {
+              "field": "store_name",
+              "op": "regex",
+              "value": "(?i)\\AROOT\\Z"
+            },
+            {
+              "field": "handle",
+              "op": "handle",
+              "value": true
+            },
+            {
+              "field": "store_provider",
+              "op": "in",
+              "value": [
+                "system",
+                "system_registry"
+              ]
+            }
+          ],
+          "bind": {
+            "store": "handle"
+          }
+        },
+        {
+          "id": "insert-root-certificate",
+          "apis": [
+            "certaddcertificatecontexttostore"
+          ],
+          "where": [
+            {
+              "field": "store_handle",
+              "op": "eq",
+              "value": {
+                "ref": "store"
+              }
+            },
+            {
+              "field": "certificate_context",
+              "op": "handle",
+              "value": true
+            }
+          ],
+          "bind": {}
+        }
+      ],
+      "invalidate": [
+        {
+          "apis": [
+            "certclosestore",
+            "certopenstore",
+            "certopensystemstore"
+          ],
+          "field": "handle",
+          "binding": "store"
+        }
+      ],
+      "qualification_required": [
+        "exact original sample and caller identity",
+        "independent target/effect qualification",
+        "adversary intent and full completion remain unproven"
+      ]
+    },
+    {
+      "id": "execute-command-through-bound-dde-conversation",
+      "attack_id": "T1559.002",
+      "name": "Execute a command through a bound DDE conversation",
+      "source": "https://attack.mitre.org/techniques/T1559/002/",
+      "description": "Requires a synchronous XTYP_EXECUTE request on the same conversation and OS thread, including concrete command content. DDE data requests and asynchronous submission are excluded.",
+      "same_thread": true,
+      "max_call_gap": 100,
+      "max_elapsed_ns": 60000000000,
+      "stages": [
+        {
+          "id": "connect-dde",
+          "apis": [
+            "ddeconnect"
+          ],
+          "where": [
+            {
+              "field": "handle",
+              "op": "handle",
+              "value": true
+            }
+          ],
+          "bind": {
+            "conversation": "handle"
+          }
+        },
+        {
+          "id": "execute-dde-command",
+          "apis": [
+            "ddeclienttransaction"
+          ],
+          "where": [
+            {
+              "field": "conversation_handle",
+              "op": "eq",
+              "value": {
+                "ref": "conversation"
+              }
+            },
+            {
+              "field": "transaction_type",
+              "op": "eq",
+              "value": 16464
+            },
+            {
+              "field": "timeout_ms",
+              "op": "gt",
+              "value": -1
+            },
+            {
+              "field": "timeout_ms",
+              "op": "lt",
+              "value": 4294967295
+            },
+            {
+              "field": "command",
+              "op": "regex",
+              "value": "\\S"
+            }
+          ],
+          "bind": {}
+        }
+      ],
+      "invalidate": [
+        {
+          "apis": [
+            "ddedisconnect",
+            "ddeconnect"
+          ],
+          "field": "handle",
+          "binding": "conversation"
+        }
+      ],
+      "qualification_required": [
+        "exact original sample and caller identity",
+        "independent target/effect qualification",
+        "adversary intent and full completion remain unproven"
+      ]
+    },
+    {
+      "id": "set-hidden-file-attribute",
+      "attack_id": "T1564.001",
+      "name": "Set the hidden attribute on a Windows file",
+      "source": "https://attack.mitre.org/techniques/T1564/001/",
+      "description": "Requires the FILE_ATTRIBUTE_HIDDEN bit in the named attributes argument on the successful target operation; unrelated numeric arguments cannot satisfy it.",
+      "same_thread": false,
+      "max_call_gap": 100,
+      "max_elapsed_ns": 60000000000,
+      "stages": [
+        {
+          "id": "hide-file",
+          "apis": [
+            "setfileattributes"
+          ],
+          "where": [
+            {
+              "field": "path",
+              "op": "local_path",
+              "value": true
+            },
+            {
+              "field": "attributes",
+              "op": "bits_all",
+              "value": 2
+            }
+          ],
+          "bind": {}
+        }
+      ],
+      "invalidate": [],
+      "qualification_required": [
+        "exact original sample and caller identity",
+        "independent target/effect qualification",
+        "adversary intent and full completion remain unproven"
+      ]
+    },
+    {
+      "id": "write-bound-named-ntfs-data-stream",
+      "attack_id": "T1564.004",
+      "name": "Write data into a bound named NTFS stream",
+      "source": "https://attack.mitre.org/techniques/T1564/004/",
+      "description": "Binds a nonempty write to a named NTFS data stream. Ordinary files, unnamed default streams, Zone.Identifier metadata, mismatched handles, and zero-byte writes are excluded.",
+      "same_thread": false,
+      "max_call_gap": 100,
+      "max_elapsed_ns": 60000000000,
+      "stages": [
+        {
+          "id": "open-named-data-stream",
+          "apis": [
+            "createfile"
+          ],
+          "where": [
+            {
+              "field": "path",
+              "op": "ntfs_stream",
+              "value": true
+            },
+            {
+              "field": "handle",
+              "op": "handle",
+              "value": true
+            }
+          ],
+          "bind": {
+            "file": "handle"
+          }
+        },
+        {
+          "id": "write-bound-stream",
+          "apis": [
+            "writefile"
+          ],
+          "where": [
+            {
+              "field": "handle",
+              "op": "eq",
+              "value": {
+                "ref": "file"
+              }
+            },
+            {
+              "field": "bytes_transferred",
+              "op": "gt",
+              "value": 0
+            }
+          ],
+          "bind": {}
+        }
+      ],
+      "invalidate": [
+        {
+          "apis": [
+            "closehandle",
+            "createfile"
+          ],
+          "field": "handle",
+          "binding": "file"
+        }
+      ],
+      "qualification_required": [
+        "exact original sample and caller identity",
+        "independent target/effect qualification",
+        "adversary intent and full completion remain unproven"
+      ]
+    },
+    {
+      "id": "copy-local-file-to-network-share",
+      "attack_id": "T1570",
+      "name": "Copy a local file to a named network-share destination",
+      "source": "https://attack.mitre.org/techniques/T1570/",
+      "description": "Uses the actual source and destination roles of a successful CopyFile operation. A UNC source, local copy, or arbitrary UNC string is insufficient. Actual peer identity and compromised-environment scope need qualification.",
+      "same_thread": false,
+      "max_call_gap": 100,
+      "max_elapsed_ns": 60000000000,
+      "stages": [
+        {
+          "id": "copy-to-share",
+          "apis": [
+            "copyfile"
+          ],
+          "where": [
+            {
+              "field": "source_path",
+              "op": "local_path",
+              "value": true
+            },
+            {
+              "field": "destination_path",
+              "op": "unc_path",
+              "value": true
+            }
+          ],
+          "bind": {}
+        }
+      ],
+      "invalidate": [],
+      "qualification_required": [
+        "exact original sample and caller identity",
+        "independent target/effect qualification",
+        "adversary intent and full completion remain unproven"
+      ]
+    }
+  ]
+}
