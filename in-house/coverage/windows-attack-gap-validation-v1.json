@@ -1,0 +1,151 @@
+{
+  "schema": 1,
+  "scope": "Validated detector-capacity expansion; runtime candidates and completed behavior remain separate.",
+  "catalog_ids": 474,
+  "official_definitions_sourced": 338,
+  "new_candidate_rules": 36,
+  "new_static_rule_ids": 36,
+  "new_dynamic_feature_compatible_rule_ids": 35,
+  "remaining_definition_designs": 302,
+  "added_detector_ids": [
+    "T1003.001",
+    "T1003.003",
+    "T1003.004",
+    "T1003.005",
+    "T1006",
+    "T1016.002",
+    "T1059.010",
+    "T1059.011",
+    "T1069.002",
+    "T1070.005",
+    "T1087.001",
+    "T1087.002",
+    "T1120",
+    "T1124",
+    "T1134.002",
+    "T1201",
+    "T1218.003",
+    "T1218.004",
+    "T1218.005",
+    "T1218.007",
+    "T1218.008",
+    "T1218.009",
+    "T1218.010",
+    "T1218.011",
+    "T1218.013",
+    "T1653",
+    "T1654",
+    "T1674",
+    "T1680",
+    "T1685",
+    "T1685.001",
+    "T1685.005",
+    "T1686",
+    "T1686.003",
+    "T1688",
+    "T1690"
+  ],
+  "detector_capacity_before": {
+    "static": 133,
+    "dynamic_feature_compatible": 118,
+    "union": 136,
+    "unmapped": 338
+  },
+  "detector_capacity_after": {
+    "static": 169,
+    "dynamic_feature_compatible": 153,
+    "union": 172,
+    "unmapped": 302
+  },
+  "rules_manifest_sha256": "2ea3cc54a5c34f8f4666803b999451bb12aa2fe502b400c0fee877d6f173238b",
+  "validation": {
+    "rule_tests_passed": 100,
+    "rule_tests_failed": 0,
+    "mapping_database_matrix_tests_passed": 7,
+    "new_rules_matched_by_full_static_pe_fixture": 35,
+    "lua_validation": "feature-context and S2E dynamic fixtures; PE fixture does not link Lua",
+    "database": {
+      "schema": 1,
+      "scope": "Isolated in-memory SQLite import and API recalculation; no production database was changed.",
+      "bundle_sha256": "0c3635e17148b81bcaf0ae1f6b3f0641e14c6712b579021cf8fa97c57d062a00",
+      "dry_run_rollback_verified": true,
+      "previous_bundle_upgrade_verified": true,
+      "historical_snapshot_preserved": true,
+      "api_capacity_recalculation_matches_snapshot": true,
+      "api_evidence_recalculation_matches_snapshot": true,
+      "sqlite_import_rows": {
+        "techniques": 474,
+        "detector_records": 745,
+        "enabled_capacity_detectors": 593,
+        "active_observations": 7272,
+        "snapshots": 2
+      },
+      "capacity_counts": {
+        "static_candidate": 169,
+        "dynamic_candidate": 153,
+        "qualified_runtime_evidence": 3,
+        "technique_completed": 0,
+        "any_detector": 172
+      },
+      "evidence_counts": {
+        "static_candidate": 77,
+        "dynamic_candidate": 13,
+        "qualified_runtime_evidence": 61,
+        "technique_completed": 1,
+        "qualified_runtime_or_higher": 61
+      }
+    }
+  },
+  "runtime_replay": {
+    "unique_journals": 372,
+    "successful_calls": 78781,
+    "rejected_unique_journals": 0,
+    "new_active_catalog_candidate_ids": [
+      "T1006"
+    ],
+    "new_candidate_matching_journals": 11,
+    "new_candidate_matching_call_locations": 113,
+    "qualified_runtime_gain_ids": [],
+    "new_guest_executions": 0
+  },
+  "instrumentation": {
+    "new_rules": 36,
+    "rules_with_any_observed_api": 4,
+    "rules_with_candidate_match": 1,
+    "new_candidate_ids": [
+      "T1006"
+    ]
+  },
+  "sample_bound_evidence_counts": {
+    "dynamic_candidate": 13,
+    "qualified_runtime_evidence": 61,
+    "qualified_runtime_or_higher": 61,
+    "static_candidate": 77,
+    "technique_completed": 1
+  },
+  "source_sha256": {
+    "official_definitions": "96c048f2b5e3c6ce1aee97e9f88eb8a587538915ca142369f0b6fa51597b414f",
+    "official_definition_review": "ce45ccc73a70080a1806e7c3db6a448c1507ea5c889ec63f83ca96fdde713fe5",
+    "mapping_audit": "1bcada9ceb2486fb8035d9ef183d3618cd68fbf93d7a9653c2ecd4c57a2b03a9",
+    "rule_cases": "194d1c09f2f0fa67c67a6f008ddd799fb49e1f8e15bc90b882dd414c297cf7ed",
+    "rule_test_source": "a77a7962865a03b0d58af1ae44c9c637d0824e5be80089878c4483b4a7932ba2",
+    "official_source_fetcher": "cb2664b8969fe06fd29060a452837d8b4bc975a776793d14a43fe2f47c2ad59a",
+    "static_fixture_source": "fe581e1bca6074df4af349b995508e2b16205201cde61143995b5655868e879a",
+    "static_fixture_pe": "91cd6f67bc440f2ca1cad3fca88b4291241acf301a172950f7dfebd2114f758e",
+    "static_fixture_analysis": "a79077e11fe2f2c95a1d5a451e2338d9d2b8171c034a05aa6a473b643112f730",
+    "rule_tests": "ab4089bf40d9514c1826a4bc00fdaa453ebe0fa8008e8c8dd3be6ee4dfbb66c0",
+    "runtime_replay": "fb5877a7e217e68e4a884fcd6b97798b5e3c04a76d2ab324a7c244dc68a79478",
+    "expanded_rule_telemetry": "4fc0f38e7d79a73e95f918d56745f4ca2a01a7724d050dddc5307ea48058b3de",
+    "coverage_matrix": "7245e29bbb181a9fb880a226c92f8376c20f7f5a90f5ae60bc8a6c2a9766e285",
+    "detector_bundle": "0c3635e17148b81bcaf0ae1f6b3f0641e14c6712b579021cf8fa97c57d062a00",
+    "database_validation": "410445c6f6f050b830269b393681297815ad4b9c1921b7894202a7d913bd55e5"
+  },
+  "limitations": [
+    "302 official definitions remain pending a discriminating executable predicate and required context; review records never count as detectors.",
+    "Dynamic capacity means feature compatibility, not deployed-hook coverage: only four new rules have any required API observed in the archived journals.",
+    "Synthetic fixtures and unexecuted PE capabilities do not create malware or runtime evidence.",
+    "The replay spans historical experiments and controls; the new T1006 candidates require original-caller provenance and actual volume-read qualification.",
+    "Qualified runtime evidence remains 61 IDs and completed-technique evidence remains one ID.",
+    "Database validation used isolated in-memory SQLite; the bundle is ready for import but no production database was changed."
+  ]
+}

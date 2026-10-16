@@ -81,3 +81,79 @@ T1497.002 needs concrete input state plus evidence that a comparison gated a
 branch. T1496 needs a concrete mining workload or protocol exchange tied to
 resource consumption. Adding API-name-only rules for these behaviors would
 increase the mapping count while weakening the meaning of runtime evidence.
+
+## Official-definition gap expansion
+
+`coverage/windows-attack-gap-review-v1.json` retains the frozen 338-ID gap,
+official MITRE technique URLs, website/definition hashes, short attributed
+definition excerpts, design requirements, and per-ID admission decisions.
+All 338 official technique pages were fetched successfully. The complete HTML
+and extracted definitions are research artifacts outside this repository;
+the checked-in excerpts and hashes pin the basis for the review.
+
+This batch adds 36 capa rules for 36 previously unmapped IDs. All have static
+function scope; 35 also have dynamic call/span scope. The LSASS/minidump rule
+is static-only: references in one function cannot prove that a runtime dump
+handle belongs to LSASS. The other rules cover credential-storage access,
+raw-volume access, discovery, token-based process creation, Lua and AutoIt/
+AutoHotkey capabilities, specific utility invocation forms, input synthesis,
+sleep prevention, and defense configuration/clearing requests.
+
+The remaining 302 definitions have `predicate_design_pending` dispositions,
+with required context and a reason that API-only matching is insufficient.
+These entries are design records, not enabled detectors. No tactic keyword,
+family association, or automatic parent-technique roll-up creates a rule.
+Some existing upstream rules use retired ATT&CK IDs; new rules use the active
+IDs after checking the official definitions and replacement relationships.
+
+Candidate scope is deliberately limited. Command rules recognize specific
+direct process-launch forms; shell wrappers, alternate option orderings,
+encoded commands, and payload execution require additional parsing and
+qualification. A matching utility launch does not prove that its operation
+succeeded. Registry/database opens do not prove credential extraction.
+Static command strings assembled on the stack or decoded at runtime may be
+invisible to the static extractor. Generic S2E argument values are not typed
+target/handle bindings, and feature compatibility does not guarantee that a
+current hook records every required argument.
+
+Run the regression suite with the GTISC capa environment:
+
+```sh
+PYTHONPATH=/path/to/capa /path/to/capa/.venv/bin/python -m pytest -q \
+  in-house/tests/test_official_gap_rules.py
+```
+
+`fixtures/official-gap-cases.json` contains hand-selected positive and near-
+miss observation cases, including benign operations. The suite additionally
+checks failed returns, unrelated-call arguments, and divergent-state
+isolation through the actual S2E extractor and capa dynamic engine. With
+`i686-w64-mingw32-gcc` available it compiles
+`fixtures/official_gap_capabilities.c` and requires the full static analyzer
+to match 35 new rules. Lua is covered by feature/dynamic fixtures, because
+that PE does not link a Lua runtime. A second PE verifies function isolation.
+The PE fixtures are analyzed without executing them; neither fixture creates
+sample or runtime coverage credit.
+
+Re-fetch the frozen gap's official source definitions:
+
+```sh
+python in-house/tools/fetch_attack_definitions.py \
+  --audit /path/to/baseline-coverage-audit.json \
+  --cache /path/to/research/mitre-html \
+  --out /path/to/research/official-definitions.json
+```
+
+The validated detector union grows from 136/474 to 172/474 IDs; the unmapped
+gap decreases from 338 to 302. Static capacity is 169/474 and S2E feature-
+compatible dynamic capacity is 153/474. Replay of 372 existing journals
+(78,781 successful calls) adds a T1006 observation candidate in 11 journals.
+Those historical observations still require provenance and effect checks.
+Only four of the 36 new rules have any of their required APIs represented in
+the archived successful calls. No CreateProcess-family calls are recorded in
+those journals, so the utility-launch rules need additional lifecycle
+instrumentation before these archives can exercise them. Dynamic capacity
+here measures extractor/rule feature compatibility, not deployed-hook
+coverage.
+Qualified runtime coverage remains 61/474; technique completion remains
+1/474. The checks and their source digests are summarized in
+`coverage/windows-attack-gap-validation-v1.json`.

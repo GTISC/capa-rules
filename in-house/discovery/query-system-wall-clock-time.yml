@@ -1,0 +1,22 @@
+rule:
+  meta:
+    name: query system wall clock time
+    namespace: in-house/discovery
+    authors:
+    - MalwareLab
+    description: Queries wall-clock system time. Monotonic counters and generic timing checks are excluded; this
+      observation does not establish sandbox evasion. Static matches are capability candidates; dynamic matches
+      are observations from successful calls, not proof of adversary intent or technique completion.
+    scopes:
+      static: function
+      dynamic: call
+    att&ck:
+    - Discovery::System Time Discovery [T1124]
+    references:
+    - https://attack.mitre.org/techniques/T1124/
+  features:
+  - or:
+    - api: GetSystemTime
+    - api: GetLocalTime
+    - api: GetSystemTimeAsFileTime
+    - api: GetSystemTimePreciseAsFileTime

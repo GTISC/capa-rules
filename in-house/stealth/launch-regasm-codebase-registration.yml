@@ -1,0 +1,25 @@
+rule:
+  meta:
+    name: launch regasm codebase registration
+    namespace: in-house/stealth
+    authors:
+    - MalwareLab
+    description: Launches assembly registration with RegAsm and an explicit codebase DLL operand. Registration callback
+      execution is not yet qualified. Static matches are capability candidates; dynamic matches are observations
+      from successful calls, not proof of adversary intent or technique completion.
+    scopes:
+      static: function
+      dynamic: call
+    att&ck:
+    - Stealth::Regsvcs/Regasm [T1218.009]
+    references:
+    - https://attack.mitre.org/techniques/T1218/009/
+  features:
+  - and:
+    - or:
+      - api: CreateProcess
+      - api: CreateProcessInternal
+      - api: CreateProcessAsUser
+      - api: CreateProcessWithToken
+    - string: /\A(?:"(?:[^"\r\n]*[\\/])?(?:RegAsm)(?:\.exe)?"|(?:[^\\/\s"\r\n]+[\\/])*(?:RegAsm)(?:\.exe)?)[ \t]+(?:"[^"\r\n]+\.dll"|[^\s"\r\n]+\.dll)[
+        \t]+/codebase[ \t]*\Z/i

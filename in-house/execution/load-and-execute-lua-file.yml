@@ -1,0 +1,25 @@
+rule:
+  meta:
+    name: load and execute lua file
+    namespace: in-house/execution
+    authors:
+    - MalwareLab
+    description: Combines Lua file loading and protected invocation in one function or dynamic state stream. This
+      candidate does not prove that both operations used the same Lua state or that the script was malicious. Static
+      matches are capability candidates; dynamic matches are observations from successful calls, not proof of adversary
+      intent or technique completion.
+    scopes:
+      static: function
+      dynamic: span of calls
+    att&ck:
+    - Execution::Lua [T1059.011]
+    references:
+    - https://attack.mitre.org/techniques/T1059/011/
+  features:
+  - and:
+    - or:
+      - api: luaL_loadfile
+      - api: luaL_loadfilex
+    - or:
+      - api: lua_pcall
+      - api: lua_pcallk

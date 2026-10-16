@@ -1,0 +1,25 @@
+rule:
+  meta:
+    name: launch odbcconf regsvr action
+    namespace: in-house/stealth
+    authors:
+    - MalwareLab
+    description: Launches the ODBC REGSVR DLL action documented by MITRE; generic ODBC configuration does not match.
+      Static matches are capability candidates; dynamic matches are observations from successful calls, not proof
+      of adversary intent or technique completion.
+    scopes:
+      static: function
+      dynamic: call
+    att&ck:
+    - Stealth::Odbcconf [T1218.008]
+    references:
+    - https://attack.mitre.org/techniques/T1218/008/
+  features:
+  - and:
+    - or:
+      - api: CreateProcess
+      - api: CreateProcessInternal
+      - api: CreateProcessAsUser
+      - api: CreateProcessWithToken
+    - string: /\A(?:"(?:[^"\r\n]*[\\/])?(?:odbcconf)(?:\.exe)?"|(?:[^\\/\s"\r\n]+[\\/])*(?:odbcconf)(?:\.exe)?)[
+        \t]+/a[ \t]+\{REGSVR[ \t]+[^{}\r\n]+\.dll\}[ \t]*\Z/i

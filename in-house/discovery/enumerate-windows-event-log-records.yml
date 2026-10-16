@@ -1,0 +1,20 @@
+rule:
+  meta:
+    name: enumerate windows event log records
+    namespace: in-house/discovery
+    authors:
+    - MalwareLab
+    description: Retrieves event-log records. Merely opening an event-log handle does not match, and the records
+      returned are not assumed to contain useful discovery data. Static matches are capability candidates; dynamic
+      matches are observations from successful calls, not proof of adversary intent or technique completion.
+    scopes:
+      static: function
+      dynamic: call
+    att&ck:
+    - Discovery::Log Enumeration [T1654]
+    references:
+    - https://attack.mitre.org/techniques/T1654/
+  features:
+  - or:
+    - api: ReadEventLog
+    - api: EvtNext

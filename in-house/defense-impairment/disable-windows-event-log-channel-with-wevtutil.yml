@@ -1,0 +1,25 @@
+rule:
+  meta:
+    name: disable windows event log channel with wevtutil
+    namespace: in-house/defense-impairment
+    authors:
+    - MalwareLab
+    description: Launches wevtutil to disable a named system event-log channel. A successful process launch alone
+      does not prove that channel configuration changed. Static matches are capability candidates; dynamic matches
+      are observations from successful calls, not proof of adversary intent or technique completion.
+    scopes:
+      static: function
+      dynamic: call
+    att&ck:
+    - Defense Impairment::Disable or Modify Windows Event Log [T1685.001]
+    references:
+    - https://attack.mitre.org/techniques/T1685/001/
+  features:
+  - and:
+    - or:
+      - api: CreateProcess
+      - api: CreateProcessInternal
+      - api: CreateProcessAsUser
+      - api: CreateProcessWithToken
+    - string: /\A(?:"(?:[^"\r\n]*[\\/])?(?:wevtutil)(?:\.exe)?"|(?:[^\\/\s"\r\n]+[\\/])*(?:wevtutil)(?:\.exe)?)[
+        \t]+(?:sl|set-log)[ \t]+(?:Security|System|Application)[ \t]+/e:false[ \t]*\Z/i

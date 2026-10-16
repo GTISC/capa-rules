@@ -1,0 +1,26 @@
+rule:
+  meta:
+    name: disable windows firewall profiles with netsh
+    namespace: in-house/defense-impairment
+    authors:
+    - MalwareLab
+    description: Launches an explicit Windows firewall-profile disable command. Requires an independent policy/effect
+      observation before qualified runtime credit. Static matches are capability candidates; dynamic matches are
+      observations from successful calls, not proof of adversary intent or technique completion.
+    scopes:
+      static: function
+      dynamic: call
+    att&ck:
+    - Defense Impairment::Windows Host Firewall [T1686.003]
+    references:
+    - https://attack.mitre.org/techniques/T1686/003/
+  features:
+  - and:
+    - or:
+      - api: CreateProcess
+      - api: CreateProcessInternal
+      - api: CreateProcessAsUser
+      - api: CreateProcessWithToken
+    - string: /\A(?:"(?:[^"\r\n]*[\\/])?(?:netsh)(?:\.exe)?"|(?:[^\\/\s"\r\n]+[\\/])*(?:netsh)(?:\.exe)?)[ \t]+advfirewall[
+        \t]+set[ \t]+(?:allprofiles|currentprofile|domainprofile|privateprofile|publicprofile)[ \t]+state[ \t]+off[
+        \t]*\Z/i

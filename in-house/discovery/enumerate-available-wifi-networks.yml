@@ -1,0 +1,20 @@
+rule:
+  meta:
+    name: enumerate available wifi networks
+    namespace: in-house/discovery
+    authors:
+    - MalwareLab
+    description: Requests available wireless networks or BSS entries. Merely opening a WLAN handle does not match.
+      Static matches are capability candidates; dynamic matches are observations from successful calls, not proof
+      of adversary intent or technique completion.
+    scopes:
+      static: function
+      dynamic: call
+    att&ck:
+    - Discovery::Wi-Fi Discovery [T1016.002]
+    references:
+    - https://attack.mitre.org/techniques/T1016/002/
+  features:
+  - or:
+    - api: WlanGetAvailableNetworkList
+    - api: WlanGetNetworkBssList

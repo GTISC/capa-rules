@@ -1,0 +1,25 @@
+rule:
+  meta:
+    name: configure safeboot with bcdedit
+    namespace: in-house/defense-impairment
+    authors:
+    - MalwareLab
+    description: Launches BCD configuration of a safe-mode boot option. A reboot into safe mode and security-tool
+      impairment are not inferred. Static matches are capability candidates; dynamic matches are observations from
+      successful calls, not proof of adversary intent or technique completion.
+    scopes:
+      static: function
+      dynamic: call
+    att&ck:
+    - Defense Impairment::Safe Mode Boot [T1688]
+    references:
+    - https://attack.mitre.org/techniques/T1688/
+  features:
+  - and:
+    - or:
+      - api: CreateProcess
+      - api: CreateProcessInternal
+      - api: CreateProcessAsUser
+      - api: CreateProcessWithToken
+    - string: /\A(?:"(?:[^"\r\n]*[\\/])?(?:bcdedit)(?:\.exe)?"|(?:[^\\/\s"\r\n]+[\\/])*(?:bcdedit)(?:\.exe)?)[ \t]+/set[
+        \t]+\{(?:current|default)\}[ \t]+safeboot[ \t]+(?:minimal|network)[ \t]*\Z/i

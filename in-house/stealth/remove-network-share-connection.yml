@@ -1,0 +1,21 @@
+rule:
+  meta:
+    name: remove network share connection
+    namespace: in-house/stealth
+    authors:
+    - MalwareLab
+    description: Removes a Windows network connection using the dedicated disconnect API. Intent to hide prior access
+      and the prior share session must be qualified separately. Static matches are capability candidates; dynamic
+      matches are observations from successful calls, not proof of adversary intent or technique completion.
+    scopes:
+      static: function
+      dynamic: call
+    att&ck:
+    - Stealth::Network Share Connection Removal [T1070.005]
+    references:
+    - https://attack.mitre.org/techniques/T1070/005/
+  features:
+  - or:
+    - api: WNetCancelConnection
+    - api: WNetCancelConnection2
+    - api: NetUseDel

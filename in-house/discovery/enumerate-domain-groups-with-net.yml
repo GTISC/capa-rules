@@ -1,0 +1,25 @@
+rule:
+  meta:
+    name: enumerate domain groups with net
+    namespace: in-house/discovery
+    authors:
+    - MalwareLab
+    description: Directly launches domain group enumeration; local groups and group creation are excluded. Static
+      matches are capability candidates; dynamic matches are observations from successful calls, not proof of adversary
+      intent or technique completion.
+    scopes:
+      static: function
+      dynamic: call
+    att&ck:
+    - Discovery::Domain Groups [T1069.002]
+    references:
+    - https://attack.mitre.org/techniques/T1069/002/
+  features:
+  - and:
+    - or:
+      - api: CreateProcess
+      - api: CreateProcessInternal
+      - api: CreateProcessAsUser
+      - api: CreateProcessWithToken
+    - string: /\A(?:"(?:[^"\r\n]*[\\/])?(?:net)(?:\.exe)?"|(?:[^\\/\s"\r\n]+[\\/])*(?:net)(?:\.exe)?)[ \t]+group[
+        \t]+/domain[ \t]*\Z/i

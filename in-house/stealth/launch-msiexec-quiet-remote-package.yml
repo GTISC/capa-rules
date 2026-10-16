@@ -1,0 +1,25 @@
+rule:
+  meta:
+    name: launch msiexec quiet remote package
+    namespace: in-house/stealth
+    authors:
+    - MalwareLab
+    description: Launches a quiet remote MSI installation. The package, custom actions, and resulting execution
+      must be qualified separately. Static matches are capability candidates; dynamic matches are observations from
+      successful calls, not proof of adversary intent or technique completion.
+    scopes:
+      static: function
+      dynamic: call
+    att&ck:
+    - Stealth::Msiexec [T1218.007]
+    references:
+    - https://attack.mitre.org/techniques/T1218/007/
+  features:
+  - and:
+    - or:
+      - api: CreateProcess
+      - api: CreateProcessInternal
+      - api: CreateProcessAsUser
+      - api: CreateProcessWithToken
+    - string: /\A(?:"(?:[^"\r\n]*[\\/])?(?:msiexec)(?:\.exe)?"|(?:[^\\/\s"\r\n]+[\\/])*(?:msiexec)(?:\.exe)?)[ \t]+/i[
+        \t]+https?://[^\s"\r\n]+\.msi[ \t]+/qn[ \t]*\Z/i
