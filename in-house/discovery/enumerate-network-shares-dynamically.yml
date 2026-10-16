@@ -1,0 +1,22 @@
+rule:
+  meta:
+    name: enumerate network shares dynamically
+    namespace: in-house/discovery
+    authors:
+      - MalwareLab
+    description: Detect repeated successful network-share enumeration calls in one dynamic state stream. This is an observation candidate; Mal-S2E separately qualifies sample provenance and completed behavior.
+    scopes:
+      static: unsupported
+      dynamic: span of calls
+    att&ck:
+      - Discovery::Network Share Discovery [T1135]
+    references:
+      - https://attack.mitre.org/techniques/T1135/
+      - https://learn.microsoft.com/en-us/windows/win32/api/lmshare/nf-lmshare-netshareenum
+      - https://learn.microsoft.com/en-us/windows/win32/api/winnetwk/nf-winnetwk-wnetenumresourcew
+    examples:
+      - 614bff99e30d0c6f5f55f8857ea42e134da011e2868f48cafd13d32028f2c37f:(pid:100,tid:0,call:2)
+  features:
+    - or:
+      - count(api(netapi32.NetShareEnum)): 2 or more
+      - count(api(mpr.WNetEnumResource)): 2 or more

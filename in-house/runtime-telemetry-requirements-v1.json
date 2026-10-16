@@ -1,0 +1,95 @@
+{
+  "schema": 1,
+  "scope": "Concrete S2E telemetry needed by the next sample-backed Windows ATT&CK detectors. Readiness is an engineering signal, not behavior evidence.",
+  "targets": [
+    {
+      "attack_id": "T1135",
+      "name": "Network Share Discovery",
+      "detector_status": "enabled_observation_candidate",
+      "probes": [
+        {
+          "api_names": ["NetShareEnum", "WNetEnumResource"],
+          "minimum_successful_calls_per_state": 2,
+          "required_named_arguments": [],
+          "required_return_fields": []
+        }
+      ],
+      "remaining_observables": [
+        "original-root or verified descendant caller provenance",
+        "enumerated share or network-resource output for effect qualification"
+      ]
+    },
+    {
+      "attack_id": "T1027.007",
+      "name": "Dynamic API Resolution",
+      "detector_status": "blocked_pending_binding_telemetry",
+      "probes": [
+        {
+          "api_names": ["GetProcAddress", "LdrGetProcedureAddress"],
+          "minimum_successful_calls_per_state": 1,
+          "required_named_arguments": ["module", "function", "resolved_address"],
+          "required_return_fields": []
+        }
+      ],
+      "remaining_observables": [
+        "function-name or hash provenance",
+        "a later indirect call whose callee equals resolved_address",
+        "the branch and invocation must remain in one S2E state"
+      ]
+    },
+    {
+      "attack_id": "T1497.002",
+      "name": "User Activity Based Checks",
+      "detector_status": "blocked_pending_data_dependency",
+      "probes": [
+        {
+          "api_names": ["GetCursorPos"],
+          "minimum_successful_calls_per_state": 2,
+          "required_named_arguments": ["x", "y"],
+          "required_return_fields": []
+        },
+        {
+          "api_names": ["GetLastInputInfo"],
+          "minimum_successful_calls_per_state": 1,
+          "required_named_arguments": ["last_input_tick"],
+          "required_return_fields": []
+        },
+        {
+          "api_names": ["GetForegroundWindow"],
+          "minimum_successful_calls_per_state": 2,
+          "required_named_arguments": ["window_handle"],
+          "required_return_fields": []
+        }
+      ],
+      "remaining_observables": [
+        "same-state comparison of two concrete observations",
+        "a branch condition data-dependent on that comparison",
+        "a later behavior gated by the branch"
+      ]
+    },
+    {
+      "attack_id": "T1496",
+      "name": "Resource Hijacking",
+      "detector_status": "blocked_pending_workload_effect",
+      "probes": [
+        {
+          "api_names": ["send", "WSASend"],
+          "minimum_successful_calls_per_state": 1,
+          "required_named_arguments": ["peer_address", "payload_prefix"],
+          "required_return_fields": []
+        },
+        {
+          "api_names": ["CreateProcess", "CreateProcessInternal"],
+          "minimum_successful_calls_per_state": 1,
+          "required_named_arguments": ["command_line"],
+          "required_return_fields": []
+        }
+      ],
+      "remaining_observables": [
+        "a concrete mining protocol exchange or mining workload signature",
+        "resource consumption attributable to the same process lineage",
+        "original-root or verified descendant caller provenance"
+      ]
+    }
+  ]
+}
