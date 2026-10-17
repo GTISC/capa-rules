@@ -1,0 +1,27 @@
+rule:
+  meta:
+    name: request device registration via explicit utility command
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: Requests device registration/join; the account, tenant, and authorization context remain unproven.
+      Static function-local references are capability candidates only. Dynamic observations require the separate
+      typed launch contract; neither proves utility completion or malicious intent.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Persistence::Account Manipulation::Device Registration [T1098.005]
+    - Privilege Escalation::Account Manipulation::Device Registration [T1098.005]
+    references:
+    - https://attack.mitre.org/techniques/T1098/005/
+  features:
+  - and:
+    - or:
+      - api: CreateProcess
+      - api: CreateProcessInternal
+      - api: CreateProcessAsUser
+      - api: CreateProcessWithToken
+      - api: CreateProcessWithLogon
+    - string: /\A(?:"(?:[^"\r\n]*[\\/])?dsregcmd(?:\.exe)?"|(?:[^\\/\s"\r\n]+[\\/])*dsregcmd(?:\.exe)?)[ \t]+/join[
+        \t]*\Z/i

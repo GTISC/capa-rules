@@ -1,0 +1,21 @@
+rule:
+  meta:
+    name: reference write bound file variant for SVG Smuggling
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: Writes SVG containing a script that constructs a downloadable Blob; static image markup alone is
+      insufficient. Static references are function-local candidates; the bound dynamic contract is separate.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Stealth::Obfuscated Files or Information::SVG Smuggling [T1027.017]
+    references:
+    - https://attack.mitre.org/techniques/T1027/017/
+  features:
+  - and:
+    - api: CreateFile
+    - api: WriteFile
+    - string: /\A[A-Z]:\\[^\r\n]+\.svg\Z/i
+    - string: /(?s)\A(?=.{0,8192}<svg\b)(?=.{0,8192}<script\b)(?=.{0,8192}new\s+Blob\s*\()(?=.{0,8192}URL\.createObjectURL\s*\()/i

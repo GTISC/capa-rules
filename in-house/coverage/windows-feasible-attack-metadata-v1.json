@@ -1,0 +1,2448 @@
+{
+  "schema": 1,
+  "scope": "Presentation metadata parsed from the pinned official website snapshots; never behavior evidence.",
+  "techniques": [
+    {
+      "attack_id": "T1001",
+      "official_url": "https://attack.mitre.org/techniques/T1001/",
+      "website_sha256": "f41a88e1201587dd30671cb8a7ec7625a21a9cd46b5c14eb9ddbb0a829a7f255",
+      "capa_attack_tags": [
+        "Command and Control::Data Obfuscation [T1001]"
+      ]
+    },
+    {
+      "attack_id": "T1001.001",
+      "official_url": "https://attack.mitre.org/techniques/T1001/001/",
+      "website_sha256": "eea5dd2b35c7f9af56bd9f0b5692c90177e249a1412fb6440820cb24fc9fdf55",
+      "capa_attack_tags": [
+        "Command and Control::Data Obfuscation::Junk Data [T1001.001]"
+      ]
+    },
+    {
+      "attack_id": "T1001.002",
+      "official_url": "https://attack.mitre.org/techniques/T1001/002/",
+      "website_sha256": "0f587dbd67c76711a562fc37fb48fe8ae1d20b96effa3ab7a58eff2cdc99853f",
+      "capa_attack_tags": [
+        "Command and Control::Data Obfuscation::Steganography [T1001.002]"
+      ]
+    },
+    {
+      "attack_id": "T1001.003",
+      "official_url": "https://attack.mitre.org/techniques/T1001/003/",
+      "website_sha256": "f03c1f07d051123e4deb4ae29f33b35706c553b1707c033b82c89fee6bdeecea",
+      "capa_attack_tags": [
+        "Command and Control::Data Obfuscation::Protocol or Service Impersonation [T1001.003]"
+      ]
+    },
+    {
+      "attack_id": "T1003",
+      "official_url": "https://attack.mitre.org/techniques/T1003/",
+      "website_sha256": "1e05d1f305ecb4a452019af5418861f672b0c2663122328706522890eff70b3f",
+      "capa_attack_tags": [
+        "Credential Access::OS Credential Dumping [T1003]",
+        "Lateral Movement::OS Credential Dumping [T1003]"
+      ]
+    },
+    {
+      "attack_id": "T1003.006",
+      "official_url": "https://attack.mitre.org/techniques/T1003/006/",
+      "website_sha256": "7b59a968cf435d02b3de877858e9c4093c1e212c323fcb7c63263c328bab1f91",
+      "capa_attack_tags": [
+        "Credential Access::OS Credential Dumping::DCSync [T1003.006]"
+      ]
+    },
+    {
+      "attack_id": "T1005",
+      "official_url": "https://attack.mitre.org/techniques/T1005/",
+      "website_sha256": "da407c6e5d92c260812faa714376d84b979f6ab3aac3a097bfe8f6f4f9bba3c8",
+      "capa_attack_tags": [
+        "Collection::Data from Local System [T1005]"
+      ]
+    },
+    {
+      "attack_id": "T1008",
+      "official_url": "https://attack.mitre.org/techniques/T1008/",
+      "website_sha256": "894cf74d7d0479efe0cb355920b4783272f2127e0bf7803537c2b4d1c0b634b9",
+      "capa_attack_tags": [
+        "Command and Control::Fallback Channels [T1008]"
+      ]
+    },
+    {
+      "attack_id": "T1011",
+      "official_url": "https://attack.mitre.org/techniques/T1011/",
+      "website_sha256": "848b46dad980515263238fdcbcd0634ce9faba2e0f2dbfb28ed3416a975d642b",
+      "capa_attack_tags": [
+        "Exfiltration::Exfiltration Over Other Network Medium [T1011]"
+      ]
+    },
+    {
+      "attack_id": "T1011.001",
+      "official_url": "https://attack.mitre.org/techniques/T1011/001/",
+      "website_sha256": "5e482a25403bc157347ce00676fd7054b85bcf9832a6395e37b9cdc162066158",
+      "capa_attack_tags": [
+        "Exfiltration::Exfiltration Over Other Network Medium::Exfiltration Over Bluetooth [T1011.001]"
+      ]
+    },
+    {
+      "attack_id": "T1014",
+      "official_url": "https://attack.mitre.org/techniques/T1014/",
+      "website_sha256": "8567657e197aaff140686765241c25d381cd542de7fb8aa189c0d0ff4d5a396e",
+      "capa_attack_tags": [
+        "Stealth::Rootkit [T1014]"
+      ]
+    },
+    {
+      "attack_id": "T1020",
+      "official_url": "https://attack.mitre.org/techniques/T1020/",
+      "website_sha256": "d9f955ee37c2ff5984ab42beb43619561e14cfd197133bd710d966f3cb4c615b",
+      "capa_attack_tags": [
+        "Exfiltration::Automated Exfiltration [T1020]"
+      ]
+    },
+    {
+      "attack_id": "T1021",
+      "official_url": "https://attack.mitre.org/techniques/T1021/",
+      "website_sha256": "c8383e10010c1fc584edc41acd19f75e9c8d6d07113b939b1d32336efaae6e74",
+      "capa_attack_tags": [
+        "Lateral Movement::Remote Services [T1021]"
+      ]
+    },
+    {
+      "attack_id": "T1021.001",
+      "official_url": "https://attack.mitre.org/techniques/T1021/001/",
+      "website_sha256": "44b073e57d41d30975ae25e08b5c8d4dc30215bc7f8c948c65c5accebbeea3d8",
+      "capa_attack_tags": [
+        "Lateral Movement::Remote Services::Remote Desktop Protocol [T1021.001]"
+      ]
+    },
+    {
+      "attack_id": "T1021.003",
+      "official_url": "https://attack.mitre.org/techniques/T1021/003/",
+      "website_sha256": "40cde5ca04fe6f40f6184dd4935cc639c9adcad3db94eb91e5a28b05050e3939",
+      "capa_attack_tags": [
+        "Lateral Movement::Remote Services::Distributed Component Object Model [T1021.003]"
+      ]
+    },
+    {
+      "attack_id": "T1021.005",
+      "official_url": "https://attack.mitre.org/techniques/T1021/005/",
+      "website_sha256": "862912e81aa08b9aac17d41f799f573fa6879f253886c4cb7c2d3357251da720",
+      "capa_attack_tags": [
+        "Lateral Movement::Remote Services::VNC [T1021.005]"
+      ]
+    },
+    {
+      "attack_id": "T1021.006",
+      "official_url": "https://attack.mitre.org/techniques/T1021/006/",
+      "website_sha256": "f962fe4de9106cfd0787a9e7c122c0e898e4253720e2108ea5c747b0e524adb3",
+      "capa_attack_tags": [
+        "Lateral Movement::Remote Services::Windows Remote Management [T1021.006]"
+      ]
+    },
+    {
+      "attack_id": "T1025",
+      "official_url": "https://attack.mitre.org/techniques/T1025/",
+      "website_sha256": "8be2975f00bbecc0a1fea8a026116dd8850e2987ea8ce3098b87cfb8d75549e7",
+      "capa_attack_tags": [
+        "Collection::Data from Removable Media [T1025]"
+      ]
+    },
+    {
+      "attack_id": "T1027.001",
+      "official_url": "https://attack.mitre.org/techniques/T1027/001/",
+      "website_sha256": "afdfc2be3bf72d3bf68e5ef5441e8ad9b35d9888b5c6de7747f24f824ebf3422",
+      "capa_attack_tags": [
+        "Stealth::Obfuscated Files or Information::Binary Padding [T1027.001]"
+      ]
+    },
+    {
+      "attack_id": "T1027.003",
+      "official_url": "https://attack.mitre.org/techniques/T1027/003/",
+      "website_sha256": "d269a0fa3848657812a3a65aaeb37fa9c8ed18fe3af57a36bda737c17e731a79",
+      "capa_attack_tags": [
+        "Stealth::Obfuscated Files or Information::Steganography [T1027.003]"
+      ]
+    },
+    {
+      "attack_id": "T1027.006",
+      "official_url": "https://attack.mitre.org/techniques/T1027/006/",
+      "website_sha256": "cf0aa8cc3cfd63093726deb537cec4457662b3ecb5f86f55302dcdee1da2dfc2",
+      "capa_attack_tags": [
+        "Stealth::Obfuscated Files or Information::HTML Smuggling [T1027.006]"
+      ]
+    },
+    {
+      "attack_id": "T1027.008",
+      "official_url": "https://attack.mitre.org/techniques/T1027/008/",
+      "website_sha256": "0102f82416f84ce45101cb7faaa582a153b19d594ff95726f3d0d68663bba044",
+      "capa_attack_tags": [
+        "Stealth::Obfuscated Files or Information::Stripped Payloads [T1027.008]"
+      ]
+    },
+    {
+      "attack_id": "T1027.009",
+      "official_url": "https://attack.mitre.org/techniques/T1027/009/",
+      "website_sha256": "63511f945411952ace4f661bcc5d6ccafec7079ce84cde19ee15f61242a5c19a",
+      "capa_attack_tags": [
+        "Stealth::Obfuscated Files or Information::Embedded Payloads [T1027.009]"
+      ]
+    },
+    {
+      "attack_id": "T1027.010",
+      "official_url": "https://attack.mitre.org/techniques/T1027/010/",
+      "website_sha256": "2048687d66b7fda38ed634dfd8539482ef2cf8d4c4412f60a6ac179bb19bf0fa",
+      "capa_attack_tags": [
+        "Stealth::Obfuscated Files or Information::Command Obfuscation [T1027.010]"
+      ]
+    },
+    {
+      "attack_id": "T1027.011",
+      "official_url": "https://attack.mitre.org/techniques/T1027/011/",
+      "website_sha256": "088a03dff629d45d92745ea0c910892c4b2f4419009f8bebc2717726b400217d",
+      "capa_attack_tags": [
+        "Persistence::Obfuscated Files or Information::Fileless Storage [T1027.011]",
+        "Stealth::Obfuscated Files or Information::Fileless Storage [T1027.011]"
+      ]
+    },
+    {
+      "attack_id": "T1027.012",
+      "official_url": "https://attack.mitre.org/techniques/T1027/012/",
+      "website_sha256": "5703253c8984f407d6d184d70a669e3b04b9c6c01fa2ad9cd4b2d2dabd530cc8",
+      "capa_attack_tags": [
+        "Stealth::Obfuscated Files or Information::LNK Icon Smuggling [T1027.012]"
+      ]
+    },
+    {
+      "attack_id": "T1027.013",
+      "official_url": "https://attack.mitre.org/techniques/T1027/013/",
+      "website_sha256": "1eb3d638f0ea7f12b9038af3e0902b86d34b601d9bbc2be20df23d988522626b",
+      "capa_attack_tags": [
+        "Stealth::Obfuscated Files or Information::Encrypted/Encoded File [T1027.013]"
+      ]
+    },
+    {
+      "attack_id": "T1027.014",
+      "official_url": "https://attack.mitre.org/techniques/T1027/014/",
+      "website_sha256": "6b187dbc054ca6b975c920e539af16e651edae174434d58eff2f76db24cb1326",
+      "capa_attack_tags": [
+        "Stealth::Obfuscated Files or Information::Polymorphic Code [T1027.014]"
+      ]
+    },
+    {
+      "attack_id": "T1027.015",
+      "official_url": "https://attack.mitre.org/techniques/T1027/015/",
+      "website_sha256": "3e493364d3ac7e42fd4c60d71f760c8c6f84bd3d58cc65718d6affe0b81ed25a",
+      "capa_attack_tags": [
+        "Stealth::Obfuscated Files or Information::Compression [T1027.015]"
+      ]
+    },
+    {
+      "attack_id": "T1027.016",
+      "official_url": "https://attack.mitre.org/techniques/T1027/016/",
+      "website_sha256": "e997959e1d9a70805edc7ff863369b64acf0cb6f67a5688aa99253ba38d8b854",
+      "capa_attack_tags": [
+        "Stealth::Obfuscated Files or Information::Junk Code Insertion [T1027.016]"
+      ]
+    },
+    {
+      "attack_id": "T1027.017",
+      "official_url": "https://attack.mitre.org/techniques/T1027/017/",
+      "website_sha256": "a0e38e4209f5f2bdba466af31846e0ab44110886348ae5c7bf4e5f17fbc1458c",
+      "capa_attack_tags": [
+        "Stealth::Obfuscated Files or Information::SVG Smuggling [T1027.017]"
+      ]
+    },
+    {
+      "attack_id": "T1027.018",
+      "official_url": "https://attack.mitre.org/techniques/T1027/018/",
+      "website_sha256": "c0ddf32da286cb4e2cff64db960e347e9683d86d8f38faffc9d3d7376a31936b",
+      "capa_attack_tags": [
+        "Stealth::Obfuscated Files or Information::Invisible Unicode [T1027.018]"
+      ]
+    },
+    {
+      "attack_id": "T1029",
+      "official_url": "https://attack.mitre.org/techniques/T1029/",
+      "website_sha256": "2cec40c1f4f6bbea40a68170a5cbf3d0c143f9bad43e8d517b923832b9f6b6b7",
+      "capa_attack_tags": [
+        "Exfiltration::Scheduled Transfer [T1029]"
+      ]
+    },
+    {
+      "attack_id": "T1030",
+      "official_url": "https://attack.mitre.org/techniques/T1030/",
+      "website_sha256": "30a789410b06b3671bad3317ebd4291929404954a36e0ab42b0a086d1afcc92f",
+      "capa_attack_tags": [
+        "Exfiltration::Data Transfer Size Limits [T1030]"
+      ]
+    },
+    {
+      "attack_id": "T1036",
+      "official_url": "https://attack.mitre.org/techniques/T1036/",
+      "website_sha256": "2e36be80d7f3daa0b02472307ec99b0254907805d365cd149bf4ae8945944330",
+      "capa_attack_tags": [
+        "Stealth::Masquerading [T1036]"
+      ]
+    },
+    {
+      "attack_id": "T1036.001",
+      "official_url": "https://attack.mitre.org/techniques/T1036/001/",
+      "website_sha256": "dfb0cd3f4f4d273cdb338cf6ba7c6817890fc75c308c1399c0a0f892651ebd84",
+      "capa_attack_tags": [
+        "Stealth::Masquerading::Invalid Code Signature [T1036.001]"
+      ]
+    },
+    {
+      "attack_id": "T1036.002",
+      "official_url": "https://attack.mitre.org/techniques/T1036/002/",
+      "website_sha256": "96d21f156b2fe49a5933fb906028d19aabc3dff9b4241b937acb50730acada32",
+      "capa_attack_tags": [
+        "Stealth::Masquerading::Right-to-Left Override [T1036.002]"
+      ]
+    },
+    {
+      "attack_id": "T1036.003",
+      "official_url": "https://attack.mitre.org/techniques/T1036/003/",
+      "website_sha256": "da0c2cc2c0c2c6cb9daa22cf6a47530f6a58415496eeaff51c2e2eba6ae6899c",
+      "capa_attack_tags": [
+        "Stealth::Masquerading::Rename Legitimate Utilities [T1036.003]"
+      ]
+    },
+    {
+      "attack_id": "T1036.004",
+      "official_url": "https://attack.mitre.org/techniques/T1036/004/",
+      "website_sha256": "b6e230483cc04989c67c0af8b69ac6c0c9ac6c2dcf40b3b92430530742529f6b",
+      "capa_attack_tags": [
+        "Stealth::Masquerading::Masquerade Task or Service [T1036.004]"
+      ]
+    },
+    {
+      "attack_id": "T1036.005",
+      "official_url": "https://attack.mitre.org/techniques/T1036/005/",
+      "website_sha256": "efa2a80d5d1b9cc574cb799c1989041311e2af09c323a44b60037618265e6e8e",
+      "capa_attack_tags": [
+        "Stealth::Masquerading::Match Legitimate Resource Name or Location [T1036.005]"
+      ]
+    },
+    {
+      "attack_id": "T1036.007",
+      "official_url": "https://attack.mitre.org/techniques/T1036/007/",
+      "website_sha256": "e43231d6d73cb1a3dace44be6ffc73763fb32952883cc607b04a4a3acc766c29",
+      "capa_attack_tags": [
+        "Initial Access::Masquerading::Double File Extension [T1036.007]",
+        "Stealth::Masquerading::Double File Extension [T1036.007]"
+      ]
+    },
+    {
+      "attack_id": "T1036.008",
+      "official_url": "https://attack.mitre.org/techniques/T1036/008/",
+      "website_sha256": "b823cd213226ba0982ac93fce2c3cc3513a90456fb55048930795fdad615f622",
+      "capa_attack_tags": [
+        "Stealth::Masquerading::Masquerade File Type [T1036.008]"
+      ]
+    },
+    {
+      "attack_id": "T1036.010",
+      "official_url": "https://attack.mitre.org/techniques/T1036/010/",
+      "website_sha256": "fcb526bd3b4a438329ae8cd1d43a189d207b765f628f7725c8992f1f19003f7f",
+      "capa_attack_tags": [
+        "Stealth::Masquerading::Masquerade Account Name [T1036.010]"
+      ]
+    },
+    {
+      "attack_id": "T1036.012",
+      "official_url": "https://attack.mitre.org/techniques/T1036/012/",
+      "website_sha256": "2137b983a6a20309ab75b29546e50137fe4292c5b41f827c6502bb8c7fc297cc",
+      "capa_attack_tags": [
+        "Stealth::Masquerading::Browser Fingerprint [T1036.012]"
+      ]
+    },
+    {
+      "attack_id": "T1037",
+      "official_url": "https://attack.mitre.org/techniques/T1037/",
+      "website_sha256": "2762976fd0a3877d962059e3c1089548e1029a031e4d5ebaba48f05d82a399e3",
+      "capa_attack_tags": [
+        "Persistence::Boot or Logon Initialization Scripts [T1037]",
+        "Privilege Escalation::Boot or Logon Initialization Scripts [T1037]"
+      ]
+    },
+    {
+      "attack_id": "T1037.003",
+      "official_url": "https://attack.mitre.org/techniques/T1037/003/",
+      "website_sha256": "b62f0bf07eaff731aa61e3beb970c2589dba2b50b054ffb360f72f6b43190f5b",
+      "capa_attack_tags": [
+        "Persistence::Boot or Logon Initialization Scripts::Network Logon Script [T1037.003]",
+        "Privilege Escalation::Boot or Logon Initialization Scripts::Network Logon Script [T1037.003]"
+      ]
+    },
+    {
+      "attack_id": "T1041",
+      "official_url": "https://attack.mitre.org/techniques/T1041/",
+      "website_sha256": "a69ddd2b40a70dcd5e68a5af245beb4b58b5fef87cc7dcdb36ca867e6832f77d",
+      "capa_attack_tags": [
+        "Exfiltration::Exfiltration Over C2 Channel [T1041]"
+      ]
+    },
+    {
+      "attack_id": "T1046",
+      "official_url": "https://attack.mitre.org/techniques/T1046/",
+      "website_sha256": "ede091c817214c5198829e52eaf94160b800b8a9601b0fdff6331c9632385496",
+      "capa_attack_tags": [
+        "Discovery::Network Service Discovery [T1046]"
+      ]
+    },
+    {
+      "attack_id": "T1048",
+      "official_url": "https://attack.mitre.org/techniques/T1048/",
+      "website_sha256": "de12f77f4cdd8c3c068ec040cf8f1748b7d409fb749280fc86fbc23adf12751f",
+      "capa_attack_tags": [
+        "Exfiltration::Exfiltration Over Alternative Protocol [T1048]"
+      ]
+    },
+    {
+      "attack_id": "T1048.001",
+      "official_url": "https://attack.mitre.org/techniques/T1048/001/",
+      "website_sha256": "5f17aed4446d49a5eaf96fd378d3181da35c364df707e01cd5a98360c4d9a00d",
+      "capa_attack_tags": [
+        "Exfiltration::Exfiltration Over Alternative Protocol::Exfiltration Over Symmetric Encrypted Non-C2 Protocol [T1048.001]"
+      ]
+    },
+    {
+      "attack_id": "T1048.002",
+      "official_url": "https://attack.mitre.org/techniques/T1048/002/",
+      "website_sha256": "a4f08cb4131e10927675897957627fe2eb35e39930c9c93e361c8c491cda244d",
+      "capa_attack_tags": [
+        "Exfiltration::Exfiltration Over Alternative Protocol::Exfiltration Over Asymmetric Encrypted Non-C2 Protocol [T1048.002]"
+      ]
+    },
+    {
+      "attack_id": "T1048.003",
+      "official_url": "https://attack.mitre.org/techniques/T1048/003/",
+      "website_sha256": "e023bab5a61652ff2f0285424878d5cd459012df79662f5d257016ed1dee35bc",
+      "capa_attack_tags": [
+        "Exfiltration::Exfiltration Over Alternative Protocol::Exfiltration Over Unencrypted Non-C2 Protocol [T1048.003]"
+      ]
+    },
+    {
+      "attack_id": "T1052",
+      "official_url": "https://attack.mitre.org/techniques/T1052/",
+      "website_sha256": "2c2247ba0010f10a83feb80c19bc2d0d4c9fe2e5545e591d789a1d7111ffb63c",
+      "capa_attack_tags": [
+        "Exfiltration::Exfiltration Over Physical Medium [T1052]"
+      ]
+    },
+    {
+      "attack_id": "T1052.001",
+      "official_url": "https://attack.mitre.org/techniques/T1052/001/",
+      "website_sha256": "3de51fc0634f1fb6bf2f4e14ab1c6832a2d583d3119aa3373ef1f3ab4ec403d6",
+      "capa_attack_tags": [
+        "Exfiltration::Exfiltration Over Physical Medium::Exfiltration over USB [T1052.001]"
+      ]
+    },
+    {
+      "attack_id": "T1055.005",
+      "official_url": "https://attack.mitre.org/techniques/T1055/005/",
+      "website_sha256": "2fea7236b22e20e5d705fcdaefef27998acd3e50c7284c9d5dd61fe6a7837c14",
+      "capa_attack_tags": [
+        "Privilege Escalation::Process Injection::Thread Local Storage [T1055.005]",
+        "Stealth::Process Injection::Thread Local Storage [T1055.005]"
+      ]
+    },
+    {
+      "attack_id": "T1055.015",
+      "official_url": "https://attack.mitre.org/techniques/T1055/015/",
+      "website_sha256": "8e3c0361e0831aeacab838d60f3a0ce575d1cc36196d7a337567c10b58668ef4",
+      "capa_attack_tags": [
+        "Privilege Escalation::Process Injection::ListPlanting [T1055.015]",
+        "Stealth::Process Injection::ListPlanting [T1055.015]"
+      ]
+    },
+    {
+      "attack_id": "T1056",
+      "official_url": "https://attack.mitre.org/techniques/T1056/",
+      "website_sha256": "989d4e66d5daf8bafa61dc59685b8a30859c071611a85340cf0063e639c0a8d3",
+      "capa_attack_tags": [
+        "Collection::Input Capture [T1056]",
+        "Credential Access::Input Capture [T1056]"
+      ]
+    },
+    {
+      "attack_id": "T1056.002",
+      "official_url": "https://attack.mitre.org/techniques/T1056/002/",
+      "website_sha256": "dba4c0094e7fb006ceb666e3296fde76bb9b3c011f4395b1d2069ec736d9fa47",
+      "capa_attack_tags": [
+        "Collection::Input Capture::GUI Input Capture [T1056.002]",
+        "Credential Access::Input Capture::GUI Input Capture [T1056.002]"
+      ]
+    },
+    {
+      "attack_id": "T1056.003",
+      "official_url": "https://attack.mitre.org/techniques/T1056/003/",
+      "website_sha256": "2cd0780795b147f9e5bcf7bf046cdb73502f71d516c57db16fcc0982e812683f",
+      "capa_attack_tags": [
+        "Collection::Input Capture::Web Portal Capture [T1056.003]",
+        "Credential Access::Input Capture::Web Portal Capture [T1056.003]"
+      ]
+    },
+    {
+      "attack_id": "T1056.004",
+      "official_url": "https://attack.mitre.org/techniques/T1056/004/",
+      "website_sha256": "e17eefc2166e1113bf0590e64800bfebcde6a7f70ece315a3ceb043503f1e309",
+      "capa_attack_tags": [
+        "Collection::Input Capture::Credential API Hooking [T1056.004]",
+        "Credential Access::Input Capture::Credential API Hooking [T1056.004]"
+      ]
+    },
+    {
+      "attack_id": "T1070.007",
+      "official_url": "https://attack.mitre.org/techniques/T1070/007/",
+      "website_sha256": "83bacc8a13e525fcd4eae744e8875f704b696fe4541bd42d043c117124d97444",
+      "capa_attack_tags": [
+        "Stealth::Indicator Removal::Clear Network Connection History and Configurations [T1070.007]"
+      ]
+    },
+    {
+      "attack_id": "T1070.008",
+      "official_url": "https://attack.mitre.org/techniques/T1070/008/",
+      "website_sha256": "c38a14c7184fc8e6a8979245f1e2925641360f420e0fe4e1987923c93dbf9679",
+      "capa_attack_tags": [
+        "Stealth::Indicator Removal::Clear Mailbox Data [T1070.008]"
+      ]
+    },
+    {
+      "attack_id": "T1070.009",
+      "official_url": "https://attack.mitre.org/techniques/T1070/009/",
+      "website_sha256": "d52497bc01f507c4245495ff856521c2ae2881aed6bd13dc2b050a33b6ccac81",
+      "capa_attack_tags": [
+        "Stealth::Indicator Removal::Clear Persistence [T1070.009]"
+      ]
+    },
+    {
+      "attack_id": "T1070.010",
+      "official_url": "https://attack.mitre.org/techniques/T1070/010/",
+      "website_sha256": "d84584ad959719b605219a9332d6566f54c529834a1c43051d5a660876c407ca",
+      "capa_attack_tags": [
+        "Persistence::Indicator Removal::Relocate Malware [T1070.010]",
+        "Stealth::Indicator Removal::Relocate Malware [T1070.010]"
+      ]
+    },
+    {
+      "attack_id": "T1071",
+      "official_url": "https://attack.mitre.org/techniques/T1071/",
+      "website_sha256": "83e7d2b18ee24c1214abfc88c477088a2bac379587ff33cf3a86553c814c4d35",
+      "capa_attack_tags": [
+        "Command and Control::Application Layer Protocol [T1071]"
+      ]
+    },
+    {
+      "attack_id": "T1071.002",
+      "official_url": "https://attack.mitre.org/techniques/T1071/002/",
+      "website_sha256": "0c8a6756d89c4ad8e5a7661d95dc6ed29fadbe0d059923b171b851060a422d7d",
+      "capa_attack_tags": [
+        "Command and Control::Application Layer Protocol::File Transfer Protocols [T1071.002]"
+      ]
+    },
+    {
+      "attack_id": "T1071.003",
+      "official_url": "https://attack.mitre.org/techniques/T1071/003/",
+      "website_sha256": "c061f19c5e24974ffd6029e23a67a716b5f7dfca612e7a0fc41e1435445db0df",
+      "capa_attack_tags": [
+        "Command and Control::Application Layer Protocol::Mail Protocols [T1071.003]"
+      ]
+    },
+    {
+      "attack_id": "T1071.004",
+      "official_url": "https://attack.mitre.org/techniques/T1071/004/",
+      "website_sha256": "8db49f414d4e8952885986d549ad8669f5bfb5ec90e698a8d5465a823168af5e",
+      "capa_attack_tags": [
+        "Command and Control::Application Layer Protocol::DNS [T1071.004]"
+      ]
+    },
+    {
+      "attack_id": "T1071.005",
+      "official_url": "https://attack.mitre.org/techniques/T1071/005/",
+      "website_sha256": "7a7ed2ccc686fb8aa385b77d2d558696ab16af242eca9d48b11a338b979969ec",
+      "capa_attack_tags": [
+        "Command and Control::Application Layer Protocol::Publish/Subscribe Protocols [T1071.005]"
+      ]
+    },
+    {
+      "attack_id": "T1072",
+      "official_url": "https://attack.mitre.org/techniques/T1072/",
+      "website_sha256": "67782b1c4cb1c8cb99d2538a2c674210b5d98b3b55bb2d88ddc7b68c870209c0",
+      "capa_attack_tags": [
+        "Execution::Software Deployment Tools [T1072]",
+        "Lateral Movement::Software Deployment Tools [T1072]"
+      ]
+    },
+    {
+      "attack_id": "T1074",
+      "official_url": "https://attack.mitre.org/techniques/T1074/",
+      "website_sha256": "eea39c9b9ca1708664caee85e8e7ed3e4c56b09b48c57e6b7b2b3f88aeeafb42",
+      "capa_attack_tags": [
+        "Collection::Data Staged [T1074]"
+      ]
+    },
+    {
+      "attack_id": "T1074.001",
+      "official_url": "https://attack.mitre.org/techniques/T1074/001/",
+      "website_sha256": "e7b2cfb413466ebfd48532fbe2632f661867011c3c4e7dfec4ee43a29f60c2c6",
+      "capa_attack_tags": [
+        "Collection::Data Staged::Local Data Staging [T1074.001]"
+      ]
+    },
+    {
+      "attack_id": "T1074.002",
+      "official_url": "https://attack.mitre.org/techniques/T1074/002/",
+      "website_sha256": "10bc43c70b67f91406b78e762adebd46c8007006801e3759f7e01e6fb10803f7",
+      "capa_attack_tags": [
+        "Collection::Data Staged::Remote Data Staging [T1074.002]"
+      ]
+    },
+    {
+      "attack_id": "T1078",
+      "official_url": "https://attack.mitre.org/techniques/T1078/",
+      "website_sha256": "806f829053f815fa14416873d4b6ffb842895b60256887d3488a72e018a0dcfb",
+      "capa_attack_tags": [
+        "Initial Access::Valid Accounts [T1078]",
+        "Persistence::Valid Accounts [T1078]",
+        "Privilege Escalation::Valid Accounts [T1078]",
+        "Stealth::Valid Accounts [T1078]"
+      ]
+    },
+    {
+      "attack_id": "T1078.001",
+      "official_url": "https://attack.mitre.org/techniques/T1078/001/",
+      "website_sha256": "824152f394f30ebfbeee7e5bac08ea7d6780e25eeaa5a403618a671b63709924",
+      "capa_attack_tags": [
+        "Initial Access::Valid Accounts::Default Accounts [T1078.001]",
+        "Persistence::Valid Accounts::Default Accounts [T1078.001]",
+        "Privilege Escalation::Valid Accounts::Default Accounts [T1078.001]",
+        "Stealth::Valid Accounts::Default Accounts [T1078.001]"
+      ]
+    },
+    {
+      "attack_id": "T1078.002",
+      "official_url": "https://attack.mitre.org/techniques/T1078/002/",
+      "website_sha256": "e898e7569c7f57aeaa0f21332303f7dc360468fa8f7571481d79e07a68a579ca",
+      "capa_attack_tags": [
+        "Initial Access::Valid Accounts::Domain Accounts [T1078.002]",
+        "Persistence::Valid Accounts::Domain Accounts [T1078.002]",
+        "Privilege Escalation::Valid Accounts::Domain Accounts [T1078.002]",
+        "Stealth::Valid Accounts::Domain Accounts [T1078.002]"
+      ]
+    },
+    {
+      "attack_id": "T1078.003",
+      "official_url": "https://attack.mitre.org/techniques/T1078/003/",
+      "website_sha256": "14ea91bfc4d90f609af6229164a8d8d92cd3f1b7bc3002b4c5fb70a8ddeccee2",
+      "capa_attack_tags": [
+        "Initial Access::Valid Accounts::Local Accounts [T1078.003]",
+        "Persistence::Valid Accounts::Local Accounts [T1078.003]",
+        "Privilege Escalation::Valid Accounts::Local Accounts [T1078.003]",
+        "Stealth::Valid Accounts::Local Accounts [T1078.003]"
+      ]
+    },
+    {
+      "attack_id": "T1080",
+      "official_url": "https://attack.mitre.org/techniques/T1080/",
+      "website_sha256": "d35a3ccf951be631a88dfad5326ddc2c57e02e4f04871997dd5e90d32b6a051d",
+      "capa_attack_tags": [
+        "Lateral Movement::Taint Shared Content [T1080]"
+      ]
+    },
+    {
+      "attack_id": "T1087.003",
+      "official_url": "https://attack.mitre.org/techniques/T1087/003/",
+      "website_sha256": "ba6f336000c932383d84134cab85e91f7ef4420319a4a786e493f3373df479b7",
+      "capa_attack_tags": [
+        "Discovery::Account Discovery::Email Account [T1087.003]"
+      ]
+    },
+    {
+      "attack_id": "T1090",
+      "official_url": "https://attack.mitre.org/techniques/T1090/",
+      "website_sha256": "20792cad8848f2ea662c8f7ede6c94ebb84b71ab5241c131b5b970776c2e67d5",
+      "capa_attack_tags": [
+        "Command and Control::Proxy [T1090]"
+      ]
+    },
+    {
+      "attack_id": "T1090.001",
+      "official_url": "https://attack.mitre.org/techniques/T1090/001/",
+      "website_sha256": "bfd138741ffdd77466a42c046ae36f908a2de440595555d011ab7e129c5674b1",
+      "capa_attack_tags": [
+        "Command and Control::Proxy::Internal Proxy [T1090.001]"
+      ]
+    },
+    {
+      "attack_id": "T1090.002",
+      "official_url": "https://attack.mitre.org/techniques/T1090/002/",
+      "website_sha256": "5614dc97436d3dc1b0236ee93f654789d0682477d0361af2a547035ad3a220ce",
+      "capa_attack_tags": [
+        "Command and Control::Proxy::External Proxy [T1090.002]"
+      ]
+    },
+    {
+      "attack_id": "T1090.003",
+      "official_url": "https://attack.mitre.org/techniques/T1090/003/",
+      "website_sha256": "0e6bfe4b8fded3b3a217ab18efcd30a0bcb5e2ad41f77b764a01995e3d9ebc6a",
+      "capa_attack_tags": [
+        "Command and Control::Proxy::Multi-hop Proxy [T1090.003]"
+      ]
+    },
+    {
+      "attack_id": "T1090.004",
+      "official_url": "https://attack.mitre.org/techniques/T1090/004/",
+      "website_sha256": "d83f4f62672e2e2631e79b87bb63de269b402934e688923203f6d1d9b0d0325f",
+      "capa_attack_tags": [
+        "Command and Control::Proxy::Domain Fronting [T1090.004]"
+      ]
+    },
+    {
+      "attack_id": "T1091",
+      "official_url": "https://attack.mitre.org/techniques/T1091/",
+      "website_sha256": "3a69e402e47f466a11b00459c923309902f24e42e1c2877cc382c8aeb2fdaeda",
+      "capa_attack_tags": [
+        "Initial Access::Replication Through Removable Media [T1091]",
+        "Lateral Movement::Replication Through Removable Media [T1091]"
+      ]
+    },
+    {
+      "attack_id": "T1092",
+      "official_url": "https://attack.mitre.org/techniques/T1092/",
+      "website_sha256": "8741f82f0c4fa52678163f79ef1b00b5c79cc22342a60721fa60b0391cc7b684",
+      "capa_attack_tags": [
+        "Command and Control::Communication Through Removable Media [T1092]"
+      ]
+    },
+    {
+      "attack_id": "T1098.002",
+      "official_url": "https://attack.mitre.org/techniques/T1098/002/",
+      "website_sha256": "bcec0679f2bb54dfec253cf58e303430a8796aafeddb66903bc9bb8f78fdf7c7",
+      "capa_attack_tags": [
+        "Persistence::Account Manipulation::Additional Email Delegate Permissions [T1098.002]",
+        "Privilege Escalation::Account Manipulation::Additional Email Delegate Permissions [T1098.002]"
+      ]
+    },
+    {
+      "attack_id": "T1098.005",
+      "official_url": "https://attack.mitre.org/techniques/T1098/005/",
+      "website_sha256": "5e0a731e4a349bd87671efb6d152d16aead55c04d72221011596d18ead07c3ca",
+      "capa_attack_tags": [
+        "Persistence::Account Manipulation::Device Registration [T1098.005]",
+        "Privilege Escalation::Account Manipulation::Device Registration [T1098.005]"
+      ]
+    },
+    {
+      "attack_id": "T1098.007",
+      "official_url": "https://attack.mitre.org/techniques/T1098/007/",
+      "website_sha256": "5bb6ecbb8426af73ac58704dddab4d13475f4bde7757602abccb83b4c0f45b36",
+      "capa_attack_tags": [
+        "Persistence::Account Manipulation::Additional Local or Domain Groups [T1098.007]",
+        "Privilege Escalation::Account Manipulation::Additional Local or Domain Groups [T1098.007]"
+      ]
+    },
+    {
+      "attack_id": "T1102",
+      "official_url": "https://attack.mitre.org/techniques/T1102/",
+      "website_sha256": "5bddbac13880b477631194e9fd5baba7bf6fe75fecae37ade813d47d26f65fe3",
+      "capa_attack_tags": [
+        "Command and Control::Web Service [T1102]"
+      ]
+    },
+    {
+      "attack_id": "T1102.001",
+      "official_url": "https://attack.mitre.org/techniques/T1102/001/",
+      "website_sha256": "8d90616fb019136609c31adda80d014922615f188337bc253285187dfd077ee7",
+      "capa_attack_tags": [
+        "Command and Control::Web Service::Dead Drop Resolver [T1102.001]"
+      ]
+    },
+    {
+      "attack_id": "T1102.002",
+      "official_url": "https://attack.mitre.org/techniques/T1102/002/",
+      "website_sha256": "163edde2924a4661de9f1ee6c7940a18b48ec9bad4cbacf5c6f850c4fd286b6d",
+      "capa_attack_tags": [
+        "Command and Control::Web Service::Bidirectional Communication [T1102.002]"
+      ]
+    },
+    {
+      "attack_id": "T1102.003",
+      "official_url": "https://attack.mitre.org/techniques/T1102/003/",
+      "website_sha256": "97b1347d10a0b94e4466555d97cc2fb0c319167600f0dd9ec849acb5e5c4caaf",
+      "capa_attack_tags": [
+        "Command and Control::Web Service::One-Way Communication [T1102.003]"
+      ]
+    },
+    {
+      "attack_id": "T1104",
+      "official_url": "https://attack.mitre.org/techniques/T1104/",
+      "website_sha256": "15ac1002b45d6e803b27dfaca2a4bcc33fae9dda443c8ef958c4acaf3a8f351f",
+      "capa_attack_tags": [
+        "Command and Control::Multi-Stage Channels [T1104]"
+      ]
+    },
+    {
+      "attack_id": "T1110",
+      "official_url": "https://attack.mitre.org/techniques/T1110/",
+      "website_sha256": "1c26d3f1084cfa167bb19cb2aa3c7f17affb9a8476cadd72e3df9f44c616dd2d",
+      "capa_attack_tags": [
+        "Credential Access::Brute Force [T1110]"
+      ]
+    },
+    {
+      "attack_id": "T1110.001",
+      "official_url": "https://attack.mitre.org/techniques/T1110/001/",
+      "website_sha256": "bb72305f0441ce64b3a12b050ce2b0a65fa7b5b50b62e4fc6c1a11e7c9ada919",
+      "capa_attack_tags": [
+        "Credential Access::Brute Force::Password Guessing [T1110.001]"
+      ]
+    },
+    {
+      "attack_id": "T1110.002",
+      "official_url": "https://attack.mitre.org/techniques/T1110/002/",
+      "website_sha256": "51c0bb6972c999aa08d627eb8ca90a4498aefb027922ee08fd8d105e4384b786",
+      "capa_attack_tags": [
+        "Credential Access::Brute Force::Password Cracking [T1110.002]"
+      ]
+    },
+    {
+      "attack_id": "T1110.003",
+      "official_url": "https://attack.mitre.org/techniques/T1110/003/",
+      "website_sha256": "67ddb65a1258ab3b40aecc1bf0a8c329edf108c86466b38123425c36ed8e538f",
+      "capa_attack_tags": [
+        "Credential Access::Brute Force::Password Spraying [T1110.003]"
+      ]
+    },
+    {
+      "attack_id": "T1110.004",
+      "official_url": "https://attack.mitre.org/techniques/T1110/004/",
+      "website_sha256": "e2fd1f899cbabc39b4162ecc180017d1d6ddac52e1b848d000122f02b19ebfcd",
+      "capa_attack_tags": [
+        "Credential Access::Brute Force::Credential Stuffing [T1110.004]"
+      ]
+    },
+    {
+      "attack_id": "T1111",
+      "official_url": "https://attack.mitre.org/techniques/T1111/",
+      "website_sha256": "fc52f147b21ad76fe40b51fcd16f440f7b5dce0519ec702a4a2a958a7aef7362",
+      "capa_attack_tags": [
+        "Credential Access::Multi-Factor Authentication Interception [T1111]"
+      ]
+    },
+    {
+      "attack_id": "T1114",
+      "official_url": "https://attack.mitre.org/techniques/T1114/",
+      "website_sha256": "b757f14fb6be5af93a3b6cef690f687c1006bea0069d4433e0786e35c4599837",
+      "capa_attack_tags": [
+        "Collection::Email Collection [T1114]"
+      ]
+    },
+    {
+      "attack_id": "T1114.001",
+      "official_url": "https://attack.mitre.org/techniques/T1114/001/",
+      "website_sha256": "97d2fd2c577c186105eae9f89c52ac2f6c23c8e52303bedd52c81d47e572a23e",
+      "capa_attack_tags": [
+        "Collection::Email Collection::Local Email Collection [T1114.001]"
+      ]
+    },
+    {
+      "attack_id": "T1114.002",
+      "official_url": "https://attack.mitre.org/techniques/T1114/002/",
+      "website_sha256": "4d5c4fe1e34af78c1ee506af7bfc6c62a82e2dce6bdecf1d87c38723f5b016a7",
+      "capa_attack_tags": [
+        "Collection::Email Collection::Remote Email Collection [T1114.002]"
+      ]
+    },
+    {
+      "attack_id": "T1114.003",
+      "official_url": "https://attack.mitre.org/techniques/T1114/003/",
+      "website_sha256": "2ac8fcfc31b71473eeac3c02114b18c4d6c8cafa93ba899c00da831b5d30723b",
+      "capa_attack_tags": [
+        "Collection::Email Collection::Email Forwarding Rule [T1114.003]"
+      ]
+    },
+    {
+      "attack_id": "T1119",
+      "official_url": "https://attack.mitre.org/techniques/T1119/",
+      "website_sha256": "9cc81405bcf64aef435332d6e39820f1b14870fddc87ea13fb9320bb698689f0",
+      "capa_attack_tags": [
+        "Collection::Automated Collection [T1119]"
+      ]
+    },
+    {
+      "attack_id": "T1127",
+      "official_url": "https://attack.mitre.org/techniques/T1127/",
+      "website_sha256": "add6d6e44d40ee67f952bc4dc13ae85d95c0bc16440e815f37c2bcc820b2becd",
+      "capa_attack_tags": [
+        "Execution::Trusted Developer Utilities Proxy Execution [T1127]",
+        "Stealth::Trusted Developer Utilities Proxy Execution [T1127]"
+      ]
+    },
+    {
+      "attack_id": "T1127.001",
+      "official_url": "https://attack.mitre.org/techniques/T1127/001/",
+      "website_sha256": "5bb1311cf6424e83d433ef30a6b9256a611b9a9194cf224bd486fd7686a94231",
+      "capa_attack_tags": [
+        "Execution::Trusted Developer Utilities Proxy Execution::MSBuild [T1127.001]",
+        "Stealth::Trusted Developer Utilities Proxy Execution::MSBuild [T1127.001]"
+      ]
+    },
+    {
+      "attack_id": "T1127.002",
+      "official_url": "https://attack.mitre.org/techniques/T1127/002/",
+      "website_sha256": "546dd4a5dacef9279f7be7d509c4949226c696dadf64752d19eed54a580bb83f",
+      "capa_attack_tags": [
+        "Execution::Trusted Developer Utilities Proxy Execution::ClickOnce [T1127.002]",
+        "Stealth::Trusted Developer Utilities Proxy Execution::ClickOnce [T1127.002]"
+      ]
+    },
+    {
+      "attack_id": "T1127.003",
+      "official_url": "https://attack.mitre.org/techniques/T1127/003/",
+      "website_sha256": "54c7440a5568f12c04601eca590b1f6ae611b91fbd860bca2032883b42f75393",
+      "capa_attack_tags": [
+        "Execution::Trusted Developer Utilities Proxy Execution::JamPlus [T1127.003]",
+        "Stealth::Trusted Developer Utilities Proxy Execution::JamPlus [T1127.003]"
+      ]
+    },
+    {
+      "attack_id": "T1132",
+      "official_url": "https://attack.mitre.org/techniques/T1132/",
+      "website_sha256": "7fd70bc14e843344be26dfbdd8012596b2cbbbb9089aa3a6228ee734b3f40fb8",
+      "capa_attack_tags": [
+        "Command and Control::Data Encoding [T1132]"
+      ]
+    },
+    {
+      "attack_id": "T1132.001",
+      "official_url": "https://attack.mitre.org/techniques/T1132/001/",
+      "website_sha256": "c5978737617ce07eb16cb8e8fad630870039192b32b76c623d881fb374c0db65",
+      "capa_attack_tags": [
+        "Command and Control::Data Encoding::Standard Encoding [T1132.001]"
+      ]
+    },
+    {
+      "attack_id": "T1132.002",
+      "official_url": "https://attack.mitre.org/techniques/T1132/002/",
+      "website_sha256": "5a202d63fb580345035fdfdc1e0e2f53566844236538e60f91bb3566783a6022",
+      "capa_attack_tags": [
+        "Command and Control::Data Encoding::Non-Standard Encoding [T1132.002]"
+      ]
+    },
+    {
+      "attack_id": "T1133",
+      "official_url": "https://attack.mitre.org/techniques/T1133/",
+      "website_sha256": "50904380aa3b8a3dd3242bda2ca3a1cad3e4ffdd7fc654af86591eec8d4ba8fe",
+      "capa_attack_tags": [
+        "Initial Access::External Remote Services [T1133]",
+        "Persistence::External Remote Services [T1133]"
+      ]
+    },
+    {
+      "attack_id": "T1134.005",
+      "official_url": "https://attack.mitre.org/techniques/T1134/005/",
+      "website_sha256": "dd9fdcda6d22bfe1ce6fe4446b2d28a41872b411ce0364e940725bcba1ef5499",
+      "capa_attack_tags": [
+        "Privilege Escalation::Access Token Manipulation::SID-History Injection [T1134.005]",
+        "Stealth::Access Token Manipulation::SID-History Injection [T1134.005]"
+      ]
+    },
+    {
+      "attack_id": "T1136.001",
+      "official_url": "https://attack.mitre.org/techniques/T1136/001/",
+      "website_sha256": "e3a1945b65aabb7c0d74caf8fa2c3960a9b6c2ea3508e369fbd4d2f973d79c88",
+      "capa_attack_tags": [
+        "Persistence::Create Account::Local Account [T1136.001]"
+      ]
+    },
+    {
+      "attack_id": "T1136.002",
+      "official_url": "https://attack.mitre.org/techniques/T1136/002/",
+      "website_sha256": "8fd7282d51c3327cd93bf18cb285e22016ee3a888eb721957bc33db55774c6b8",
+      "capa_attack_tags": [
+        "Persistence::Create Account::Domain Account [T1136.002]"
+      ]
+    },
+    {
+      "attack_id": "T1137",
+      "official_url": "https://attack.mitre.org/techniques/T1137/",
+      "website_sha256": "3fb41f3837acd37e76cbd85122aef7e2c358f93d3f069c54dcfb3c0f621c5991",
+      "capa_attack_tags": [
+        "Persistence::Office Application Startup [T1137]"
+      ]
+    },
+    {
+      "attack_id": "T1137.001",
+      "official_url": "https://attack.mitre.org/techniques/T1137/001/",
+      "website_sha256": "cfc9accff7eaa7a743de29d59a164cc6008395a4e430f4e4b621e1f7487c6e19",
+      "capa_attack_tags": [
+        "Persistence::Office Application Startup::Office Template Macros [T1137.001]"
+      ]
+    },
+    {
+      "attack_id": "T1137.002",
+      "official_url": "https://attack.mitre.org/techniques/T1137/002/",
+      "website_sha256": "d4a84eb72e4621bd0debba1aface34cba2231767a247f85dfc9bd1b95492365c",
+      "capa_attack_tags": [
+        "Persistence::Office Application Startup::Office Test [T1137.002]"
+      ]
+    },
+    {
+      "attack_id": "T1137.003",
+      "official_url": "https://attack.mitre.org/techniques/T1137/003/",
+      "website_sha256": "27a91aca306eaecd58aede88fc15d630819ac334d8e04f8d1745e315bdb1030a",
+      "capa_attack_tags": [
+        "Persistence::Office Application Startup::Outlook Forms [T1137.003]"
+      ]
+    },
+    {
+      "attack_id": "T1137.004",
+      "official_url": "https://attack.mitre.org/techniques/T1137/004/",
+      "website_sha256": "08f7dba0220575e225d47aa046eabe7c0642e70659935188ea7c417a8602d925",
+      "capa_attack_tags": [
+        "Persistence::Office Application Startup::Outlook Home Page [T1137.004]"
+      ]
+    },
+    {
+      "attack_id": "T1137.005",
+      "official_url": "https://attack.mitre.org/techniques/T1137/005/",
+      "website_sha256": "0fb524de16a73f04b7975e7ba06e9103d008c0236d139fc7938f7d9d12ba7550",
+      "capa_attack_tags": [
+        "Persistence::Office Application Startup::Outlook Rules [T1137.005]"
+      ]
+    },
+    {
+      "attack_id": "T1176.001",
+      "official_url": "https://attack.mitre.org/techniques/T1176/001/",
+      "website_sha256": "154a8644eac024ef49b58391873221facff0c129cc558bc65b79b9a7a9343d1f",
+      "capa_attack_tags": [
+        "Command and Control::Software Extensions::Browser Extensions [T1176.001]",
+        "Persistence::Software Extensions::Browser Extensions [T1176.001]",
+        "Stealth::Software Extensions::Browser Extensions [T1176.001]"
+      ]
+    },
+    {
+      "attack_id": "T1176.002",
+      "official_url": "https://attack.mitre.org/techniques/T1176/002/",
+      "website_sha256": "8f00ad48787dd3aa759e14936775b5f246d307d9709e1f39078afe9075c7a730",
+      "capa_attack_tags": [
+        "Persistence::Software Extensions::IDE Extensions [T1176.002]"
+      ]
+    },
+    {
+      "attack_id": "T1185",
+      "official_url": "https://attack.mitre.org/techniques/T1185/",
+      "website_sha256": "4ec5c80983f435bf5a3d1e91bb3ea620d98fbfae23e7353db9646eecaaeada8b",
+      "capa_attack_tags": [
+        "Collection::Browser Session Hijacking [T1185]"
+      ]
+    },
+    {
+      "attack_id": "T1187",
+      "official_url": "https://attack.mitre.org/techniques/T1187/",
+      "website_sha256": "540d0eed417e5a12c99aeb7ea0b033ec81b7bc027c53809a3f71550715da423a",
+      "capa_attack_tags": [
+        "Credential Access::Forced Authentication [T1187]"
+      ]
+    },
+    {
+      "attack_id": "T1189",
+      "official_url": "https://attack.mitre.org/techniques/T1189/",
+      "website_sha256": "c758934645e2f0c502be238d3aa9423336720504e6d5c7bfae3111695aa17175",
+      "capa_attack_tags": [
+        "Initial Access::Drive-by Compromise [T1189]"
+      ]
+    },
+    {
+      "attack_id": "T1190",
+      "official_url": "https://attack.mitre.org/techniques/T1190/",
+      "website_sha256": "858f29b2ce3629344c5e735913522edf94a3a6c9e22d46123a6af1b468d311d8",
+      "capa_attack_tags": [
+        "Initial Access::Exploit Public-Facing Application [T1190]"
+      ]
+    },
+    {
+      "attack_id": "T1195",
+      "official_url": "https://attack.mitre.org/techniques/T1195/",
+      "website_sha256": "6d54218e49a988e93a2f6c35d4dc8b25a12c12631b1d2153d000859f479d7117",
+      "capa_attack_tags": [
+        "Initial Access::Supply Chain Compromise [T1195]"
+      ]
+    },
+    {
+      "attack_id": "T1195.001",
+      "official_url": "https://attack.mitre.org/techniques/T1195/001/",
+      "website_sha256": "ec087f1a2561471892cbf8759baba1a9b926569a724bddfd2df2efa936db99a6",
+      "capa_attack_tags": [
+        "Initial Access::Supply Chain Compromise::Compromise Software Dependencies and Development Tools [T1195.001]"
+      ]
+    },
+    {
+      "attack_id": "T1195.002",
+      "official_url": "https://attack.mitre.org/techniques/T1195/002/",
+      "website_sha256": "eae1da994652ab823741e5bbd74fd556020bbf3555f36940273ab552c6090bb9",
+      "capa_attack_tags": [
+        "Initial Access::Supply Chain Compromise::Compromise Software Supply Chain [T1195.002]"
+      ]
+    },
+    {
+      "attack_id": "T1195.003",
+      "official_url": "https://attack.mitre.org/techniques/T1195/003/",
+      "website_sha256": "4e88236c856f8bdeee46ee162922856036397c2ccfdd522707bdcd0cafcc17a3",
+      "capa_attack_tags": [
+        "Initial Access::Supply Chain Compromise::Compromise Hardware Supply Chain [T1195.003]"
+      ]
+    },
+    {
+      "attack_id": "T1199",
+      "official_url": "https://attack.mitre.org/techniques/T1199/",
+      "website_sha256": "4496cf1ed89267a46217a0a9d960ef36482147bd93bad2ac90ab6d05ecc5055e",
+      "capa_attack_tags": [
+        "Initial Access::Trusted Relationship [T1199]"
+      ]
+    },
+    {
+      "attack_id": "T1200",
+      "official_url": "https://attack.mitre.org/techniques/T1200/",
+      "website_sha256": "e7a6935d8e777f64a9fb001fd834bcf24343e5110705bcdb91ce48de6af2ad8c",
+      "capa_attack_tags": [
+        "Initial Access::Hardware Additions [T1200]"
+      ]
+    },
+    {
+      "attack_id": "T1202",
+      "official_url": "https://attack.mitre.org/techniques/T1202/",
+      "website_sha256": "48beca2ae4e0cd740e263454fd5f015f6c00cf9c58df4998ed1d00f503747b99",
+      "capa_attack_tags": [
+        "Stealth::Indirect Command Execution [T1202]"
+      ]
+    },
+    {
+      "attack_id": "T1203",
+      "official_url": "https://attack.mitre.org/techniques/T1203/",
+      "website_sha256": "95981eee7d4809ba14cc4848c226f3e4803564f7d9cb086e1d3f2efa91e9f37e",
+      "capa_attack_tags": [
+        "Execution::Exploitation for Client Execution [T1203]"
+      ]
+    },
+    {
+      "attack_id": "T1204",
+      "official_url": "https://attack.mitre.org/techniques/T1204/",
+      "website_sha256": "8bf3b0b8d0abc1031815e4feed03868e9163a136eb434950ea557035cf7ff965",
+      "capa_attack_tags": [
+        "Execution::User Execution [T1204]"
+      ]
+    },
+    {
+      "attack_id": "T1204.001",
+      "official_url": "https://attack.mitre.org/techniques/T1204/001/",
+      "website_sha256": "ce71899f0110a40e72edc84363207266990e80ac226c7b58bba0021cd38bd7ce",
+      "capa_attack_tags": [
+        "Execution::User Execution::Malicious Link [T1204.001]"
+      ]
+    },
+    {
+      "attack_id": "T1204.002",
+      "official_url": "https://attack.mitre.org/techniques/T1204/002/",
+      "website_sha256": "7ab2179cd65d433a4704ec3d6140e8efc6168591ef51f99e525b729ef88327b5",
+      "capa_attack_tags": [
+        "Execution::User Execution::Malicious File [T1204.002]"
+      ]
+    },
+    {
+      "attack_id": "T1204.004",
+      "official_url": "https://attack.mitre.org/techniques/T1204/004/",
+      "website_sha256": "fab36a0b8bd18c012561612cf7ca9fd62d1bc88a658e5b4b9d098845c12d59f8",
+      "capa_attack_tags": [
+        "Execution::User Execution::Malicious Copy and Paste [T1204.004]"
+      ]
+    },
+    {
+      "attack_id": "T1204.005",
+      "official_url": "https://attack.mitre.org/techniques/T1204/005/",
+      "website_sha256": "6c02bc295659ab370430cf881e0475e40ff6f54784710bb19389b70457266ada",
+      "capa_attack_tags": [
+        "Execution::User Execution::Malicious Library [T1204.005]"
+      ]
+    },
+    {
+      "attack_id": "T1205",
+      "official_url": "https://attack.mitre.org/techniques/T1205/",
+      "website_sha256": "53a65d0dc10a7ccbde066b7a6b7c721c78de47b24c1d06a72b921531aac84d0d",
+      "capa_attack_tags": [
+        "Command and Control::Traffic Signaling [T1205]",
+        "Persistence::Traffic Signaling [T1205]",
+        "Stealth::Traffic Signaling [T1205]"
+      ]
+    },
+    {
+      "attack_id": "T1205.001",
+      "official_url": "https://attack.mitre.org/techniques/T1205/001/",
+      "website_sha256": "50ec04b9ec2a1bf715c9ae0a54a4af71330fd8acabde3e2367152a8019d2aeb4",
+      "capa_attack_tags": [
+        "Command and Control::Traffic Signaling::Port Knocking [T1205.001]",
+        "Persistence::Traffic Signaling::Port Knocking [T1205.001]",
+        "Stealth::Traffic Signaling::Port Knocking [T1205.001]"
+      ]
+    },
+    {
+      "attack_id": "T1207",
+      "official_url": "https://attack.mitre.org/techniques/T1207/",
+      "website_sha256": "18a0727dbe166a91cfe49a2910455dde012c7a2799f9b00adf84175940051963",
+      "capa_attack_tags": [
+        "Defense Impairment::Rogue Domain Controller [T1207]"
+      ]
+    },
+    {
+      "attack_id": "T1210",
+      "official_url": "https://attack.mitre.org/techniques/T1210/",
+      "website_sha256": "2d19d1460aa75a881ad27d571613727275dd23cbbed699fb75eadb358bda23f2",
+      "capa_attack_tags": [
+        "Lateral Movement::Exploitation of Remote Services [T1210]"
+      ]
+    },
+    {
+      "attack_id": "T1211",
+      "official_url": "https://attack.mitre.org/techniques/T1211/",
+      "website_sha256": "a82cf35a4d2562df682db924963c586d234d1cb4ad80b16b207bdf603cecb34f",
+      "capa_attack_tags": [
+        "Stealth::Exploitation for Stealth [T1211]"
+      ]
+    },
+    {
+      "attack_id": "T1213.002",
+      "official_url": "https://attack.mitre.org/techniques/T1213/002/",
+      "website_sha256": "06912e1ae5d1a6f516c9173c4f9530826c3600c2f89106f863971919189563a2",
+      "capa_attack_tags": [
+        "Collection::Data from Information Repositories::Sharepoint [T1213.002]"
+      ]
+    },
+    {
+      "attack_id": "T1213.006",
+      "official_url": "https://attack.mitre.org/techniques/T1213/006/",
+      "website_sha256": "5f22e78fda78e25c233e0a4b393948b3b10601162377070f6ba7a40141e511dd",
+      "capa_attack_tags": [
+        "Collection::Data from Information Repositories::Databases [T1213.006]",
+        "Command and Control::Data from Information Repositories::Databases [T1213.006]",
+        "Exfiltration::Data from Information Repositories::Databases [T1213.006]",
+        "Lateral Movement::Data from Information Repositories::Databases [T1213.006]"
+      ]
+    },
+    {
+      "attack_id": "T1216",
+      "official_url": "https://attack.mitre.org/techniques/T1216/",
+      "website_sha256": "9f481898e6469b87f2ca8b2b9319e58c2db4965e8ee8d03a95885ee59cce6d8b",
+      "capa_attack_tags": [
+        "Stealth::System Script Proxy Execution [T1216]"
+      ]
+    },
+    {
+      "attack_id": "T1216.001",
+      "official_url": "https://attack.mitre.org/techniques/T1216/001/",
+      "website_sha256": "0f9fe916e0c14d0a4d74b43235832b9256fc8e2ea3e9ce18fbfb5132dfd2be99",
+      "capa_attack_tags": [
+        "Stealth::System Script Proxy Execution::PubPrn [T1216.001]"
+      ]
+    },
+    {
+      "attack_id": "T1216.002",
+      "official_url": "https://attack.mitre.org/techniques/T1216/002/",
+      "website_sha256": "2008bf862d2626f705a6b9dc554362a1df9045f708fc1274c25a2f47650ce046",
+      "capa_attack_tags": [
+        "Stealth::System Script Proxy Execution::SyncAppvPublishingServer [T1216.002]"
+      ]
+    },
+    {
+      "attack_id": "T1217",
+      "official_url": "https://attack.mitre.org/techniques/T1217/",
+      "website_sha256": "4cab973063f0a66887f3197876db7fb990a2be9a3afee2bed6788a30d728f403",
+      "capa_attack_tags": [
+        "Discovery::Browser Information Discovery [T1217]"
+      ]
+    },
+    {
+      "attack_id": "T1218",
+      "official_url": "https://attack.mitre.org/techniques/T1218/",
+      "website_sha256": "097cb18dfd279020bfd076be49a0e67aa8b5eba6c59c38c42bb663fc8fbb1e44",
+      "capa_attack_tags": [
+        "Stealth::System Binary Proxy Execution [T1218]"
+      ]
+    },
+    {
+      "attack_id": "T1218.001",
+      "official_url": "https://attack.mitre.org/techniques/T1218/001/",
+      "website_sha256": "3cade71b1711690a5e65f05dd388161f7a7bd2d65a6597fdd7ccdaad44438024",
+      "capa_attack_tags": [
+        "Stealth::System Binary Proxy Execution::Compiled HTML File [T1218.001]"
+      ]
+    },
+    {
+      "attack_id": "T1218.002",
+      "official_url": "https://attack.mitre.org/techniques/T1218/002/",
+      "website_sha256": "00a1595ab143f7bfe09d56b766f1e1fa1d4e525e85084c74571833ee68a05de5",
+      "capa_attack_tags": [
+        "Stealth::System Binary Proxy Execution::Control Panel [T1218.002]"
+      ]
+    },
+    {
+      "attack_id": "T1218.012",
+      "official_url": "https://attack.mitre.org/techniques/T1218/012/",
+      "website_sha256": "ce177f56e45a7525ef4b5c654a1c4c8b2145d2bc261fb75ad7a60172d158bf5f",
+      "capa_attack_tags": [
+        "Stealth::System Binary Proxy Execution::Verclsid [T1218.012]"
+      ]
+    },
+    {
+      "attack_id": "T1218.014",
+      "official_url": "https://attack.mitre.org/techniques/T1218/014/",
+      "website_sha256": "cb00ebb39d72a1bd867ed334824e34caedfbd23cef66ebf67964a452e9c46bd4",
+      "capa_attack_tags": [
+        "Stealth::System Binary Proxy Execution::MMC [T1218.014]"
+      ]
+    },
+    {
+      "attack_id": "T1218.015",
+      "official_url": "https://attack.mitre.org/techniques/T1218/015/",
+      "website_sha256": "b7bf1742b7c64c48068c6a21dd75b5bd5840191899577c9f8d706f84a24b3696",
+      "capa_attack_tags": [
+        "Stealth::System Binary Proxy Execution::Electron Applications [T1218.015]"
+      ]
+    },
+    {
+      "attack_id": "T1219",
+      "official_url": "https://attack.mitre.org/techniques/T1219/",
+      "website_sha256": "ca4d1997562aab2f8d357da6e911053eeeb0e549560e82e36794f6dd3dda6ade",
+      "capa_attack_tags": [
+        "Command and Control::Remote Access Tools [T1219]"
+      ]
+    },
+    {
+      "attack_id": "T1219.001",
+      "official_url": "https://attack.mitre.org/techniques/T1219/001/",
+      "website_sha256": "ed7de8cb4613275111e991002d8d675249d784e081bbf012fa1c68f6f3714859",
+      "capa_attack_tags": [
+        "Command and Control::Remote Access Tools::IDE Tunneling [T1219.001]"
+      ]
+    },
+    {
+      "attack_id": "T1219.002",
+      "official_url": "https://attack.mitre.org/techniques/T1219/002/",
+      "website_sha256": "32f450e81daf74c9e2b91d31544d9d9e15f1f24bc762deb7bca194367f347969",
+      "capa_attack_tags": [
+        "Command and Control::Remote Access Tools::Remote Desktop Software [T1219.002]"
+      ]
+    },
+    {
+      "attack_id": "T1219.003",
+      "official_url": "https://attack.mitre.org/techniques/T1219/003/",
+      "website_sha256": "1da4fbd5539440740f9771e60ae82aee87cccb539388492c01c9e7646f4213c5",
+      "capa_attack_tags": [
+        "Command and Control::Remote Access Tools::Remote Access Hardware [T1219.003]"
+      ]
+    },
+    {
+      "attack_id": "T1220",
+      "official_url": "https://attack.mitre.org/techniques/T1220/",
+      "website_sha256": "c66d6576781be18c7d8db1069878774970e932fb6e545fc3ca38eea2a0f44e94",
+      "capa_attack_tags": [
+        "Stealth::XSL Script Processing [T1220]"
+      ]
+    },
+    {
+      "attack_id": "T1221",
+      "official_url": "https://attack.mitre.org/techniques/T1221/",
+      "website_sha256": "54ae9f2464e71545e674d0c42c417d09ed08e99f20fb1806afb1802849168cac",
+      "capa_attack_tags": [
+        "Stealth::Template Injection [T1221]"
+      ]
+    },
+    {
+      "attack_id": "T1480",
+      "official_url": "https://attack.mitre.org/techniques/T1480/",
+      "website_sha256": "cd8003d35b1ce67554beb859fb35bf3652fb03dad7ef228423ca806f6f800651",
+      "capa_attack_tags": [
+        "Stealth::Execution Guardrails [T1480]"
+      ]
+    },
+    {
+      "attack_id": "T1480.001",
+      "official_url": "https://attack.mitre.org/techniques/T1480/001/",
+      "website_sha256": "991dae00a92692da42f9d67598fd94716d4a2b225283c2404bc025fbd7048aeb",
+      "capa_attack_tags": [
+        "Stealth::Execution Guardrails::Environmental Keying [T1480.001]"
+      ]
+    },
+    {
+      "attack_id": "T1480.002",
+      "official_url": "https://attack.mitre.org/techniques/T1480/002/",
+      "website_sha256": "8d3eb7132a4495cf52409975a4523fb1de4ec74a3042129bbe89e8be184c5636",
+      "capa_attack_tags": [
+        "Stealth::Execution Guardrails::Mutual Exclusion [T1480.002]"
+      ]
+    },
+    {
+      "attack_id": "T1484",
+      "official_url": "https://attack.mitre.org/techniques/T1484/",
+      "website_sha256": "a7e6b75add3b717bc36be44751ef97fcd3fad371c1d1a6ab26db9082900d7e7a",
+      "capa_attack_tags": [
+        "Defense Impairment::Domain or Tenant Policy Modification [T1484]",
+        "Privilege Escalation::Domain or Tenant Policy Modification [T1484]"
+      ]
+    },
+    {
+      "attack_id": "T1484.001",
+      "official_url": "https://attack.mitre.org/techniques/T1484/001/",
+      "website_sha256": "80fe2916ef006ac341be910557fcb341ccfb849afd00f48687eb434597b81af7",
+      "capa_attack_tags": [
+        "Defense Impairment::Domain or Tenant Policy Modification::Group Policy Modification [T1484.001]",
+        "Privilege Escalation::Domain or Tenant Policy Modification::Group Policy Modification [T1484.001]"
+      ]
+    },
+    {
+      "attack_id": "T1484.002",
+      "official_url": "https://attack.mitre.org/techniques/T1484/002/",
+      "website_sha256": "7982374861961d7eaef77bea1850c0e39efb001144b2bd704e735a99b14be6be",
+      "capa_attack_tags": [
+        "Defense Impairment::Domain or Tenant Policy Modification::Trust Modification [T1484.002]",
+        "Privilege Escalation::Domain or Tenant Policy Modification::Trust Modification [T1484.002]"
+      ]
+    },
+    {
+      "attack_id": "T1485",
+      "official_url": "https://attack.mitre.org/techniques/T1485/",
+      "website_sha256": "91bfd21f35e8dfc43df472fabfd36dfea69cf06ca6b4608790c4e067ddb97849",
+      "capa_attack_tags": [
+        "Impact::Data Destruction [T1485]"
+      ]
+    },
+    {
+      "attack_id": "T1486",
+      "official_url": "https://attack.mitre.org/techniques/T1486/",
+      "website_sha256": "bb5feee1ddb0c30b0e6b64bd211a8b6804723e855807b9e972943d48008d81ba",
+      "capa_attack_tags": [
+        "Impact::Data Encrypted for Impact [T1486]"
+      ]
+    },
+    {
+      "attack_id": "T1491",
+      "official_url": "https://attack.mitre.org/techniques/T1491/",
+      "website_sha256": "eedb10a68c77a84b4b356e59bc52f459dd3223adb42624d4be9ceaf77aa1310f",
+      "capa_attack_tags": [
+        "Impact::Defacement [T1491]"
+      ]
+    },
+    {
+      "attack_id": "T1491.001",
+      "official_url": "https://attack.mitre.org/techniques/T1491/001/",
+      "website_sha256": "3437529ce3b5317fa4890068331ba91b5726ee1253a1567c98485de9f0f5fdfb",
+      "capa_attack_tags": [
+        "Impact::Defacement::Internal Defacement [T1491.001]"
+      ]
+    },
+    {
+      "attack_id": "T1491.002",
+      "official_url": "https://attack.mitre.org/techniques/T1491/002/",
+      "website_sha256": "ef6b81ef919bbf66ff8fc12b7548cb10f0c79bc9681cb5ade69792a19811db81",
+      "capa_attack_tags": [
+        "Impact::Defacement::External Defacement [T1491.002]"
+      ]
+    },
+    {
+      "attack_id": "T1495",
+      "official_url": "https://attack.mitre.org/techniques/T1495/",
+      "website_sha256": "a0c2e20e19424396b8267e181ec85765bca230b1bfb9075a309301c45b8559e0",
+      "capa_attack_tags": [
+        "Impact::Firmware Corruption [T1495]"
+      ]
+    },
+    {
+      "attack_id": "T1496.001",
+      "official_url": "https://attack.mitre.org/techniques/T1496/001/",
+      "website_sha256": "94ad0b73dfaea8de8d35aa69a379957bc55597fad187c2ddf9ee3b22ae999683",
+      "capa_attack_tags": [
+        "Impact::Resource Hijacking::Compute Hijacking [T1496.001]"
+      ]
+    },
+    {
+      "attack_id": "T1496.002",
+      "official_url": "https://attack.mitre.org/techniques/T1496/002/",
+      "website_sha256": "606bcd2c44c499ca8b01ea02be42536bbf68e1651bdfb9eb7d8e56decd8427f8",
+      "capa_attack_tags": [
+        "Impact::Resource Hijacking::Bandwidth Hijacking [T1496.002]"
+      ]
+    },
+    {
+      "attack_id": "T1497.003",
+      "official_url": "https://attack.mitre.org/techniques/T1497/003/",
+      "website_sha256": "57e38e8a830bceedb97d6758f89b93c27e4f264cd5058514570265875de68fa2",
+      "capa_attack_tags": [
+        "Discovery::Virtualization/Sandbox Evasion::Time Based Checks [T1497.003]",
+        "Stealth::Virtualization/Sandbox Evasion::Time Based Checks [T1497.003]"
+      ]
+    },
+    {
+      "attack_id": "T1498",
+      "official_url": "https://attack.mitre.org/techniques/T1498/",
+      "website_sha256": "2cff614b6878c643b91fb46333c11c2dd7bc4e6ff2434bacb798b2c53272a9cf",
+      "capa_attack_tags": [
+        "Impact::Network Denial of Service [T1498]"
+      ]
+    },
+    {
+      "attack_id": "T1498.001",
+      "official_url": "https://attack.mitre.org/techniques/T1498/001/",
+      "website_sha256": "d932d542f484395a1598e62c94683a5be442dfb4d93931dce250019c05097f67",
+      "capa_attack_tags": [
+        "Impact::Network Denial of Service::Direct Network Flood [T1498.001]"
+      ]
+    },
+    {
+      "attack_id": "T1498.002",
+      "official_url": "https://attack.mitre.org/techniques/T1498/002/",
+      "website_sha256": "83fad03310f7ecfd2a1489eebad05f93a14e0f9770ed13fb286a0cd5ca6f2da0",
+      "capa_attack_tags": [
+        "Impact::Network Denial of Service::Reflection Amplification [T1498.002]"
+      ]
+    },
+    {
+      "attack_id": "T1499.001",
+      "official_url": "https://attack.mitre.org/techniques/T1499/001/",
+      "website_sha256": "cf08665033d64a08aba4f96a19b939790c4d7c42a53a68a398e06e7b22963dc6",
+      "capa_attack_tags": [
+        "Impact::Endpoint Denial of Service::OS Exhaustion Flood [T1499.001]"
+      ]
+    },
+    {
+      "attack_id": "T1499.002",
+      "official_url": "https://attack.mitre.org/techniques/T1499/002/",
+      "website_sha256": "421389e09fc94fcb701d8b36ce949a87f934df3bc33c72a72dc92848c841ac5f",
+      "capa_attack_tags": [
+        "Impact::Endpoint Denial of Service::Service Exhaustion Flood [T1499.002]"
+      ]
+    },
+    {
+      "attack_id": "T1499.003",
+      "official_url": "https://attack.mitre.org/techniques/T1499/003/",
+      "website_sha256": "2ca800cfea330240bbe94a63eeeaace77dcca507fb253af59727b5324c597378",
+      "capa_attack_tags": [
+        "Impact::Endpoint Denial of Service::Application Exhaustion Flood [T1499.003]"
+      ]
+    },
+    {
+      "attack_id": "T1499.004",
+      "official_url": "https://attack.mitre.org/techniques/T1499/004/",
+      "website_sha256": "c4d93471d0459b30e932e31fcde8b62e42cfe9c9f77964a34282d1db162102ec",
+      "capa_attack_tags": [
+        "Impact::Endpoint Denial of Service::Application or System Exploitation [T1499.004]"
+      ]
+    },
+    {
+      "attack_id": "T1505.001",
+      "official_url": "https://attack.mitre.org/techniques/T1505/001/",
+      "website_sha256": "38fd7b0b7c2be403ae260cc3376e6ffdabf7b46f6de34c0a308360495b56f3a4",
+      "capa_attack_tags": [
+        "Persistence::Server Software Component::SQL Stored Procedures [T1505.001]"
+      ]
+    },
+    {
+      "attack_id": "T1505.003",
+      "official_url": "https://attack.mitre.org/techniques/T1505/003/",
+      "website_sha256": "5f29b0132e8ba3ebe50fa8928952b1582ebecea63be1aaa012f799685d0e6c31",
+      "capa_attack_tags": [
+        "Persistence::Server Software Component::Web Shell [T1505.003]"
+      ]
+    },
+    {
+      "attack_id": "T1505.005",
+      "official_url": "https://attack.mitre.org/techniques/T1505/005/",
+      "website_sha256": "26bbbe94ed6b7867123755c915c84cb4d3c9845cdea1a97cbcb8215f6dc631cf",
+      "capa_attack_tags": [
+        "Persistence::Server Software Component::Terminal Services DLL [T1505.005]"
+      ]
+    },
+    {
+      "attack_id": "T1518.002",
+      "official_url": "https://attack.mitre.org/techniques/T1518/002/",
+      "website_sha256": "e04b29f3fd081e04f0cf8c1ebc0e56262869a97205320eae6c4b9e35eb148f90",
+      "capa_attack_tags": [
+        "Discovery::Software Discovery::Backup Software Discovery [T1518.002]"
+      ]
+    },
+    {
+      "attack_id": "T1534",
+      "official_url": "https://attack.mitre.org/techniques/T1534/",
+      "website_sha256": "a2eddc4220f297cd9049d81d72fd91fc3e1e5ecb0a32da297f57c92d17c2c07e",
+      "capa_attack_tags": [
+        "Lateral Movement::Internal Spearphishing [T1534]"
+      ]
+    },
+    {
+      "attack_id": "T1539",
+      "official_url": "https://attack.mitre.org/techniques/T1539/",
+      "website_sha256": "a8141c0a4dba7b3551fb1f1622696feebb0dd6cada74822144c265c1442cf380",
+      "capa_attack_tags": [
+        "Credential Access::Steal Web Session Cookie [T1539]"
+      ]
+    },
+    {
+      "attack_id": "T1542",
+      "official_url": "https://attack.mitre.org/techniques/T1542/",
+      "website_sha256": "3bc3337e41d45c98ddc1a269bb386caad1cbc0a73ac0001e3a725f0ada40eaaa",
+      "capa_attack_tags": [
+        "Persistence::Pre-OS Boot [T1542]",
+        "Stealth::Pre-OS Boot [T1542]"
+      ]
+    },
+    {
+      "attack_id": "T1542.002",
+      "official_url": "https://attack.mitre.org/techniques/T1542/002/",
+      "website_sha256": "3a40a0cd36cecfdfc96129a70f33976a1383068a46dd51e0fb288c297dcd1992",
+      "capa_attack_tags": [
+        "Persistence::Pre-OS Boot::Component Firmware [T1542.002]",
+        "Stealth::Pre-OS Boot::Component Firmware [T1542.002]"
+      ]
+    },
+    {
+      "attack_id": "T1542.003",
+      "official_url": "https://attack.mitre.org/techniques/T1542/003/",
+      "website_sha256": "9af01cde0b9fb0ec827f80b04396b40ce0de0652a1ff26132c26fe41be8878d7",
+      "capa_attack_tags": [
+        "Persistence::Pre-OS Boot::Bootkit [T1542.003]",
+        "Stealth::Pre-OS Boot::Bootkit [T1542.003]"
+      ]
+    },
+    {
+      "attack_id": "T1543",
+      "official_url": "https://attack.mitre.org/techniques/T1543/",
+      "website_sha256": "69c4561e663e1fcb8ecc82c69469ecac09f950afcbc254b59c5f027bde361ac9",
+      "capa_attack_tags": [
+        "Persistence::Create or Modify System Process [T1543]",
+        "Privilege Escalation::Create or Modify System Process [T1543]"
+      ]
+    },
+    {
+      "attack_id": "T1546.003",
+      "official_url": "https://attack.mitre.org/techniques/T1546/003/",
+      "website_sha256": "98c1f844e9ce591a42846a04ce7e36ffcb64a8c2e803efd31fe0fdb932a328ab",
+      "capa_attack_tags": [
+        "Persistence::Event Triggered Execution::Windows Management Instrumentation Event Subscription [T1546.003]",
+        "Privilege Escalation::Event Triggered Execution::Windows Management Instrumentation Event Subscription [T1546.003]"
+      ]
+    },
+    {
+      "attack_id": "T1546.007",
+      "official_url": "https://attack.mitre.org/techniques/T1546/007/",
+      "website_sha256": "b512b80a8e580b8a1fe27e20d0bdbcedc1ad70b2d4b98d5ab687219f9966e818",
+      "capa_attack_tags": [
+        "Persistence::Event Triggered Execution::Netsh Helper DLL [T1546.007]",
+        "Privilege Escalation::Event Triggered Execution::Netsh Helper DLL [T1546.007]"
+      ]
+    },
+    {
+      "attack_id": "T1546.016",
+      "official_url": "https://attack.mitre.org/techniques/T1546/016/",
+      "website_sha256": "91348feeeebf890309b0ab9bbab4d845b9cc99740b6ace2082c7c937855c255a",
+      "capa_attack_tags": [
+        "Persistence::Event Triggered Execution::Installer Packages [T1546.016]",
+        "Privilege Escalation::Event Triggered Execution::Installer Packages [T1546.016]"
+      ]
+    },
+    {
+      "attack_id": "T1546.018",
+      "official_url": "https://attack.mitre.org/techniques/T1546/018/",
+      "website_sha256": "b4bd3d23526a9bfdadb131c054fd2a5fb5afd476bf8941a8f4fcd40e5ddf9e48",
+      "capa_attack_tags": [
+        "Persistence::Event Triggered Execution::Python Startup Hooks [T1546.018]",
+        "Privilege Escalation::Event Triggered Execution::Python Startup Hooks [T1546.018]"
+      ]
+    },
+    {
+      "attack_id": "T1547.008",
+      "official_url": "https://attack.mitre.org/techniques/T1547/008/",
+      "website_sha256": "9b082ec64b088f67744d73c95d32dcb849f3d68ebe494a2842f8349408f2589b",
+      "capa_attack_tags": [
+        "Persistence::Boot or Logon Autostart Execution::LSASS Driver [T1547.008]",
+        "Privilege Escalation::Boot or Logon Autostart Execution::LSASS Driver [T1547.008]"
+      ]
+    },
+    {
+      "attack_id": "T1548",
+      "official_url": "https://attack.mitre.org/techniques/T1548/",
+      "website_sha256": "779d9de0e0d5838bb455cfd8e42fe4d2237cf5e1fc223cf30c2b1503568a0bbc",
+      "capa_attack_tags": [
+        "Privilege Escalation::Abuse Elevation Control Mechanism [T1548]"
+      ]
+    },
+    {
+      "attack_id": "T1550",
+      "official_url": "https://attack.mitre.org/techniques/T1550/",
+      "website_sha256": "c96f8af79adf05b53673428b7724758ab6dc0b1cd92d647478293ac9cdb98ce7",
+      "capa_attack_tags": [
+        "Credential Access::Use Alternate Authentication Material [T1550]",
+        "Lateral Movement::Use Alternate Authentication Material [T1550]"
+      ]
+    },
+    {
+      "attack_id": "T1550.002",
+      "official_url": "https://attack.mitre.org/techniques/T1550/002/",
+      "website_sha256": "c57daff147789e9e47f5fc827c3b4d3e8011aee9933e4d6da6eaf26a2faff3a6",
+      "capa_attack_tags": [
+        "Credential Access::Use Alternate Authentication Material::Pass the Hash [T1550.002]",
+        "Lateral Movement::Use Alternate Authentication Material::Pass the Hash [T1550.002]"
+      ]
+    },
+    {
+      "attack_id": "T1550.003",
+      "official_url": "https://attack.mitre.org/techniques/T1550/003/",
+      "website_sha256": "98c5f7d57b8d6d33ac7f9df876cf09ce2c41045d9d5bd0ef1e642fac66f63907",
+      "capa_attack_tags": [
+        "Lateral Movement::Use Alternate Authentication Material::Pass the Ticket [T1550.003]"
+      ]
+    },
+    {
+      "attack_id": "T1552",
+      "official_url": "https://attack.mitre.org/techniques/T1552/",
+      "website_sha256": "f27f1230a25fe97023cd60b2f8da38382220c0a15fdc67eee6bc60f8dc4e7349",
+      "capa_attack_tags": [
+        "Credential Access::Unsecured Credentials [T1552]"
+      ]
+    },
+    {
+      "attack_id": "T1552.002",
+      "official_url": "https://attack.mitre.org/techniques/T1552/002/",
+      "website_sha256": "fd4e8a1bb0c9755ee0113b2b415f1eda965c8c5c81ecf53a0c6732756118239d",
+      "capa_attack_tags": [
+        "Credential Access::Unsecured Credentials::Credentials in Registry [T1552.002]"
+      ]
+    },
+    {
+      "attack_id": "T1552.003",
+      "official_url": "https://attack.mitre.org/techniques/T1552/003/",
+      "website_sha256": "46b963309f0a67820bb5d813a71143df296b504f7ceec3ff35ed8477c7acb387",
+      "capa_attack_tags": [
+        "Credential Access::Unsecured Credentials::Shell History [T1552.003]"
+      ]
+    },
+    {
+      "attack_id": "T1552.006",
+      "official_url": "https://attack.mitre.org/techniques/T1552/006/",
+      "website_sha256": "544ecc988f69e90c661b8f8aeda505378f7dc8d2c1331bfcdcfcccf308537654",
+      "capa_attack_tags": [
+        "Credential Access::Unsecured Credentials::Group Policy Preferences [T1552.006]"
+      ]
+    },
+    {
+      "attack_id": "T1553",
+      "official_url": "https://attack.mitre.org/techniques/T1553/",
+      "website_sha256": "e476a57976460e124694dcc637816c4e57326d748a9b2e28bb6566878bd489d4",
+      "capa_attack_tags": [
+        "Defense Impairment::Subvert Trust Controls [T1553]"
+      ]
+    },
+    {
+      "attack_id": "T1553.002",
+      "official_url": "https://attack.mitre.org/techniques/T1553/002/",
+      "website_sha256": "3c17d1d422da39562e7fc4ef3cd13fd9141eb448e1bfa09b88f078c6bd25d8ac",
+      "capa_attack_tags": [
+        "Defense Impairment::Subvert Trust Controls::Code Signing [T1553.002]"
+      ]
+    },
+    {
+      "attack_id": "T1553.003",
+      "official_url": "https://attack.mitre.org/techniques/T1553/003/",
+      "website_sha256": "e51239e53949edf6f1c935ff71dcbe1ce353dd29808d12be57215246390eb08d",
+      "capa_attack_tags": [
+        "Defense Impairment::Subvert Trust Controls::SIP and Trust Provider Hijacking [T1553.003]"
+      ]
+    },
+    {
+      "attack_id": "T1554",
+      "official_url": "https://attack.mitre.org/techniques/T1554/",
+      "website_sha256": "3b269a947f5173397109a6d137580dbd52238f5c3d25bf1aebe991c3b68f17f7",
+      "capa_attack_tags": [
+        "Persistence::Compromise Host Software Binary [T1554]"
+      ]
+    },
+    {
+      "attack_id": "T1556",
+      "official_url": "https://attack.mitre.org/techniques/T1556/",
+      "website_sha256": "f0fa8500524ec5303ee8b38aa9e715563f4ebfdefb2e69538e73d6c69ff5ac1e",
+      "capa_attack_tags": [
+        "Credential Access::Modify Authentication Process [T1556]",
+        "Defense Impairment::Modify Authentication Process [T1556]",
+        "Persistence::Modify Authentication Process [T1556]"
+      ]
+    },
+    {
+      "attack_id": "T1556.001",
+      "official_url": "https://attack.mitre.org/techniques/T1556/001/",
+      "website_sha256": "b891d29e64cd611c6be9e87765a20578159553018347c92a198f3196c8193ff0",
+      "capa_attack_tags": [
+        "Credential Access::Modify Authentication Process::Domain Controller Authentication [T1556.001]",
+        "Defense Impairment::Modify Authentication Process::Domain Controller Authentication [T1556.001]",
+        "Persistence::Modify Authentication Process::Domain Controller Authentication [T1556.001]"
+      ]
+    },
+    {
+      "attack_id": "T1556.005",
+      "official_url": "https://attack.mitre.org/techniques/T1556/005/",
+      "website_sha256": "1c9344841516380e28b96bfb02a77244668aa2a6df54be2a85cd4ac8aa134c72",
+      "capa_attack_tags": [
+        "Credential Access::Modify Authentication Process::Reversible Encryption [T1556.005]",
+        "Defense Impairment::Modify Authentication Process::Reversible Encryption [T1556.005]",
+        "Persistence::Modify Authentication Process::Reversible Encryption [T1556.005]"
+      ]
+    },
+    {
+      "attack_id": "T1556.006",
+      "official_url": "https://attack.mitre.org/techniques/T1556/006/",
+      "website_sha256": "7b67448c322861bd840f9324e71ff8db00301b78f518768e3976740b146408ba",
+      "capa_attack_tags": [
+        "Credential Access::Modify Authentication Process::Multi-Factor Authentication [T1556.006]",
+        "Defense Impairment::Modify Authentication Process::Multi-Factor Authentication [T1556.006]",
+        "Persistence::Modify Authentication Process::Multi-Factor Authentication [T1556.006]"
+      ]
+    },
+    {
+      "attack_id": "T1556.007",
+      "official_url": "https://attack.mitre.org/techniques/T1556/007/",
+      "website_sha256": "bf806e1b39c015668b96a0d541135083d4ec23da7ed95ff9752e019df38c18aa",
+      "capa_attack_tags": [
+        "Credential Access::Modify Authentication Process::Hybrid Identity [T1556.007]",
+        "Defense Impairment::Modify Authentication Process::Hybrid Identity [T1556.007]",
+        "Persistence::Modify Authentication Process::Hybrid Identity [T1556.007]"
+      ]
+    },
+    {
+      "attack_id": "T1557",
+      "official_url": "https://attack.mitre.org/techniques/T1557/",
+      "website_sha256": "e1efd5d845fa14004c001bf00c89770c7e13e0a80a49cfb53b4f9875d5da62fd",
+      "capa_attack_tags": [
+        "Collection::Adversary-in-the-Middle [T1557]",
+        "Credential Access::Adversary-in-the-Middle [T1557]"
+      ]
+    },
+    {
+      "attack_id": "T1557.001",
+      "official_url": "https://attack.mitre.org/techniques/T1557/001/",
+      "website_sha256": "8d1380c954f29c3abdcfc032a63ffba7733668fae96528746cdb1a5630eb7ce1",
+      "capa_attack_tags": [
+        "Collection::Adversary-in-the-Middle::Name Resolution Poisoning and SMB Relay [T1557.001]",
+        "Credential Access::Adversary-in-the-Middle::Name Resolution Poisoning and SMB Relay [T1557.001]"
+      ]
+    },
+    {
+      "attack_id": "T1557.002",
+      "official_url": "https://attack.mitre.org/techniques/T1557/002/",
+      "website_sha256": "f9238787bc8ca65b1c8abeb0c9bdd95cccbdae47b1e30fccb11752763fc9663a",
+      "capa_attack_tags": [
+        "Collection::Adversary-in-the-Middle::ARP Cache Poisoning [T1557.002]",
+        "Credential Access::Adversary-in-the-Middle::ARP Cache Poisoning [T1557.002]"
+      ]
+    },
+    {
+      "attack_id": "T1557.003",
+      "official_url": "https://attack.mitre.org/techniques/T1557/003/",
+      "website_sha256": "58793d0a55d93c79fb1564df5be9c3aecffbfe2a2970ef93e470f4175801fcd9",
+      "capa_attack_tags": [
+        "Collection::Adversary-in-the-Middle::DHCP Spoofing [T1557.003]",
+        "Credential Access::Adversary-in-the-Middle::DHCP Spoofing [T1557.003]"
+      ]
+    },
+    {
+      "attack_id": "T1558",
+      "official_url": "https://attack.mitre.org/techniques/T1558/",
+      "website_sha256": "71bce0581f5eba1927185c2c831b281a07481fb3023d9a1f6675287d8eaa902f",
+      "capa_attack_tags": [
+        "Credential Access::Steal or Forge Kerberos Tickets [T1558]"
+      ]
+    },
+    {
+      "attack_id": "T1558.001",
+      "official_url": "https://attack.mitre.org/techniques/T1558/001/",
+      "website_sha256": "27600fd9c35773aaff777cc18caaa97028bcec9c6eec24a0c93f58125f4d006e",
+      "capa_attack_tags": [
+        "Credential Access::Steal or Forge Kerberos Tickets::Golden Ticket [T1558.001]"
+      ]
+    },
+    {
+      "attack_id": "T1558.002",
+      "official_url": "https://attack.mitre.org/techniques/T1558/002/",
+      "website_sha256": "9b92e59ba17ca3f5ad97f61d45dd5d44a04e4cd9ef4e536ebffd0f2d767d440e",
+      "capa_attack_tags": [
+        "Credential Access::Steal or Forge Kerberos Tickets::Silver Ticket [T1558.002]"
+      ]
+    },
+    {
+      "attack_id": "T1558.003",
+      "official_url": "https://attack.mitre.org/techniques/T1558/003/",
+      "website_sha256": "5b6d3bf6b348b733cc456794f72cbc6068a306ec8d26d5a960f4ef053e99d811",
+      "capa_attack_tags": [
+        "Credential Access::Steal or Forge Kerberos Tickets::Kerberoasting [T1558.003]",
+        "Lateral Movement::Steal or Forge Kerberos Tickets::Kerberoasting [T1558.003]",
+        "Persistence::Steal or Forge Kerberos Tickets::Kerberoasting [T1558.003]",
+        "Privilege Escalation::Steal or Forge Kerberos Tickets::Kerberoasting [T1558.003]"
+      ]
+    },
+    {
+      "attack_id": "T1558.004",
+      "official_url": "https://attack.mitre.org/techniques/T1558/004/",
+      "website_sha256": "bb7e65a68635ef6c0bbb0a666e799f454e9c9af802cdf7587befef87bd91baa0",
+      "capa_attack_tags": [
+        "Credential Access::Steal or Forge Kerberos Tickets::AS-REP Roasting [T1558.004]",
+        "Lateral Movement::Steal or Forge Kerberos Tickets::AS-REP Roasting [T1558.004]",
+        "Persistence::Steal or Forge Kerberos Tickets::AS-REP Roasting [T1558.004]",
+        "Privilege Escalation::Steal or Forge Kerberos Tickets::AS-REP Roasting [T1558.004]"
+      ]
+    },
+    {
+      "attack_id": "T1559",
+      "official_url": "https://attack.mitre.org/techniques/T1559/",
+      "website_sha256": "eea59c0c08651d845d6efad2ea17b17e268fa6333c605d60a5d8b17c6751c048",
+      "capa_attack_tags": [
+        "Execution::Inter-Process Communication [T1559]"
+      ]
+    },
+    {
+      "attack_id": "T1560",
+      "official_url": "https://attack.mitre.org/techniques/T1560/",
+      "website_sha256": "94fd8c33e4ed72b7df52f4b7d59080ee907674de74deaa2c1fc52816cd216ef4",
+      "capa_attack_tags": [
+        "Collection::Archive Collected Data [T1560]"
+      ]
+    },
+    {
+      "attack_id": "T1560.001",
+      "official_url": "https://attack.mitre.org/techniques/T1560/001/",
+      "website_sha256": "ea18c95970df1c511d7454a0c817841ce5989ddad2d6d458356ea060ebfdd7ea",
+      "capa_attack_tags": [
+        "Collection::Archive Collected Data::Archive via Utility [T1560.001]"
+      ]
+    },
+    {
+      "attack_id": "T1560.003",
+      "official_url": "https://attack.mitre.org/techniques/T1560/003/",
+      "website_sha256": "ef2410a7f22078862f8381769dbcf589d5bebfc0a799dbff47d19c1a7904131c",
+      "capa_attack_tags": [
+        "Collection::Archive Collected Data::Archive via Custom Method [T1560.003]"
+      ]
+    },
+    {
+      "attack_id": "T1561",
+      "official_url": "https://attack.mitre.org/techniques/T1561/",
+      "website_sha256": "af7b5ea1a41730f9858047cc74b1be3bbd7764fe7b9f95399a1f25f7692934f2",
+      "capa_attack_tags": [
+        "Impact::Disk Wipe [T1561]"
+      ]
+    },
+    {
+      "attack_id": "T1561.001",
+      "official_url": "https://attack.mitre.org/techniques/T1561/001/",
+      "website_sha256": "b42c1655e1cae153665861cd8fd2645fa9ab20250ef38c47659436f600f21347",
+      "capa_attack_tags": [
+        "Impact::Disk Wipe::Disk Content Wipe [T1561.001]"
+      ]
+    },
+    {
+      "attack_id": "T1563",
+      "official_url": "https://attack.mitre.org/techniques/T1563/",
+      "website_sha256": "942356e9cd8a20bda08b2c3e23e56d9122cbcb3af469063ed5412606e50b1d19",
+      "capa_attack_tags": [
+        "Lateral Movement::Remote Service Session Hijacking [T1563]"
+      ]
+    },
+    {
+      "attack_id": "T1563.002",
+      "official_url": "https://attack.mitre.org/techniques/T1563/002/",
+      "website_sha256": "ba4e7fa9acc3b135b8536f1b18f7666668b4b80c8a896149d82827c701e49a93",
+      "capa_attack_tags": [
+        "Lateral Movement::Remote Service Session Hijacking::RDP Hijacking [T1563.002]"
+      ]
+    },
+    {
+      "attack_id": "T1564.002",
+      "official_url": "https://attack.mitre.org/techniques/T1564/002/",
+      "website_sha256": "980adfe3756889ba6353eb9c73a35cc4854ae969b76a6f6b82d44e6cdcd15eee",
+      "capa_attack_tags": [
+        "Stealth::Hide Artifacts::Hidden Users [T1564.002]"
+      ]
+    },
+    {
+      "attack_id": "T1564.006",
+      "official_url": "https://attack.mitre.org/techniques/T1564/006/",
+      "website_sha256": "7f40f7b1ad61bc3b36a621b0972b081d81abe304dcea4be10aba404ed42e1c88",
+      "capa_attack_tags": [
+        "Stealth::Hide Artifacts::Run Virtual Instance [T1564.006]"
+      ]
+    },
+    {
+      "attack_id": "T1564.007",
+      "official_url": "https://attack.mitre.org/techniques/T1564/007/",
+      "website_sha256": "5902b994678c491506defcaf2f3f7150f94ebbb4e400510de945f063ee8a9836",
+      "capa_attack_tags": [
+        "Stealth::Hide Artifacts::VBA Stomping [T1564.007]"
+      ]
+    },
+    {
+      "attack_id": "T1564.008",
+      "official_url": "https://attack.mitre.org/techniques/T1564/008/",
+      "website_sha256": "5e6773ec2180975efa1a1f3a3bd1de76006cef929e9c91d12f73f59bbdd92661",
+      "capa_attack_tags": [
+        "Stealth::Hide Artifacts::Email Hiding Rules [T1564.008]"
+      ]
+    },
+    {
+      "attack_id": "T1564.010",
+      "official_url": "https://attack.mitre.org/techniques/T1564/010/",
+      "website_sha256": "3ce405ce2eece2ba24cbeb42e3998c486f23fa68ecd09e6b0eb39296af9ee8a4",
+      "capa_attack_tags": [
+        "Stealth::Hide Artifacts::Process Argument Spoofing [T1564.010]"
+      ]
+    },
+    {
+      "attack_id": "T1564.011",
+      "official_url": "https://attack.mitre.org/techniques/T1564/011/",
+      "website_sha256": "45a0b53856d23ff2315a50fdcc917cd4ba2b257dd9f0a350f85814ebbf34ff55",
+      "capa_attack_tags": [
+        "Persistence::Hide Artifacts::Ignore Process Interrupts [T1564.011]",
+        "Stealth::Hide Artifacts::Ignore Process Interrupts [T1564.011]"
+      ]
+    },
+    {
+      "attack_id": "T1564.012",
+      "official_url": "https://attack.mitre.org/techniques/T1564/012/",
+      "website_sha256": "ad7b678538a433389ab51365438383ef68564a9149365ac6561aa8afb3ede5ac",
+      "capa_attack_tags": [
+        "Discovery::Hide Artifacts::File/Path Exclusions [T1564.012]",
+        "Reconnaissance::Hide Artifacts::File/Path Exclusions [T1564.012]",
+        "Stealth::Hide Artifacts::File/Path Exclusions [T1564.012]"
+      ]
+    },
+    {
+      "attack_id": "T1565",
+      "official_url": "https://attack.mitre.org/techniques/T1565/",
+      "website_sha256": "61919e3023133d6b46f5f663cad02fd0ca8e74bd81e871834ee7f6f68338a878",
+      "capa_attack_tags": [
+        "Impact::Data Manipulation [T1565]"
+      ]
+    },
+    {
+      "attack_id": "T1565.001",
+      "official_url": "https://attack.mitre.org/techniques/T1565/001/",
+      "website_sha256": "745e68924ec90550c9092479e2b00dd594668e6be7d2f3243f3b45a1f4a401a8",
+      "capa_attack_tags": [
+        "Impact::Data Manipulation::Stored Data Manipulation [T1565.001]"
+      ]
+    },
+    {
+      "attack_id": "T1565.003",
+      "official_url": "https://attack.mitre.org/techniques/T1565/003/",
+      "website_sha256": "4c199451fe9223729de56d45860dc6a8aa5f83b9e276e97f53be0c18476a9b57",
+      "capa_attack_tags": [
+        "Impact::Data Manipulation::Runtime Data Manipulation [T1565.003]"
+      ]
+    },
+    {
+      "attack_id": "T1566",
+      "official_url": "https://attack.mitre.org/techniques/T1566/",
+      "website_sha256": "6c08a32140f0fb20fdd2ca4b08ef358107b0d68902b397ea193dfb9c6133639a",
+      "capa_attack_tags": [
+        "Initial Access::Phishing [T1566]"
+      ]
+    },
+    {
+      "attack_id": "T1566.001",
+      "official_url": "https://attack.mitre.org/techniques/T1566/001/",
+      "website_sha256": "e14787ae220e985e1aa880f34657e0fb46d9ffb13680dd9593d95caa13c4625d",
+      "capa_attack_tags": [
+        "Initial Access::Phishing::Spearphishing Attachment [T1566.001]"
+      ]
+    },
+    {
+      "attack_id": "T1566.002",
+      "official_url": "https://attack.mitre.org/techniques/T1566/002/",
+      "website_sha256": "a5febacedeea00571ff0764285712a6d4b694d9d94c18d25d522b011bf18aaa0",
+      "capa_attack_tags": [
+        "Initial Access::Phishing::Spearphishing Link [T1566.002]"
+      ]
+    },
+    {
+      "attack_id": "T1566.003",
+      "official_url": "https://attack.mitre.org/techniques/T1566/003/",
+      "website_sha256": "f7ab18deee478d9cd3c117b0bea9b7dd736921bd80fbbdc8b0399aee2636cd3c",
+      "capa_attack_tags": [
+        "Initial Access::Phishing::Spearphishing via Service [T1566.003]"
+      ]
+    },
+    {
+      "attack_id": "T1566.004",
+      "official_url": "https://attack.mitre.org/techniques/T1566/004/",
+      "website_sha256": "122191c595ce65d2fd0062a39d5f27224794bfa9d2e23044658d6755f8d03c0c",
+      "capa_attack_tags": [
+        "Initial Access::Phishing::Spearphishing Voice [T1566.004]"
+      ]
+    },
+    {
+      "attack_id": "T1567",
+      "official_url": "https://attack.mitre.org/techniques/T1567/",
+      "website_sha256": "7d18fc847ade14a0a253be4f71a6e6ee0205535517143c48a602cff3d47e5811",
+      "capa_attack_tags": [
+        "Exfiltration::Exfiltration Over Web Service [T1567]"
+      ]
+    },
+    {
+      "attack_id": "T1567.001",
+      "official_url": "https://attack.mitre.org/techniques/T1567/001/",
+      "website_sha256": "2a3707ee982764fb25ab3fb65f19e7b9dcb07ad460b702d5f4c49f832a94abc5",
+      "capa_attack_tags": [
+        "Exfiltration::Exfiltration Over Web Service::Exfiltration to Code Repository [T1567.001]"
+      ]
+    },
+    {
+      "attack_id": "T1567.003",
+      "official_url": "https://attack.mitre.org/techniques/T1567/003/",
+      "website_sha256": "27a895b23a2c877a19f382abc5c23d75c79ec10c998a63b0b7b791e632ca0647",
+      "capa_attack_tags": [
+        "Exfiltration::Exfiltration Over Web Service::Exfiltration to Text Storage Sites [T1567.003]"
+      ]
+    },
+    {
+      "attack_id": "T1567.004",
+      "official_url": "https://attack.mitre.org/techniques/T1567/004/",
+      "website_sha256": "68cf9e95b6dbcd7d3b6e0aa9537f1ead8243ceafed7290b7f0b90b6861fcb44f",
+      "capa_attack_tags": [
+        "Exfiltration::Exfiltration Over Web Service::Exfiltration Over Webhook [T1567.004]"
+      ]
+    },
+    {
+      "attack_id": "T1568",
+      "official_url": "https://attack.mitre.org/techniques/T1568/",
+      "website_sha256": "42c54e44f903a0b25faf5429ee161d7e8ff98310f13684bc80eb4b2eec05366d",
+      "capa_attack_tags": [
+        "Command and Control::Dynamic Resolution [T1568]"
+      ]
+    },
+    {
+      "attack_id": "T1568.001",
+      "official_url": "https://attack.mitre.org/techniques/T1568/001/",
+      "website_sha256": "00dd94cb0676bcc67f0fc18baf655f81de6461f54d00e92ef1a9424977780c37",
+      "capa_attack_tags": [
+        "Command and Control::Dynamic Resolution::Fast Flux DNS [T1568.001]"
+      ]
+    },
+    {
+      "attack_id": "T1568.002",
+      "official_url": "https://attack.mitre.org/techniques/T1568/002/",
+      "website_sha256": "6e4e21944b83bcf012ca5ee6e3927a2ad9a09a30aa5177dd2b62e904bca5cd7d",
+      "capa_attack_tags": [
+        "Command and Control::Dynamic Resolution::Domain Generation Algorithms [T1568.002]"
+      ]
+    },
+    {
+      "attack_id": "T1568.003",
+      "official_url": "https://attack.mitre.org/techniques/T1568/003/",
+      "website_sha256": "a42003b82fcd6b717727d39df25ce06cebc80432143af039b26087e4dd0d90da",
+      "capa_attack_tags": [
+        "Command and Control::Dynamic Resolution::DNS Calculation [T1568.003]"
+      ]
+    },
+    {
+      "attack_id": "T1569",
+      "official_url": "https://attack.mitre.org/techniques/T1569/",
+      "website_sha256": "1dc9e71c3f4d23d6c09d1dd681792bbbdc4a2e816ecc82140192a69c690ede92",
+      "capa_attack_tags": [
+        "Execution::System Services [T1569]"
+      ]
+    },
+    {
+      "attack_id": "T1571",
+      "official_url": "https://attack.mitre.org/techniques/T1571/",
+      "website_sha256": "f4bdafaf951891d34d4f122de7cadb140999d15cd8120d5f7eb0e6c109cd579e",
+      "capa_attack_tags": [
+        "Command and Control::Non-Standard Port [T1571]"
+      ]
+    },
+    {
+      "attack_id": "T1572",
+      "official_url": "https://attack.mitre.org/techniques/T1572/",
+      "website_sha256": "84bda4404748b321963d6bd5ef720dc2466a5a4fdef54dc40d796588a551c85c",
+      "capa_attack_tags": [
+        "Command and Control::Protocol Tunneling [T1572]"
+      ]
+    },
+    {
+      "attack_id": "T1573",
+      "official_url": "https://attack.mitre.org/techniques/T1573/",
+      "website_sha256": "d72f59f3a35ec9aa12512f3720fb8cf69208332d8af13b88c942660f1906281d",
+      "capa_attack_tags": [
+        "Command and Control::Encrypted Channel [T1573]"
+      ]
+    },
+    {
+      "attack_id": "T1573.001",
+      "official_url": "https://attack.mitre.org/techniques/T1573/001/",
+      "website_sha256": "570681465270d08520befe99318e8a1f788d02b4474c231d70cc42c07716fc81",
+      "capa_attack_tags": [
+        "Command and Control::Encrypted Channel::Symmetric Cryptography [T1573.001]"
+      ]
+    },
+    {
+      "attack_id": "T1573.002",
+      "official_url": "https://attack.mitre.org/techniques/T1573/002/",
+      "website_sha256": "9012cdfca7ba1dfe9365422f8a45d4a19d9c64fa43e61506f36fe6378527ac89",
+      "capa_attack_tags": [
+        "Command and Control::Encrypted Channel::Asymmetric Cryptography [T1573.002]"
+      ]
+    },
+    {
+      "attack_id": "T1574.001",
+      "official_url": "https://attack.mitre.org/techniques/T1574/001/",
+      "website_sha256": "89aecc3a297631c7ac39a7d4a6694f1f229fa5277c14693de28e6cb359092d7d",
+      "capa_attack_tags": [
+        "Execution::Hijack Execution Flow::DLL [T1574.001]",
+        "Stealth::Hijack Execution Flow::DLL [T1574.001]"
+      ]
+    },
+    {
+      "attack_id": "T1574.005",
+      "official_url": "https://attack.mitre.org/techniques/T1574/005/",
+      "website_sha256": "e54ee4f69bc7ad7e595bc2b20bed1748e64ddf3ef8c363fadb83969870e4c19a",
+      "capa_attack_tags": [
+        "Execution::Hijack Execution Flow::Executable Installer File Permissions Weakness [T1574.005]",
+        "Stealth::Hijack Execution Flow::Executable Installer File Permissions Weakness [T1574.005]"
+      ]
+    },
+    {
+      "attack_id": "T1574.008",
+      "official_url": "https://attack.mitre.org/techniques/T1574/008/",
+      "website_sha256": "816a121c0160f54a99303029d6c8198cb6868ee27ce407432cd45c22fd367baa",
+      "capa_attack_tags": [
+        "Execution::Hijack Execution Flow::Path Interception by Search Order Hijacking [T1574.008]",
+        "Stealth::Hijack Execution Flow::Path Interception by Search Order Hijacking [T1574.008]"
+      ]
+    },
+    {
+      "attack_id": "T1574.009",
+      "official_url": "https://attack.mitre.org/techniques/T1574/009/",
+      "website_sha256": "12adadc88364781811133f5242bd9e0dcd65d916d18c279fc2dd53353dd3e7e7",
+      "capa_attack_tags": [
+        "Execution::Hijack Execution Flow::Path Interception by Unquoted Path [T1574.009]",
+        "Stealth::Hijack Execution Flow::Path Interception by Unquoted Path [T1574.009]"
+      ]
+    },
+    {
+      "attack_id": "T1574.010",
+      "official_url": "https://attack.mitre.org/techniques/T1574/010/",
+      "website_sha256": "b1de5f8f6098283a5408446ea32684314ebaea3296112f08b95203898ba1c628",
+      "capa_attack_tags": [
+        "Execution::Hijack Execution Flow::Services File Permissions Weakness [T1574.010]",
+        "Stealth::Hijack Execution Flow::Services File Permissions Weakness [T1574.010]"
+      ]
+    },
+    {
+      "attack_id": "T1574.011",
+      "official_url": "https://attack.mitre.org/techniques/T1574/011/",
+      "website_sha256": "8524c143efb2aa615464b7efea4146da64f2054adce7b17ee8d51ddaaa9a39c6",
+      "capa_attack_tags": [
+        "Execution::Hijack Execution Flow::Services Registry Permissions Weakness [T1574.011]",
+        "Stealth::Hijack Execution Flow::Services Registry Permissions Weakness [T1574.011]"
+      ]
+    },
+    {
+      "attack_id": "T1574.013",
+      "official_url": "https://attack.mitre.org/techniques/T1574/013/",
+      "website_sha256": "723c6b7190d7dbf595e8d6ca841feb9ffe77206112a991cd97f5b878db1b93d9",
+      "capa_attack_tags": [
+        "Execution::Hijack Execution Flow::KernelCallbackTable [T1574.013]",
+        "Stealth::Hijack Execution Flow::KernelCallbackTable [T1574.013]"
+      ]
+    },
+    {
+      "attack_id": "T1574.014",
+      "official_url": "https://attack.mitre.org/techniques/T1574/014/",
+      "website_sha256": "df0892c0d1686f9dae14b6cf2d4ef893c503cb8b1d4d1ceafe3d7a1702d9ed70",
+      "capa_attack_tags": [
+        "Execution::Hijack Execution Flow::AppDomainManager [T1574.014]",
+        "Stealth::Hijack Execution Flow::AppDomainManager [T1574.014]"
+      ]
+    },
+    {
+      "attack_id": "T1606",
+      "official_url": "https://attack.mitre.org/techniques/T1606/",
+      "website_sha256": "58ccd5437f29b15f5b35b98ee442892b5d6a421f4f996dba5c9d9c85e142cd81",
+      "capa_attack_tags": [
+        "Credential Access::Forge Web Credentials [T1606]"
+      ]
+    },
+    {
+      "attack_id": "T1606.001",
+      "official_url": "https://attack.mitre.org/techniques/T1606/001/",
+      "website_sha256": "040fb4bc274efe36f56792239f0fe099b60ef3ad1e1480108796543ee4a2065e",
+      "capa_attack_tags": [
+        "Credential Access::Forge Web Credentials::Web Cookies [T1606.001]"
+      ]
+    },
+    {
+      "attack_id": "T1606.002",
+      "official_url": "https://attack.mitre.org/techniques/T1606/002/",
+      "website_sha256": "99ef2b89f700be9446aec431bcd2d5ba981e1402727a9052855ed27edcd67412",
+      "capa_attack_tags": [
+        "Credential Access::Forge Web Credentials::SAML Tokens [T1606.002]"
+      ]
+    },
+    {
+      "attack_id": "T1611",
+      "official_url": "https://attack.mitre.org/techniques/T1611/",
+      "website_sha256": "9576d0db6bbe7568589759c446f1d8efe58c9a7d70cffb09144c75878d6b9859",
+      "capa_attack_tags": [
+        "Privilege Escalation::Escape to Host [T1611]"
+      ]
+    },
+    {
+      "attack_id": "T1621",
+      "official_url": "https://attack.mitre.org/techniques/T1621/",
+      "website_sha256": "531ab0c8b01d41b516ae8ed566689965ad1c9be7585b6508ec745eb719bc6b6e",
+      "capa_attack_tags": [
+        "Credential Access::Multi-Factor Authentication Request Generation [T1621]"
+      ]
+    },
+    {
+      "attack_id": "T1649",
+      "official_url": "https://attack.mitre.org/techniques/T1649/",
+      "website_sha256": "aafeb17ad2149194637e2d6bb3471c3598f2ecba83679c7b1c13ed731a138310",
+      "capa_attack_tags": [
+        "Credential Access::Steal or Forge Authentication Certificates [T1649]",
+        "Lateral Movement::Steal or Forge Authentication Certificates [T1649]",
+        "Persistence::Steal or Forge Authentication Certificates [T1649]",
+        "Privilege Escalation::Steal or Forge Authentication Certificates [T1649]"
+      ]
+    },
+    {
+      "attack_id": "T1657",
+      "official_url": "https://attack.mitre.org/techniques/T1657/",
+      "website_sha256": "ed69ddd48c74717ad82a6248fb0f6e535382827dac4685f2244b4b57f89ff920",
+      "capa_attack_tags": [
+        "Exfiltration::Financial Theft [T1657]",
+        "Impact::Financial Theft [T1657]"
+      ]
+    },
+    {
+      "attack_id": "T1659",
+      "official_url": "https://attack.mitre.org/techniques/T1659/",
+      "website_sha256": "1ad3f5723da75e899adb891d60a7f87e38d04ca02356b7106c9140de6a5e9163",
+      "capa_attack_tags": [
+        "Command and Control::Content Injection [T1659]",
+        "Initial Access::Content Injection [T1659]"
+      ]
+    },
+    {
+      "attack_id": "T1665",
+      "official_url": "https://attack.mitre.org/techniques/T1665/",
+      "website_sha256": "a383f1e8eefb3ac9f71471c8ceeba45cb03b119501cea8f09d1147532ff8900e",
+      "capa_attack_tags": [
+        "Command and Control::Hide Infrastructure [T1665]",
+        "Resource Development::Hide Infrastructure [T1665]"
+      ]
+    },
+    {
+      "attack_id": "T1667",
+      "official_url": "https://attack.mitre.org/techniques/T1667/",
+      "website_sha256": "ea22653b0cdf112dbc48da00ad38232455a7b35bf43619e2e6284d67adc53bce",
+      "capa_attack_tags": [
+        "Impact::Email Bombing [T1667]"
+      ]
+    },
+    {
+      "attack_id": "T1668",
+      "official_url": "https://attack.mitre.org/techniques/T1668/",
+      "website_sha256": "d0bf059a80f704f76cc3c8ecec08d6e018446583c20bb5029fda02c173ef72a5",
+      "capa_attack_tags": [
+        "Persistence::Exclusive Control [T1668]"
+      ]
+    },
+    {
+      "attack_id": "T1669",
+      "official_url": "https://attack.mitre.org/techniques/T1669/",
+      "website_sha256": "cfe0a1f14bca85142ed623fa5d1059c69a334ef0737196e6bf368e55b0e73f32",
+      "capa_attack_tags": [
+        "Credential Access::Wi-Fi Networks [T1669]",
+        "Discovery::Wi-Fi Networks [T1669]",
+        "Initial Access::Wi-Fi Networks [T1669]"
+      ]
+    },
+    {
+      "attack_id": "T1673",
+      "official_url": "https://attack.mitre.org/techniques/T1673/",
+      "website_sha256": "b943016cc59abe314532aeb2c47540c86bbdd2463fe013cafcc47a4a15584d40",
+      "capa_attack_tags": [
+        "Discovery::Virtual Machine Discovery [T1673]"
+      ]
+    },
+    {
+      "attack_id": "T1678",
+      "official_url": "https://attack.mitre.org/techniques/T1678/",
+      "website_sha256": "fc6c8cfc0dd9b5b6c577c74ace53857527ac69fc7ee717ca5986f788d0bc1063",
+      "capa_attack_tags": [
+        "Stealth::Delay Execution [T1678]"
+      ]
+    },
+    {
+      "attack_id": "T1679",
+      "official_url": "https://attack.mitre.org/techniques/T1679/",
+      "website_sha256": "c592342f7f9f85848ee883d511d114b5397ac292b2111fe30a3a5eb02b0ec6bb",
+      "capa_attack_tags": [
+        "Stealth::Selective Exclusion [T1679]"
+      ]
+    },
+    {
+      "attack_id": "T1684",
+      "official_url": "https://attack.mitre.org/techniques/T1684/",
+      "website_sha256": "9a26f8979a58ccc3b4a9738e7456e5d051d7bcd15da55128a7c6dbe7b8e33a9e",
+      "capa_attack_tags": [
+        "Stealth::Social Engineering [T1684]"
+      ]
+    },
+    {
+      "attack_id": "T1684.001",
+      "official_url": "https://attack.mitre.org/techniques/T1684/001/",
+      "website_sha256": "fd16b2a73433206795adabe49eeaed2065cc16bed55f2ccf9c37acdd384404a1",
+      "capa_attack_tags": [
+        "Stealth::Social Engineering::Impersonation [T1684.001]"
+      ]
+    },
+    {
+      "attack_id": "T1684.002",
+      "official_url": "https://attack.mitre.org/techniques/T1684/002/",
+      "website_sha256": "9d981d55fcff55c2ef597ad42338701a5dd6928ff12696053fe0bd81863e3d22",
+      "capa_attack_tags": [
+        "Stealth::Social Engineering::Email Spoofing [T1684.002]"
+      ]
+    },
+    {
+      "attack_id": "T1685.003",
+      "official_url": "https://attack.mitre.org/techniques/T1685/003/",
+      "website_sha256": "5470b5df738473d6ecf3b955e177a24f7ca8cd08dc38fd7de6f269d6a6d59623",
+      "capa_attack_tags": [
+        "Defense Impairment::Disable or Modify Tools::Modify or Spoof Tool UI [T1685.003]"
+      ]
+    },
+    {
+      "attack_id": "T1687",
+      "official_url": "https://attack.mitre.org/techniques/T1687/",
+      "website_sha256": "05bd5e733e628b9432c5cec32bd8f1b0c3e3c17de9f2d441c0ef7877dd3035c9",
+      "capa_attack_tags": [
+        "Defense Impairment::Exploitation for Defense Impairment [T1687]"
+      ]
+    },
+    {
+      "attack_id": "T1689",
+      "official_url": "https://attack.mitre.org/techniques/T1689/",
+      "website_sha256": "6eb6802425783a087f987cd4e48348562288e70c97ee9533e76c85ae30556aca",
+      "capa_attack_tags": [
+        "Defense Impairment::Downgrade Attack [T1689]"
+      ]
+    }
+  ]
+}

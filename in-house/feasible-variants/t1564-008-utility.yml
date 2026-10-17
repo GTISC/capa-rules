@@ -1,0 +1,27 @@
+rule:
+  meta:
+    name: request email hiding rules via explicit utility command
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: Requests an inbox rule deleting security-related messages; mailbox state remains unproven. Static
+      function-local references are capability candidates only. Dynamic observations require the separate typed
+      launch contract; neither proves utility completion or malicious intent.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Stealth::Hide Artifacts::Email Hiding Rules [T1564.008]
+    references:
+    - https://attack.mitre.org/techniques/T1564/008/
+  features:
+  - and:
+    - or:
+      - api: CreateProcess
+      - api: CreateProcessInternal
+      - api: CreateProcessAsUser
+      - api: CreateProcessWithToken
+      - api: CreateProcessWithLogon
+    - string: /\A(?:"(?:[^"\r\n]*[\\/])?powershell(?:\.exe)?"|(?:[^\\/\s"\r\n]+[\\/])*powershell(?:\.exe)?)[ \t]+-NoProfile[
+        \t]+-Command[ \t]+"New-InboxRule[ \t]+-Name[ \t]+[\w.-]+[ \t]+-SubjectContainsWords[ \t]+(?:phish|malware|security)[
+        \t]+-DeleteMessage[ \t]+\$true"[ \t]*\Z/i

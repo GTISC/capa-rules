@@ -1,0 +1,26 @@
+rule:
+  meta:
+    name: request indirect command execution via explicit utility command
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: Requests command execution indirectly through forfiles /c. Static function-local references are
+      capability candidates only. Dynamic observations require the separate typed launch contract; neither proves
+      utility completion or malicious intent.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Stealth::Indirect Command Execution [T1202]
+    references:
+    - https://attack.mitre.org/techniques/T1202/
+  features:
+  - and:
+    - or:
+      - api: CreateProcess
+      - api: CreateProcessInternal
+      - api: CreateProcessAsUser
+      - api: CreateProcessWithToken
+      - api: CreateProcessWithLogon
+    - string: /\A(?:"(?:[^"\r\n]*[\\/])?forfiles(?:\.exe)?"|(?:[^\\/\s"\r\n]+[\\/])*forfiles(?:\.exe)?)[ \t]+/p[
+        \t]+[^\s"]+[ \t]+/m[ \t]+[^\s"]+[ \t]+/c[ \t]+"[^"\r\n]+"[ \t]*\Z/i

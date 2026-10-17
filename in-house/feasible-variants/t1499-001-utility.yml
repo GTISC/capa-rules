@@ -1,0 +1,27 @@
+rule:
+  meta:
+    name: request os exhaustion flood via explicit utility command
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: Requests unbounded committed/touched memory allocations using the documented default allocation
+      count. Low-resource impact, utility identity, and malicious intent remain unproven. Static function-local
+      references are capability candidates only. Dynamic observations require the separate typed launch contract;
+      neither proves utility completion or malicious intent.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Impact::Endpoint Denial of Service::OS Exhaustion Flood [T1499.001]
+    references:
+    - https://attack.mitre.org/techniques/T1499/001/
+  features:
+  - and:
+    - or:
+      - api: CreateProcess
+      - api: CreateProcessInternal
+      - api: CreateProcessAsUser
+      - api: CreateProcessWithToken
+      - api: CreateProcessWithLogon
+    - string: /\A(?:"(?:[^"\r\n]*[\\/])?testlimit64(?:\.exe)?"|(?:[^\\/\s"\r\n]+[\\/])*testlimit64(?:\.exe)?)[ \t]+-d[
+        \t]+[1-9][0-9]{3,}[ \t]*\Z/i

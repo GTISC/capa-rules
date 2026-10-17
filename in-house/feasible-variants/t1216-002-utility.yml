@@ -1,0 +1,26 @@
+rule:
+  meta:
+    name: request syncappvpublishingserver via explicit utility command
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: Requests the utility with a command-injection argument; script execution requires qualification.
+      Static function-local references are capability candidates only. Dynamic observations require the separate
+      typed launch contract; neither proves utility completion or malicious intent.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Stealth::System Script Proxy Execution::SyncAppvPublishingServer [T1216.002]
+    references:
+    - https://attack.mitre.org/techniques/T1216/002/
+  features:
+  - and:
+    - or:
+      - api: CreateProcess
+      - api: CreateProcessInternal
+      - api: CreateProcessAsUser
+      - api: CreateProcessWithToken
+      - api: CreateProcessWithLogon
+    - string: /\A(?:"(?:[^"\r\n]*[\\/])?syncappvpublishingserver(?:\.exe)?"|(?:[^\\/\s"\r\n]+[\\/])*syncappvpublishingserver(?:\.exe)?)[
+        \t]+"n;[A-Za-z][^"\r\n]+"[ \t]*\Z/i

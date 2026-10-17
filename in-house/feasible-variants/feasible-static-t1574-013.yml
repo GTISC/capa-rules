@@ -1,0 +1,31 @@
+rule:
+  meta:
+    name: reference a PEB callback-table modification workflow
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: References the architecture-specific PEB KernelCallbackTable offset, remote memory operations,
+      and WM_COPYDATA. Static co-occurrence cannot establish the actual pointer chain or callback execution. Static
+      capability candidate only; never qualified runtime evidence.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Execution::Hijack Execution Flow::KernelCallbackTable [T1574.013]
+    - Stealth::Hijack Execution Flow::KernelCallbackTable [T1574.013]
+    references:
+    - https://attack.mitre.org/techniques/T1574/013/
+  features:
+  - and:
+    - api: NtQueryInformationProcess
+    - api: ReadProcessMemory
+    - api: WriteProcessMemory
+    - api: SendMessage
+    - number: 74
+    - or:
+      - and:
+        - arch: i386
+        - offset: 44
+      - and:
+        - arch: amd64
+        - offset: 88

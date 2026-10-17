@@ -1,0 +1,24 @@
+rule:
+  meta:
+    name: reference set bound registry variant for Browser Extensions
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: Adds a force-installed browser extension policy with an extension ID and update URL; extension
+      code and load require qualification. Static references are function-local candidates; the bound dynamic contract
+      is separate.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Command and Control::Software Extensions::Browser Extensions [T1176.001]
+    - Persistence::Software Extensions::Browser Extensions [T1176.001]
+    - Stealth::Software Extensions::Browser Extensions [T1176.001]
+    references:
+    - https://attack.mitre.org/techniques/T1176/001/
+  features:
+  - and:
+    - api: RegSetValueEx
+    - string: /\A(?:HKLM|HKEY_LOCAL_MACHINE)\\SOFTWARE\\Policies\\(?:Google\\Chrome|Microsoft\\Edge)\\ExtensionInstallForcelist\Z/i
+    - string: /\A[1-9][0-9]*\Z/i
+    - string: /\A[a-p]{32};https://[^\s]+\Z/i

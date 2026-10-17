@@ -1,0 +1,27 @@
+rule:
+  meta:
+    name: request email collection via explicit utility command
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: Requests mailbox collection into an explicit PST export. Static function-local references are capability
+      candidates only. Dynamic observations require the separate typed launch contract; neither proves utility completion
+      or malicious intent.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Collection::Email Collection [T1114]
+    references:
+    - https://attack.mitre.org/techniques/T1114/
+  features:
+  - and:
+    - or:
+      - api: CreateProcess
+      - api: CreateProcessInternal
+      - api: CreateProcessAsUser
+      - api: CreateProcessWithToken
+      - api: CreateProcessWithLogon
+    - string: /\A(?:"(?:[^"\r\n]*[\\/])?powershell(?:\.exe)?"|(?:[^\\/\s"\r\n]+[\\/])*powershell(?:\.exe)?)[ \t]+-NoProfile[
+        \t]+-Command[ \t]+"New-MailboxExportRequest[ \t]+-Mailbox[ \t]+[\w.@-]+[ \t]+-FilePath[ \t]+\\\\[^\s"]+\.pst"[
+        \t]*\Z/i

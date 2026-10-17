@@ -1,0 +1,23 @@
+rule:
+  meta:
+    name: reference remote list-view sorting callback injection
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: References remote memory writing and LVM_SORTITEMS (0x1030). A callback address, matching window/process
+      identity, and control transfer still require qualification. Static capability candidate only; never qualified
+      runtime evidence.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Privilege Escalation::Process Injection::ListPlanting [T1055.015]
+    - Stealth::Process Injection::ListPlanting [T1055.015]
+    references:
+    - https://attack.mitre.org/techniques/T1055/015/
+  features:
+  - and:
+    - api: OpenProcess
+    - api: WriteProcessMemory
+    - api: SendMessage
+    - number: 4144

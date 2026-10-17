@@ -1,0 +1,22 @@
+rule:
+  meta:
+    name: reference set bound registry variant for SIP and Trust Provider Hijacking
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: Redirects a concrete signature-verification SIP DLL; its return behavior and trust bypass need
+      qualification. Static references are function-local candidates; the bound dynamic contract is separate.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Defense Impairment::Subvert Trust Controls::SIP and Trust Provider Hijacking [T1553.003]
+    references:
+    - https://attack.mitre.org/techniques/T1553/003/
+  features:
+  - and:
+    - api: RegSetValueEx
+    - string: /\A(?:HKLM|HKEY_LOCAL_MACHINE)\\SOFTWARE\\(?:WOW6432Node\\)?Microsoft\\Cryptography\\OID\\EncodingType
+        0\\(?:CryptSIPDllGetSignedDataMsg|CryptSIPDllVerifyIndirectData)\\\{[0-9a-f-]{36}\}\Z/i
+    - string: /\ADll\Z/i
+    - string: /\A[A-Z]:\\[^\r\n]+\.dll\Z/i

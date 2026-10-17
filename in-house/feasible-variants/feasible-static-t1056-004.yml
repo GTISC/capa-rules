@@ -1,0 +1,23 @@
+rule:
+  meta:
+    name: reference patching a credential authentication API
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: References resolution of a credential API and memory patching in one function. Address/dataflow
+      binding, hook installation, and credential interception remain unproven. Static capability candidate only;
+      never qualified runtime evidence.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Collection::Input Capture::Credential API Hooking [T1056.004]
+    - Credential Access::Input Capture::Credential API Hooking [T1056.004]
+    references:
+    - https://attack.mitre.org/techniques/T1056/004/
+  features:
+  - and:
+    - api: GetProcAddress
+    - string: LsaLogonUser
+    - api: VirtualProtect
+    - api: WriteProcessMemory

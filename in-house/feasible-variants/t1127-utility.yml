@@ -1,0 +1,27 @@
+rule:
+  meta:
+    name: request trusted developer utilities proxy execution via explicit utility command
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: Requests a developer build utility to execute named project targets; project content needs inspection.
+      Static function-local references are capability candidates only. Dynamic observations require the separate
+      typed launch contract; neither proves utility completion or malicious intent.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Execution::Trusted Developer Utilities Proxy Execution [T1127]
+    - Stealth::Trusted Developer Utilities Proxy Execution [T1127]
+    references:
+    - https://attack.mitre.org/techniques/T1127/
+  features:
+  - and:
+    - or:
+      - api: CreateProcess
+      - api: CreateProcessInternal
+      - api: CreateProcessAsUser
+      - api: CreateProcessWithToken
+      - api: CreateProcessWithLogon
+    - string: /\A(?:"(?:[^"\r\n]*[\\/])?msbuild(?:\.exe)?"|(?:[^\\/\s"\r\n]+[\\/])*msbuild(?:\.exe)?)[ \t]+(?:"[^"\r\n]+"|[^\s"\r\n&|<>]+)[
+        \t]+/target:[\w;]+[ \t]*\Z/i

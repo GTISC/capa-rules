@@ -1,0 +1,26 @@
+rule:
+  meta:
+    name: request downgrade attack via explicit utility command
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: Requests the older PowerShell engine; availability and disabled modern controls need qualification.
+      Static function-local references are capability candidates only. Dynamic observations require the separate
+      typed launch contract; neither proves utility completion or malicious intent.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Defense Impairment::Downgrade Attack [T1689]
+    references:
+    - https://attack.mitre.org/techniques/T1689/
+  features:
+  - and:
+    - or:
+      - api: CreateProcess
+      - api: CreateProcessInternal
+      - api: CreateProcessAsUser
+      - api: CreateProcessWithToken
+      - api: CreateProcessWithLogon
+    - string: /\A(?:"(?:[^"\r\n]*[\\/])?powershell(?:\.exe)?"|(?:[^\\/\s"\r\n]+[\\/])*powershell(?:\.exe)?)[ \t]+-Version[
+        \t]+2[ \t]+-NoProfile[ \t]+-Command[ \t]+"[^"\r\n]+"[ \t]*\Z/i

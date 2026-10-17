@@ -1,0 +1,27 @@
+rule:
+  meta:
+    name: request local data staging via explicit utility command
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: Requests recursive collection of user documents into a local staging directory. The data's later
+      use, authorization, and actual copy results remain unproven. Static function-local references are capability
+      candidates only. Dynamic observations require the separate typed launch contract; neither proves utility completion
+      or malicious intent.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Collection::Data Staged::Local Data Staging [T1074.001]
+    references:
+    - https://attack.mitre.org/techniques/T1074/001/
+  features:
+  - and:
+    - or:
+      - api: CreateProcess
+      - api: CreateProcessInternal
+      - api: CreateProcessAsUser
+      - api: CreateProcessWithToken
+      - api: CreateProcessWithLogon
+    - string: /\A(?:"(?:[^"\r\n]*[\\/])?robocopy(?:\.exe)?"|(?:[^\\/\s"\r\n]+[\\/])*robocopy(?:\.exe)?)[ \t]+C:\\Users\\[^\\\s]+\\Documents[
+        \t]+C:\\ProgramData\\[^\s&|<>]+[ \t]+/S[ \t]*\Z/i

@@ -1,0 +1,26 @@
+rule:
+  meta:
+    name: request xsl script processing via explicit utility command
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: Requests remote XSL formatting through WMIC. Static function-local references are capability candidates
+      only. Dynamic observations require the separate typed launch contract; neither proves utility completion or
+      malicious intent.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Stealth::XSL Script Processing [T1220]
+    references:
+    - https://attack.mitre.org/techniques/T1220/
+  features:
+  - and:
+    - or:
+      - api: CreateProcess
+      - api: CreateProcessInternal
+      - api: CreateProcessAsUser
+      - api: CreateProcessWithToken
+      - api: CreateProcessWithLogon
+    - string: /\A(?:"(?:[^"\r\n]*[\\/])?wmic(?:\.exe)?"|(?:[^\\/\s"\r\n]+[\\/])*wmic(?:\.exe)?)[ \t]+os[ \t]+get[
+        \t]+/format:https?://[^\s"]+\.xsl[ \t]*\Z/i

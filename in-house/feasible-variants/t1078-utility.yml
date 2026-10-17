@@ -1,0 +1,29 @@
+rule:
+  meta:
+    name: request valid accounts via explicit utility command
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: Requests execution under a named account; valid authentication and adversary ownership are unproven.
+      Static function-local references are capability candidates only. Dynamic observations require the separate
+      typed launch contract; neither proves utility completion or malicious intent.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Initial Access::Valid Accounts [T1078]
+    - Persistence::Valid Accounts [T1078]
+    - Privilege Escalation::Valid Accounts [T1078]
+    - Stealth::Valid Accounts [T1078]
+    references:
+    - https://attack.mitre.org/techniques/T1078/
+  features:
+  - and:
+    - or:
+      - api: CreateProcess
+      - api: CreateProcessInternal
+      - api: CreateProcessAsUser
+      - api: CreateProcessWithToken
+      - api: CreateProcessWithLogon
+    - string: /\A(?:"(?:[^"\r\n]*[\\/])?runas(?:\.exe)?"|(?:[^\\/\s"\r\n]+[\\/])*runas(?:\.exe)?)[ \t]+/user:\.[\\][\w.-]+[
+        \t]+(?:"[^"\r\n]+\.exe"|[^\s"\r\n&|<>]+\.exe)[ \t]*\Z/i

@@ -1,0 +1,22 @@
+rule:
+  meta:
+    name: reference write bound file variant for HTML Smuggling
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: Writes HTML that constructs a Blob, creates its object URL, and assigns a download filename; payload
+      identity and filter evasion remain unproven. Static references are function-local candidates; the bound dynamic
+      contract is separate.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Stealth::Obfuscated Files or Information::HTML Smuggling [T1027.006]
+    references:
+    - https://attack.mitre.org/techniques/T1027/006/
+  features:
+  - and:
+    - api: CreateFile
+    - api: WriteFile
+    - string: /\A[A-Z]:\\[^\r\n]+\.html?\Z/i
+    - string: /(?s)\A(?=.{0,8192}new\s+Blob\s*\()(?=.{0,8192}URL\.createObjectURL\s*\()(?=.{0,8192}\.download\s*=)/i

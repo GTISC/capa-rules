@@ -1,0 +1,29 @@
+rule:
+  meta:
+    name: request multi-factor authentication via explicit utility command
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: Requests removal of a user's MFA requirements using the legacy administration module. Static function-local
+      references are capability candidates only. Dynamic observations require the separate typed launch contract;
+      neither proves utility completion or malicious intent.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Credential Access::Modify Authentication Process::Multi-Factor Authentication [T1556.006]
+    - Defense Impairment::Modify Authentication Process::Multi-Factor Authentication [T1556.006]
+    - Persistence::Modify Authentication Process::Multi-Factor Authentication [T1556.006]
+    references:
+    - https://attack.mitre.org/techniques/T1556/006/
+  features:
+  - and:
+    - or:
+      - api: CreateProcess
+      - api: CreateProcessInternal
+      - api: CreateProcessAsUser
+      - api: CreateProcessWithToken
+      - api: CreateProcessWithLogon
+    - string: /\A(?:"(?:[^"\r\n]*[\\/])?powershell(?:\.exe)?"|(?:[^\\/\s"\r\n]+[\\/])*powershell(?:\.exe)?)[ \t]+-NoProfile[
+        \t]+-Command[ \t]+"Set-MsolUser[ \t]+-UserPrincipalName[ \t]+[\w.@-]+[ \t]+-StrongAuthenticationRequirements[
+        \t]+@\(\)"[ \t]*\Z/i

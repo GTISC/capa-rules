@@ -1,0 +1,22 @@
+rule:
+  meta:
+    name: reference write bound file variant for Data Manipulation
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: Writes concrete hostname-to-address mappings into the system hosts file; adversary intent and deviation
+      from an authorized baseline remain unproven. Static references are function-local candidates; the bound dynamic
+      contract is separate.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Impact::Data Manipulation [T1565]
+    references:
+    - https://attack.mitre.org/techniques/T1565/
+  features:
+  - and:
+    - api: CreateFile
+    - api: WriteFile
+    - string: /\A[A-Z]:\\Windows\\System32\\drivers\\etc\\hosts\Z/i
+    - string: /(?m)^[ \t]*(?:[0-9]{1,3}\.){3}[0-9]{1,3}[ \t]+[A-Za-z0-9][A-Za-z0-9.-]+(?:[ \t]*\r?$)/i

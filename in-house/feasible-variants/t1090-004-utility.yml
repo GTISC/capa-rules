@@ -1,0 +1,27 @@
+rule:
+  meta:
+    name: request domain fronting via explicit utility command
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: Requests HTTPS with a Host header different from the URL's TLS hostname. Actual SNI, front-end
+      routing, domain ownership, and C2 role remain unproven. Static function-local references are capability candidates
+      only. Dynamic observations require the separate typed launch contract; neither proves utility completion or
+      malicious intent.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Command and Control::Proxy::Domain Fronting [T1090.004]
+    references:
+    - https://attack.mitre.org/techniques/T1090/004/
+  features:
+  - and:
+    - or:
+      - api: CreateProcess
+      - api: CreateProcessInternal
+      - api: CreateProcessAsUser
+      - api: CreateProcessWithToken
+      - api: CreateProcessWithLogon
+    - string: /\A(?:"(?:[^"\r\n]*[\\/])?curl(?:\.exe)?"|(?:[^\\/\s"\r\n]+[\\/])*curl(?:\.exe)?)[ \t]+-H[ \t]+"Host:[
+        \t]+(?P<hidden>[a-z0-9.-]+)"[ \t]+https://(?!(?P=hidden)(?:/|[ \t]|\Z))[a-z0-9.-]+/[^\s"]*[ \t]*\Z/i

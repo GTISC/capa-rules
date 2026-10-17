@@ -1,0 +1,21 @@
+rule:
+  meta:
+    name: reference write bound file variant for Python Startup Hooks
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: Writes a Python startup-hook module; interpreter search-path membership and execution remain unproven.
+      Static references are function-local candidates; the bound dynamic contract is separate.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Persistence::Event Triggered Execution::Python Startup Hooks [T1546.018]
+    - Privilege Escalation::Event Triggered Execution::Python Startup Hooks [T1546.018]
+    references:
+    - https://attack.mitre.org/techniques/T1546/018/
+  features:
+  - and:
+    - api: CreateFile
+    - api: WriteFile
+    - string: /\A[A-Z]:\\[^\r\n]+\\(?:site-packages\\)?(?:sitecustomize|usercustomize)\.py\Z/i

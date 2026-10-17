@@ -1,0 +1,21 @@
+rule:
+  meta:
+    name: contain a long run of executable no-operation instructions
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: At least 32 decoded NOP instructions in a basic block are a junk-code candidate. Compiler alignment
+      and benign code remain possible. Static capability candidate only; never qualified runtime evidence.
+    scopes:
+      static: basic block
+      dynamic: unsupported
+    att&ck:
+    - Stealth::Obfuscated Files or Information::Junk Code Insertion [T1027.016]
+    references:
+    - https://attack.mitre.org/techniques/T1027/016/
+  features:
+  - and:
+    - or:
+      - arch: i386
+      - arch: amd64
+    - count(mnemonic(nop)): 32 or more

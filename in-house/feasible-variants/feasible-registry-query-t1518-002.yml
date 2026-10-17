@@ -1,0 +1,20 @@
+rule:
+  meta:
+    name: reference query bound registry variant for Backup Software Discovery
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: Queries installation/version information on an exact backup software configuration key. Static
+      references are function-local candidates; the bound dynamic contract is separate.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Discovery::Software Discovery::Backup Software Discovery [T1518.002]
+    references:
+    - https://attack.mitre.org/techniques/T1518/002/
+  features:
+  - and:
+    - api: RegQueryValueEx
+    - string: /\A(?:HKLM|HKEY_LOCAL_MACHINE)\\SOFTWARE\\Veeam\\[^\r\n]+\Z/i
+    - string: /\A(?:InstallPath|Version)\Z/i

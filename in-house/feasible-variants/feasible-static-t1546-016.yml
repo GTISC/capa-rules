@@ -1,0 +1,25 @@
+rule:
+  meta:
+    name: reference adding and scheduling an installer custom action
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: References transactional MSI modification, custom-action insertion, install-sequence insertion,
+      and database commit in one function. Actual record bindings, package identity, action payload, elevation,
+      and install triggering remain unproven. Static capability candidate only; never qualified runtime evidence.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Persistence::Event Triggered Execution::Installer Packages [T1546.016]
+    - Privilege Escalation::Event Triggered Execution::Installer Packages [T1546.016]
+    references:
+    - https://attack.mitre.org/techniques/T1546/016/
+  features:
+  - and:
+    - api: MsiOpenDatabase
+    - api: MsiDatabaseOpenView
+    - api: MsiViewExecute
+    - api: MsiDatabaseCommit
+    - string: /\AINSERT INTO `CustomAction` /i
+    - string: /\AINSERT INTO `InstallExecuteSequence` /i

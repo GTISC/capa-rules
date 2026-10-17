@@ -1,0 +1,21 @@
+rule:
+  meta:
+    name: reference remote MMC DCOM command activation
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: References the MMC automation command method alongside extended COM activation in one function.
+      Remote server identity, method dispatch, and execution need qualification. Static capability candidate only;
+      never qualified runtime evidence.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Lateral Movement::Remote Services::Distributed Component Object Model [T1021.003]
+    references:
+    - https://attack.mitre.org/techniques/T1021/003/
+  features:
+  - and:
+    - api: CoCreateInstanceEx
+    - string: MMC20.Application
+    - string: ExecuteShellCommand

@@ -1,0 +1,26 @@
+rule:
+  meta:
+    name: request delay execution via explicit utility command
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: Requests a long uninterruptible command delay; evasion intent and wall-clock effect remain unproven.
+      Static function-local references are capability candidates only. Dynamic observations require the separate
+      typed launch contract; neither proves utility completion or malicious intent.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Stealth::Delay Execution [T1678]
+    references:
+    - https://attack.mitre.org/techniques/T1678/
+  features:
+  - and:
+    - or:
+      - api: CreateProcess
+      - api: CreateProcessInternal
+      - api: CreateProcessAsUser
+      - api: CreateProcessWithToken
+      - api: CreateProcessWithLogon
+    - string: /\A(?:"(?:[^"\r\n]*[\\/])?timeout(?:\.exe)?"|(?:[^\\/\s"\r\n]+[\\/])*timeout(?:\.exe)?)[ \t]+/T[ \t]+[1-9][0-9]{2,}[
+        \t]+/NOBREAK[ \t]*\Z/i

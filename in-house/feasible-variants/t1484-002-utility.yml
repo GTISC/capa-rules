@@ -1,0 +1,27 @@
+rule:
+  meta:
+    name: request trust modification via explicit utility command
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: Requests creation of a domain trust relationship. Static function-local references are capability
+      candidates only. Dynamic observations require the separate typed launch contract; neither proves utility completion
+      or malicious intent.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Defense Impairment::Domain or Tenant Policy Modification::Trust Modification [T1484.002]
+    - Privilege Escalation::Domain or Tenant Policy Modification::Trust Modification [T1484.002]
+    references:
+    - https://attack.mitre.org/techniques/T1484/002/
+  features:
+  - and:
+    - or:
+      - api: CreateProcess
+      - api: CreateProcessInternal
+      - api: CreateProcessAsUser
+      - api: CreateProcessWithToken
+      - api: CreateProcessWithLogon
+    - string: /\A(?:"(?:[^"\r\n]*[\\/])?netdom(?:\.exe)?"|(?:[^\\/\s"\r\n]+[\\/])*netdom(?:\.exe)?)[ \t]+trust[
+        \t]+[\w.-]+[ \t]+/domain:[\w.-]+[ \t]+/add[ \t]*\Z/i

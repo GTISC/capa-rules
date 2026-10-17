@@ -1,0 +1,26 @@
+rule:
+  meta:
+    name: request local account via explicit utility command
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: Requests local-account creation; command completion and account state need qualification. Static
+      function-local references are capability candidates only. Dynamic observations require the separate typed
+      launch contract; neither proves utility completion or malicious intent.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Persistence::Create Account::Local Account [T1136.001]
+    references:
+    - https://attack.mitre.org/techniques/T1136/001/
+  features:
+  - and:
+    - or:
+      - api: CreateProcess
+      - api: CreateProcessInternal
+      - api: CreateProcessAsUser
+      - api: CreateProcessWithToken
+      - api: CreateProcessWithLogon
+    - string: /\A(?:"(?:[^"\r\n]*[\\/])?net(?:\.exe)?"|(?:[^\\/\s"\r\n]+[\\/])*net(?:\.exe)?)[ \t]+user[ \t]+[\w.-]+[
+        \t]+[^\s&|<>]+[ \t]+/add[ \t]*\Z/i

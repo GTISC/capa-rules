@@ -1,0 +1,27 @@
+rule:
+  meta:
+    name: request software deployment tools via explicit utility command
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: Requests deployment through a software distribution tool. Static function-local references are
+      capability candidates only. Dynamic observations require the separate typed launch contract; neither proves
+      utility completion or malicious intent.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Execution::Software Deployment Tools [T1072]
+    - Lateral Movement::Software Deployment Tools [T1072]
+    references:
+    - https://attack.mitre.org/techniques/T1072/
+  features:
+  - and:
+    - or:
+      - api: CreateProcess
+      - api: CreateProcessInternal
+      - api: CreateProcessAsUser
+      - api: CreateProcessWithToken
+      - api: CreateProcessWithLogon
+    - string: /\A(?:"(?:[^"\r\n]*[\\/])?pdqdeploy(?:\.exe)?"|(?:[^\\/\s"\r\n]+[\\/])*pdqdeploy(?:\.exe)?)[ \t]+Deploy[
+        \t]+-Package[ \t]+(?:"[^"\r\n]+"|[^\s"\r\n&|<>]+)[ \t]+-Targets[ \t]+[\w.-]+[ \t]*\Z/i

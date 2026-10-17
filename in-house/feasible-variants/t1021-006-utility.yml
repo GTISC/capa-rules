@@ -1,0 +1,26 @@
+rule:
+  meta:
+    name: request windows remote management via explicit utility command
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: Requests remote command execution through Windows Remote Shell. Static function-local references
+      are capability candidates only. Dynamic observations require the separate typed launch contract; neither proves
+      utility completion or malicious intent.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Lateral Movement::Remote Services::Windows Remote Management [T1021.006]
+    references:
+    - https://attack.mitre.org/techniques/T1021/006/
+  features:
+  - and:
+    - or:
+      - api: CreateProcess
+      - api: CreateProcessInternal
+      - api: CreateProcessAsUser
+      - api: CreateProcessWithToken
+      - api: CreateProcessWithLogon
+    - string: /\A(?:"(?:[^"\r\n]*[\\/])?winrs(?:\.exe)?"|(?:[^\\/\s"\r\n]+[\\/])*winrs(?:\.exe)?)[ \t]+-r:[\w.-]+[
+        \t]+(?:"[^"\r\n]+"|[^\s"\r\n&|<>]+)[ \t]*\Z/i

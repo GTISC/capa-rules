@@ -1,0 +1,26 @@
+rule:
+  meta:
+    name: request compiled html file via explicit utility command
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: Requests compiled HTML help processing; embedded script execution is unproven. Static function-local
+      references are capability candidates only. Dynamic observations require the separate typed launch contract;
+      neither proves utility completion or malicious intent.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Stealth::System Binary Proxy Execution::Compiled HTML File [T1218.001]
+    references:
+    - https://attack.mitre.org/techniques/T1218/001/
+  features:
+  - and:
+    - or:
+      - api: CreateProcess
+      - api: CreateProcessInternal
+      - api: CreateProcessAsUser
+      - api: CreateProcessWithToken
+      - api: CreateProcessWithLogon
+    - string: /\A(?:"(?:[^"\r\n]*[\\/])?hh(?:\.exe)?"|(?:[^\\/\s"\r\n]+[\\/])*hh(?:\.exe)?)[ \t]+(?:"[^"\r\n]+\.chm"|[^\s"]+\.chm)[
+        \t]*\Z/i

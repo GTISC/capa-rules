@@ -1,0 +1,27 @@
+rule:
+  meta:
+    name: request golden ticket via explicit utility command
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: Requests a forged TGT using a krbtgt key and domain SID. Static function-local references are capability
+      candidates only. Dynamic observations require the separate typed launch contract; neither proves utility completion
+      or malicious intent.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Credential Access::Steal or Forge Kerberos Tickets::Golden Ticket [T1558.001]
+    references:
+    - https://attack.mitre.org/techniques/T1558/001/
+  features:
+  - and:
+    - or:
+      - api: CreateProcess
+      - api: CreateProcessInternal
+      - api: CreateProcessAsUser
+      - api: CreateProcessWithToken
+      - api: CreateProcessWithLogon
+    - string: /\A(?:"(?:[^"\r\n]*[\\/])?mimikatz(?:\.exe)?"|(?:[^\\/\s"\r\n]+[\\/])*mimikatz(?:\.exe)?)[ \t]+"kerberos::golden[
+        \t]+/user:[\w.-]+[ \t]+/domain:[\w.-]+[ \t]+/sid:S-[0-9-]+[ \t]+/krbtgt:[0-9a-f]{32}[ \t]+/ptt"[ \t]+"exit"[
+        \t]*\Z/i

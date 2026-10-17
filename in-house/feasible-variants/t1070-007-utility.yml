@@ -1,0 +1,26 @@
+rule:
+  meta:
+    name: request clear network connection history and configurations via explicit utility command
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: Requests deletion of a saved wireless connection profile. Static function-local references are
+      capability candidates only. Dynamic observations require the separate typed launch contract; neither proves
+      utility completion or malicious intent.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Stealth::Indicator Removal::Clear Network Connection History and Configurations [T1070.007]
+    references:
+    - https://attack.mitre.org/techniques/T1070/007/
+  features:
+  - and:
+    - or:
+      - api: CreateProcess
+      - api: CreateProcessInternal
+      - api: CreateProcessAsUser
+      - api: CreateProcessWithToken
+      - api: CreateProcessWithLogon
+    - string: /\A(?:"(?:[^"\r\n]*[\\/])?netsh(?:\.exe)?"|(?:[^\\/\s"\r\n]+[\\/])*netsh(?:\.exe)?)[ \t]+wlan[ \t]+delete[
+        \t]+profile[ \t]+name=(?:"[^"\r\n]+"|[^\s&|<>]+)[ \t]*\Z/i

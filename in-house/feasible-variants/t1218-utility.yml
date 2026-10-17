@@ -1,0 +1,26 @@
+rule:
+  meta:
+    name: request system binary proxy execution via explicit utility command
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: Requests signed-binary proxy execution using the remote scriptlet form; a direct parent predicate,
+      not parent roll-up. Static function-local references are capability candidates only. Dynamic observations
+      require the separate typed launch contract; neither proves utility completion or malicious intent.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Stealth::System Binary Proxy Execution [T1218]
+    references:
+    - https://attack.mitre.org/techniques/T1218/
+  features:
+  - and:
+    - or:
+      - api: CreateProcess
+      - api: CreateProcessInternal
+      - api: CreateProcessAsUser
+      - api: CreateProcessWithToken
+      - api: CreateProcessWithLogon
+    - string: /\A(?:"(?:[^"\r\n]*[\\/])?regsvr32(?:\.exe)?"|(?:[^\\/\s"\r\n]+[\\/])*regsvr32(?:\.exe)?)[ \t]+/s[
+        \t]+/n[ \t]+/u[ \t]+/i:https?://[^\s"]+[ \t]+scrobj\.dll[ \t]*\Z/i

@@ -1,5 +1,52 @@
 # GTISC in-house capa rules
 
+## Frozen 293-ID feasibility pass
+
+`coverage/windows-feasible-gap-review-v1.json` records an explicit decision for
+every ID in the subsequent 293-ID gap. This pass implements supported variants
+for 215 IDs and retains 78 open requirements for additional evidence or analysis
+backends. The latter are not declared impossible and do not count as detectors.
+The earlier 338/302/293 inventories below remain historical snapshots.
+
+The implementation adds 154 static capa rules and 207 typed trace contracts
+(203 new dynamic IDs; some IDs have multiple variants). The combined catalog
+has 320 static IDs, 365 executable dynamic candidate IDs, and 396 IDs in their
+union. These are detector-capacity counts, not executed-technique coverage.
+
+Static rules include precise utility requests, target-specific artifact and
+configuration references, and structural PE observations. The capa fork adds
+bounded valid-section PE carving and uniform-overlay observations to its
+native, PE-file, and .NET extractors. Tactic/technique presentation metadata is
+pinned to the previously retrieved official MITRE pages under
+`coverage/windows-feasible-attack-metadata-v1.json`.
+
+Typed contracts bind actual argument roles, handles, process lifetimes,
+symbolic states, byte counts, and content relationships. Additional parsers
+handle LNK icon fields, referenced OOXML templates, a specified BMP pixel-LSB
+variant, AD FS runtime configuration, native-x86 PEB/TLS/argument-buffer chains,
+and network command/data flows. Utility launch requests do not prove utility
+completion. Co-occurring static references do not prove runtime dataflow.
+
+Mal-S2E owns the executable engine and its raw API field profiles. Captured
+buffers are bounded to 1 MiB; text regex inputs to 32 KiB. Unsupported capture,
+missing fields, and search-budget exhaustion never create evidence. The trace
+catalog requires the updated engine; declaring a field does not install a guest
+hook or recover an argument absent from an archived trace.
+
+Rebuild the checked-in fixtures/catalogs with `tools/build_artifact_fixtures.py`
+and `tools/build_feasible_detectors.py`. The harmless parsed DLL fixture is
+built from `fixtures/feasible_payload.c` using MinGW `-shared -s` and
+`-Wl,--no-insert-timestamp`. Run Mal-S2E's `test_feasible_detectors.py` and
+`test_feasible_static_detectors.py` with this capa fork on `PYTHONPATH`.
+
+Validation artifacts are under
+`/mnt/data3/ding/pipeline-results/feasible-gap-detectors-20261016-v1/`.
+Structural replay evaluates all 957 pinned originals, including 777 parseable
+PEs, and finds two new static candidate IDs across 69 samples. It does not
+replay all new function/basic-block rules. Replaying 372 archived journals
+produces no new typed candidates or qualified runtime gains. Synthetic fixtures
+are never imported as sample evidence.
+
 These rules extend the upstream capa rule library without changing upstream
 rule files. The GTISC/capa fork points its `rules` submodule at this fork so a
 recursive checkout includes both upstream and in-house rules. Each in-house

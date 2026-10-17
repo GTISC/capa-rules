@@ -1,0 +1,27 @@
+rule:
+  meta:
+    name: request pass the hash via explicit utility command
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: Requests pass-the-hash using an explicit NTLM hash; authentication is not inferred. Static function-local
+      references are capability candidates only. Dynamic observations require the separate typed launch contract;
+      neither proves utility completion or malicious intent.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Credential Access::Use Alternate Authentication Material::Pass the Hash [T1550.002]
+    - Lateral Movement::Use Alternate Authentication Material::Pass the Hash [T1550.002]
+    references:
+    - https://attack.mitre.org/techniques/T1550/002/
+  features:
+  - and:
+    - or:
+      - api: CreateProcess
+      - api: CreateProcessInternal
+      - api: CreateProcessAsUser
+      - api: CreateProcessWithToken
+      - api: CreateProcessWithLogon
+    - string: /\A(?:"(?:[^"\r\n]*[\\/])?mimikatz(?:\.exe)?"|(?:[^\\/\s"\r\n]+[\\/])*mimikatz(?:\.exe)?)[ \t]+"sekurlsa::pth[
+        \t]+/user:[\w.-]+[ \t]+/domain:[\w.-]+[ \t]+/ntlm:[0-9a-f]{32}"[ \t]+"exit"[ \t]*\Z/i

@@ -1,0 +1,27 @@
+rule:
+  meta:
+    name: request jamplus via explicit utility command
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: Requests processing of a JamPlus build description. Static function-local references are capability
+      candidates only. Dynamic observations require the separate typed launch contract; neither proves utility completion
+      or malicious intent.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Execution::Trusted Developer Utilities Proxy Execution::JamPlus [T1127.003]
+    - Stealth::Trusted Developer Utilities Proxy Execution::JamPlus [T1127.003]
+    references:
+    - https://attack.mitre.org/techniques/T1127/003/
+  features:
+  - and:
+    - or:
+      - api: CreateProcess
+      - api: CreateProcessInternal
+      - api: CreateProcessAsUser
+      - api: CreateProcessWithToken
+      - api: CreateProcessWithLogon
+    - string: /\A(?:"(?:[^"\r\n]*[\\/])?jamplus(?:\.exe)?"|(?:[^\\/\s"\r\n]+[\\/])*jamplus(?:\.exe)?)[ \t]+-f[ \t]+(?:"[^"\r\n]+"|[^\s"\r\n&|<>]+)[
+        \t]*\Z/i

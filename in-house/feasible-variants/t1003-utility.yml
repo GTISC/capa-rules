@@ -1,0 +1,27 @@
+rule:
+  meta:
+    name: request os credential dumping via explicit utility command
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: Requests LSASS logon credential extraction; extraction is not established. Static function-local
+      references are capability candidates only. Dynamic observations require the separate typed launch contract;
+      neither proves utility completion or malicious intent.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Credential Access::OS Credential Dumping [T1003]
+    - Lateral Movement::OS Credential Dumping [T1003]
+    references:
+    - https://attack.mitre.org/techniques/T1003/
+  features:
+  - and:
+    - or:
+      - api: CreateProcess
+      - api: CreateProcessInternal
+      - api: CreateProcessAsUser
+      - api: CreateProcessWithToken
+      - api: CreateProcessWithLogon
+    - string: /\A(?:"(?:[^"\r\n]*[\\/])?mimikatz(?:\.exe)?"|(?:[^\\/\s"\r\n]+[\\/])*mimikatz(?:\.exe)?)[ \t]+"sekurlsa::logonpasswords"[
+        \t]+"exit"[ \t]*\Z/i

@@ -1,0 +1,27 @@
+rule:
+  meta:
+    name: request additional local or domain groups via explicit utility command
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: Requests addition of an account to a local privileged group. Static function-local references are
+      capability candidates only. Dynamic observations require the separate typed launch contract; neither proves
+      utility completion or malicious intent.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Persistence::Account Manipulation::Additional Local or Domain Groups [T1098.007]
+    - Privilege Escalation::Account Manipulation::Additional Local or Domain Groups [T1098.007]
+    references:
+    - https://attack.mitre.org/techniques/T1098/007/
+  features:
+  - and:
+    - or:
+      - api: CreateProcess
+      - api: CreateProcessInternal
+      - api: CreateProcessAsUser
+      - api: CreateProcessWithToken
+      - api: CreateProcessWithLogon
+    - string: /\A(?:"(?:[^"\r\n]*[\\/])?net(?:\.exe)?"|(?:[^\\/\s"\r\n]+[\\/])*net(?:\.exe)?)[ \t]+localgroup[ \t]+administrators[
+        \t]+[\w\\.-]+[ \t]+/add[ \t]*\Z/i

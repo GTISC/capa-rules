@@ -1,0 +1,27 @@
+rule:
+  meta:
+    name: request clickonce via explicit utility command
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: Requests ClickOnce application activation through the documented dfshim entry point. Static function-local
+      references are capability candidates only. Dynamic observations require the separate typed launch contract;
+      neither proves utility completion or malicious intent.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Execution::Trusted Developer Utilities Proxy Execution::ClickOnce [T1127.002]
+    - Stealth::Trusted Developer Utilities Proxy Execution::ClickOnce [T1127.002]
+    references:
+    - https://attack.mitre.org/techniques/T1127/002/
+  features:
+  - and:
+    - or:
+      - api: CreateProcess
+      - api: CreateProcessInternal
+      - api: CreateProcessAsUser
+      - api: CreateProcessWithToken
+      - api: CreateProcessWithLogon
+    - string: /\A(?:"(?:[^"\r\n]*[\\/])?rundll32(?:\.exe)?"|(?:[^\\/\s"\r\n]+[\\/])*rundll32(?:\.exe)?)[ \t]+dfshim\.dll,ShOpenVerbApplication1[
+        \t]+https?://[^\s"]+\.application[ \t]*\Z/i

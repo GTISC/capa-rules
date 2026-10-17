@@ -1,0 +1,22 @@
+rule:
+  meta:
+    name: reference write bound file variant for Web Shell
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: Writes PHP in a web-root location that passes a request parameter directly to an OS command sink;
+      actual server configuration and remote execution remain unproven. Static references are function-local candidates;
+      the bound dynamic contract is separate.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Persistence::Server Software Component::Web Shell [T1505.003]
+    references:
+    - https://attack.mitre.org/techniques/T1505/003/
+  features:
+  - and:
+    - api: CreateFile
+    - api: WriteFile
+    - string: /\A[A-Z]:\\inetpub\\wwwroot\\[^\r\n]+\.php\Z/i
+    - string: /(?s)<\?php\s+(?:system|shell_exec|passthru)\s*\(\s*\$_(?:GET|POST|REQUEST)\s*\[\s*[\x27"]\w+[\x27"]\s*\]\s*\)/i

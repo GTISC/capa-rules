@@ -1,0 +1,28 @@
+rule:
+  meta:
+    name: request group policy modification via explicit utility command
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: Requests an explicit GPO registry setting update. Static function-local references are capability
+      candidates only. Dynamic observations require the separate typed launch contract; neither proves utility completion
+      or malicious intent.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Defense Impairment::Domain or Tenant Policy Modification::Group Policy Modification [T1484.001]
+    - Privilege Escalation::Domain or Tenant Policy Modification::Group Policy Modification [T1484.001]
+    references:
+    - https://attack.mitre.org/techniques/T1484/001/
+  features:
+  - and:
+    - or:
+      - api: CreateProcess
+      - api: CreateProcessInternal
+      - api: CreateProcessAsUser
+      - api: CreateProcessWithToken
+      - api: CreateProcessWithLogon
+    - string: /\A(?:"(?:[^"\r\n]*[\\/])?powershell(?:\.exe)?"|(?:[^\\/\s"\r\n]+[\\/])*powershell(?:\.exe)?)[ \t]+-NoProfile[
+        \t]+-Command[ \t]+"Set-GPRegistryValue[ \t]+-Name[ \t]+[\w.-]+[ \t]+-Key[ \t]+[^\s"]+[ \t]+-ValueName[ \t]+[\w.-]+[
+        \t]+-Type[ \t]+DWord[ \t]+-Value[ \t]+[0-9]+"[ \t]*\Z/i

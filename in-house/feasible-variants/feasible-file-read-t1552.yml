@@ -1,0 +1,20 @@
+rule:
+  meta:
+    name: reference read bound file variant for Unsecured Credentials
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: Reads a concrete unsecured credential store, a direct parent-technique implementation. Static references
+      are function-local candidates; the bound dynamic contract is separate.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Credential Access::Unsecured Credentials [T1552]
+    references:
+    - https://attack.mitre.org/techniques/T1552/
+  features:
+  - and:
+    - api: CreateFile
+    - api: ReadFile
+    - string: /\A[A-Z]:\\Users\\[^\\]+\\\.aws\\credentials\Z/i

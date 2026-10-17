@@ -1,0 +1,20 @@
+rule:
+  meta:
+    name: reference write bound file variant for Office Application Startup
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: Writes Word's startup template, a concrete Office startup mechanism; malicious macros and invocation
+      are unproven. Static references are function-local candidates; the bound dynamic contract is separate.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Persistence::Office Application Startup [T1137]
+    references:
+    - https://attack.mitre.org/techniques/T1137/
+  features:
+  - and:
+    - api: CreateFile
+    - api: WriteFile
+    - string: /\A[A-Z]:\\Users\\[^\\]+\\AppData\\Roaming\\Microsoft\\Templates\\Normal\.dotm\Z/i

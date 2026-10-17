@@ -1,0 +1,29 @@
+rule:
+  meta:
+    name: request domain accounts via explicit utility command
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: Requests use of an explicitly domain-qualified account for network authentication; /netonly does
+      not validate credentials. Static function-local references are capability candidates only. Dynamic observations
+      require the separate typed launch contract; neither proves utility completion or malicious intent.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Initial Access::Valid Accounts::Domain Accounts [T1078.002]
+    - Persistence::Valid Accounts::Domain Accounts [T1078.002]
+    - Privilege Escalation::Valid Accounts::Domain Accounts [T1078.002]
+    - Stealth::Valid Accounts::Domain Accounts [T1078.002]
+    references:
+    - https://attack.mitre.org/techniques/T1078/002/
+  features:
+  - and:
+    - or:
+      - api: CreateProcess
+      - api: CreateProcessInternal
+      - api: CreateProcessAsUser
+      - api: CreateProcessWithToken
+      - api: CreateProcessWithLogon
+    - string: /\A(?:"(?:[^"\r\n]*[\\/])?runas(?:\.exe)?"|(?:[^\\/\s"\r\n]+[\\/])*runas(?:\.exe)?)[ \t]+/netonly[
+        \t]+/user:[\w.-]+\.[\w.-]+[\\][\w.-]+[ \t]+(?:"[^"\r\n]+\.exe"|[^\s"\r\n&|<>]+\.exe)[ \t]*\Z/i

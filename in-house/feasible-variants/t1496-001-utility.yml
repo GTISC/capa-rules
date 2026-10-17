@@ -1,0 +1,26 @@
+rule:
+  meta:
+    name: request compute hijacking via explicit utility command
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: Requests a cryptocurrency mining workload against a pool endpoint; unauthorized resource use is
+      unproven. Static function-local references are capability candidates only. Dynamic observations require the
+      separate typed launch contract; neither proves utility completion or malicious intent.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Impact::Resource Hijacking::Compute Hijacking [T1496.001]
+    references:
+    - https://attack.mitre.org/techniques/T1496/001/
+  features:
+  - and:
+    - or:
+      - api: CreateProcess
+      - api: CreateProcessInternal
+      - api: CreateProcessAsUser
+      - api: CreateProcessWithToken
+      - api: CreateProcessWithLogon
+    - string: /\A(?:"(?:[^"\r\n]*[\\/])?xmrig(?:\.exe)?"|(?:[^\\/\s"\r\n]+[\\/])*xmrig(?:\.exe)?)[ \t]+--url[ \t]+stratum\+tcp://[\w.-]+:[0-9]+[
+        \t]+--user[ \t]+[^\s&|<>]+[ \t]*\Z/i

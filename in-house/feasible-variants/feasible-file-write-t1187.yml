@@ -1,0 +1,22 @@
+rule:
+  meta:
+    name: reference write bound file variant for Forced Authentication
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: Writes an Internet Shortcut with a UNC icon resource that can initiate SMB authentication when
+      rendered; actual rendering, authentication, and adversary control of the peer require qualification. Static
+      references are function-local candidates; the bound dynamic contract is separate.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Credential Access::Forced Authentication [T1187]
+    references:
+    - https://attack.mitre.org/techniques/T1187/
+  features:
+  - and:
+    - api: CreateFile
+    - api: WriteFile
+    - string: /\A[A-Z]:\\[^\r\n]+\.url\Z/i
+    - string: /(?ims)\A(?=.{0,8192}^\[InternetShortcut\]\r?$)(?=.{0,8192}^IconFile=\\\\[^\\\r\n]+\\[^\r\n]+)/i

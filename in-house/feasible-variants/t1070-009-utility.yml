@@ -1,0 +1,26 @@
+rule:
+  meta:
+    name: request clear persistence via explicit utility command
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: Requests removal of a scheduled persistence mechanism; its prior malicious role requires context.
+      Static function-local references are capability candidates only. Dynamic observations require the separate
+      typed launch contract; neither proves utility completion or malicious intent.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Stealth::Indicator Removal::Clear Persistence [T1070.009]
+    references:
+    - https://attack.mitre.org/techniques/T1070/009/
+  features:
+  - and:
+    - or:
+      - api: CreateProcess
+      - api: CreateProcessInternal
+      - api: CreateProcessAsUser
+      - api: CreateProcessWithToken
+      - api: CreateProcessWithLogon
+    - string: /\A(?:"(?:[^"\r\n]*[\\/])?schtasks(?:\.exe)?"|(?:[^\\/\s"\r\n]+[\\/])*schtasks(?:\.exe)?)[ \t]+/Delete[
+        \t]+/TN[ \t]+[\w\\.-]+[ \t]+/F[ \t]*\Z/i

@@ -1,0 +1,26 @@
+rule:
+  meta:
+    name: request archive collected data via explicit utility command
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: Requests archiving an input collection into an output archive. Static function-local references
+      are capability candidates only. Dynamic observations require the separate typed launch contract; neither proves
+      utility completion or malicious intent.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Collection::Archive Collected Data [T1560]
+    references:
+    - https://attack.mitre.org/techniques/T1560/
+  features:
+  - and:
+    - or:
+      - api: CreateProcess
+      - api: CreateProcessInternal
+      - api: CreateProcessAsUser
+      - api: CreateProcessWithToken
+      - api: CreateProcessWithLogon
+    - string: /\A(?:"(?:[^"\r\n]*[\\/])?7z(?:\.exe)?"|(?:[^\\/\s"\r\n]+[\\/])*7z(?:\.exe)?)[ \t]+a[ \t]+(?:"[^"\r\n]+"|[^\s"\r\n&|<>]+)[
+        \t]+(?:"[^"\r\n]+"|[^\s"\r\n&|<>]+)[ \t]*\Z/i
