@@ -1,0 +1,21 @@
+rule:
+  meta:
+    name: query Chromium browser history database
+    namespace: collection/browser
+    authors:
+      - MalwareLab
+    description: identify a query over Chromium's URL and visit history schema
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+      - Discovery::Browser Information Discovery [T1217]
+    references:
+      - https://attack.mitre.org/techniques/T1217/
+    examples:
+      - be94cee55a56c0572ca5b0812f0fed5d73a3efa33cf2b27cb4ecfe27f1b26a8c:0x412974
+  features:
+    - and:
+      - substring: "FROM urls, visits"
+      - substring: "urls.id = visits.url"
+      - substring: "visits.visit_time"
