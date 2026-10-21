@@ -17,5 +17,5 @@ rule:
   features:
     - and:
       - substring: "FROM urls, visits"
-      - substring: "urls.id = visits.url"
+      - string: /WHERE urls\.id\s*=\s*visits\.url/i
       - substring: "visits.visit_time"
