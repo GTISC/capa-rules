@@ -4,7 +4,8 @@ rule:
     namespace: in-house/discovery
     authors:
     - MalwareLab
-    description: Queries wall-clock system time. Monotonic counters and generic timing checks are excluded; this
+    description: Queries wall-clock system time. The MSVC security-cookie entropy initialization pattern,
+      monotonic counters and generic timing checks are excluded; this
       observation does not establish sandbox evasion. Static matches are capability candidates; dynamic matches
       are observations from successful calls, not proof of adversary intent or technique completion.
     scopes:
@@ -14,9 +15,19 @@ rule:
     - Discovery::System Time Discovery [T1124]
     references:
     - https://attack.mitre.org/techniques/T1124/
+    - https://learn.microsoft.com/en-us/cpp/c-runtime-library/reference/security-init-cookie
   features:
-  - or:
-    - api: GetSystemTime
-    - api: GetLocalTime
-    - api: GetSystemTimeAsFileTime
-    - api: GetSystemTimePreciseAsFileTime
+  - and:
+    - or:
+      - api: GetSystemTime
+      - api: GetLocalTime
+      - api: GetSystemTimeAsFileTime
+      - api: GetSystemTimePreciseAsFileTime
+    - not:
+      - and:
+        - api: GetSystemTimeAsFileTime
+        - api: GetCurrentProcessId
+        - api: GetCurrentThreadId
+        - api: GetTickCount
+        - api: QueryPerformanceCounter
+        - number: 0xBB40E64E
