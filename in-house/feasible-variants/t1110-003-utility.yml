@@ -1,0 +1,26 @@
+rule:
+  meta:
+    name: request password spraying via explicit utility command
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: Requests one password against a username list. Case-sensitive -L/-l semantics are enforced by a
+      separate contract below. Static function-local references are capability candidates only. Dynamic observations
+      require the separate typed launch contract; neither proves utility completion or malicious intent.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Credential Access::Brute Force::Password Spraying [T1110.003]
+    references:
+    - https://attack.mitre.org/techniques/T1110/003/
+  features:
+  - and:
+    - or:
+      - api: CreateProcess
+      - api: CreateProcessInternal
+      - api: CreateProcessAsUser
+      - api: CreateProcessWithToken
+      - api: CreateProcessWithLogon
+    - string: /\A(?:"(?:[^"\r\n]*[\\/])?hydra(?:\.exe)?"|(?:[^\\/\s"\r\n]+[\\/])*hydra(?:\.exe)?)[ \t]+(?-i:-L)[
+        \t]+(?:"[^"\r\n]+"|[^\s"\r\n&|<>]+)[ \t]+(?-i:-p)[ \t]+[^\s&|<>]+[ \t]+rdp://[\w.-]+[ \t]*\Z/i

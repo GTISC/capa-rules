@@ -1,0 +1,1987 @@
+{
+  "schema": 1,
+  "scope": "Synthetic raw-argument fixtures only; never sample evidence.",
+  "cases": [
+    {
+      "attack_id": "T1005",
+      "action": "read",
+      "pattern": "(?i)\\A[A-Z]:\\\\Users\\\\[^\\\\]+\\\\(?:Documents|Desktop)\\\\[^\\r\\n]+\\.(?:docx?|xlsx?|pdf|txt|csv)\\Z",
+      "positive": "C:\\Users\\lab\\Documents\\report.docx",
+      "negative": "C:\\Windows\\System32\\kernel32.dll",
+      "note": "Reads nonempty content from a bound user-document handle; collection intent is unproven.",
+      "rule_id": "feasible-file-read-t1005",
+      "rule_name": "reference read bound file variant for Data from Local System",
+      "rule_path": "feasible-variants/feasible-file-read-t1005.yml",
+      "family": "file",
+      "positive_calls": [
+        {
+          "api": "CreateFileW",
+          "arguments": {
+            "path": "C:\\Users\\lab\\Documents\\report.docx",
+            "handle": 64
+          }
+        },
+        {
+          "api": "ReadFile",
+          "arguments": {
+            "handle": 64,
+            "bytes_transferred": 8
+          }
+        }
+      ],
+      "negative_calls": [
+        {
+          "api": "CreateFileW",
+          "arguments": {
+            "path": "C:\\Windows\\System32\\kernel32.dll",
+            "handle": 64
+          }
+        },
+        {
+          "api": "ReadFile",
+          "arguments": {
+            "handle": 64,
+            "bytes_transferred": 8
+          }
+        }
+      ],
+      "source": "https://attack.mitre.org/techniques/T1005/",
+      "definition_sha256": "6dda8e3f5fd7621e6f9c3649c9ce4857818f407852a47ba5059441f4f1fcdb6f"
+    },
+    {
+      "attack_id": "T1037",
+      "action": "write",
+      "pattern": "(?i)\\A[A-Z]:\\\\Windows\\\\System32\\\\GroupPolicy\\\\(?:User|Machine)\\\\Scripts\\\\(?:Logon|Startup)\\\\[^\\\\]+\\.(?:bat|cmd|ps1|vbs)\\Z",
+      "positive": "C:\\Windows\\System32\\GroupPolicy\\User\\Scripts\\Logon\\lab.bat",
+      "negative": "C:\\temp\\lab.bat",
+      "note": "Writes a script in a concrete Group Policy boot/logon script directory; policy registration and invocation need qualification.",
+      "rule_id": "feasible-file-write-t1037",
+      "rule_name": "reference write bound file variant for Boot or Logon Initialization Scripts",
+      "rule_path": "feasible-variants/feasible-file-write-t1037.yml",
+      "family": "file",
+      "positive_calls": [
+        {
+          "api": "CreateFileW",
+          "arguments": {
+            "path": "C:\\Windows\\System32\\GroupPolicy\\User\\Scripts\\Logon\\lab.bat",
+            "handle": 64
+          }
+        },
+        {
+          "api": "WriteFile",
+          "arguments": {
+            "handle": 64,
+            "bytes_transferred": 8
+          }
+        }
+      ],
+      "negative_calls": [
+        {
+          "api": "CreateFileW",
+          "arguments": {
+            "path": "C:\\temp\\lab.bat",
+            "handle": 64
+          }
+        },
+        {
+          "api": "WriteFile",
+          "arguments": {
+            "handle": 64,
+            "bytes_transferred": 8
+          }
+        }
+      ],
+      "source": "https://attack.mitre.org/techniques/T1037/",
+      "definition_sha256": "54854afe2b150a79fd672413499b64531bbf2e679f500f400dc744b7665ad39d"
+    },
+    {
+      "attack_id": "T1037.003",
+      "action": "write",
+      "pattern": "(?i)\\A\\\\\\\\[^\\\\]+\\\\SYSVOL\\\\[^\\\\]+\\\\scripts\\\\[^\\r\\n]+\\.(?:bat|cmd|ps1|vbs)\\Z",
+      "positive": "\\\\dc\\SYSVOL\\lab.local\\scripts\\logon.bat",
+      "negative": "C:\\temp\\logon.bat",
+      "note": "Writes a network-domain logon script location; active policy assignment is unproven.",
+      "rule_id": "feasible-file-write-t1037-003",
+      "rule_name": "reference write bound file variant for Network Logon Script",
+      "rule_path": "feasible-variants/feasible-file-write-t1037-003.yml",
+      "family": "file",
+      "positive_calls": [
+        {
+          "api": "CreateFileW",
+          "arguments": {
+            "path": "\\\\dc\\SYSVOL\\lab.local\\scripts\\logon.bat",
+            "handle": 64
+          }
+        },
+        {
+          "api": "WriteFile",
+          "arguments": {
+            "handle": 64,
+            "bytes_transferred": 8
+          }
+        }
+      ],
+      "negative_calls": [
+        {
+          "api": "CreateFileW",
+          "arguments": {
+            "path": "C:\\temp\\logon.bat",
+            "handle": 64
+          }
+        },
+        {
+          "api": "WriteFile",
+          "arguments": {
+            "handle": 64,
+            "bytes_transferred": 8
+          }
+        }
+      ],
+      "source": "https://attack.mitre.org/techniques/T1037/003/",
+      "definition_sha256": "189dd077f482d2b99b80daddde5a78a7bb7a8601bda494490f1018a4c8ef78be"
+    },
+    {
+      "attack_id": "T1114.001",
+      "action": "read",
+      "pattern": "(?i)\\A[A-Z]:\\\\Users\\\\[^\\\\]+\\\\(?:AppData\\\\Local\\\\Microsoft\\\\Outlook|Documents\\\\Outlook Files)\\\\[^\\\\]+\\.(?:pst|ost)\\Z",
+      "positive": "C:\\Users\\lab\\AppData\\Local\\Microsoft\\Outlook\\mail.ost",
+      "negative": "C:\\Users\\lab\\Documents\\report.docx",
+      "note": "Reads nonempty content from a bound Outlook mail-store file.",
+      "rule_id": "feasible-file-read-t1114-001",
+      "rule_name": "reference read bound file variant for Local Email Collection",
+      "rule_path": "feasible-variants/feasible-file-read-t1114-001.yml",
+      "family": "file",
+      "positive_calls": [
+        {
+          "api": "CreateFileW",
+          "arguments": {
+            "path": "C:\\Users\\lab\\AppData\\Local\\Microsoft\\Outlook\\mail.ost",
+            "handle": 64
+          }
+        },
+        {
+          "api": "ReadFile",
+          "arguments": {
+            "handle": 64,
+            "bytes_transferred": 8
+          }
+        }
+      ],
+      "negative_calls": [
+        {
+          "api": "CreateFileW",
+          "arguments": {
+            "path": "C:\\Users\\lab\\Documents\\report.docx",
+            "handle": 64
+          }
+        },
+        {
+          "api": "ReadFile",
+          "arguments": {
+            "handle": 64,
+            "bytes_transferred": 8
+          }
+        }
+      ],
+      "source": "https://attack.mitre.org/techniques/T1114/001/",
+      "definition_sha256": "cc376559a50121a4fb5ba435c0d2eae3f0add4f09fddceb74d9a94be96e09387"
+    },
+    {
+      "attack_id": "T1137",
+      "action": "write",
+      "pattern": "(?i)\\A[A-Z]:\\\\Users\\\\[^\\\\]+\\\\AppData\\\\Roaming\\\\Microsoft\\\\Templates\\\\Normal\\.dotm\\Z",
+      "positive": "C:\\Users\\lab\\AppData\\Roaming\\Microsoft\\Templates\\Normal.dotm",
+      "negative": "C:\\Users\\lab\\Documents\\normal.docx",
+      "note": "Writes Word's startup template, a concrete Office startup mechanism; malicious macros and invocation are unproven.",
+      "rule_id": "feasible-file-write-t1137",
+      "rule_name": "reference write bound file variant for Office Application Startup",
+      "rule_path": "feasible-variants/feasible-file-write-t1137.yml",
+      "family": "file",
+      "positive_calls": [
+        {
+          "api": "CreateFileW",
+          "arguments": {
+            "path": "C:\\Users\\lab\\AppData\\Roaming\\Microsoft\\Templates\\Normal.dotm",
+            "handle": 64
+          }
+        },
+        {
+          "api": "WriteFile",
+          "arguments": {
+            "handle": 64,
+            "bytes_transferred": 8
+          }
+        }
+      ],
+      "negative_calls": [
+        {
+          "api": "CreateFileW",
+          "arguments": {
+            "path": "C:\\Users\\lab\\Documents\\normal.docx",
+            "handle": 64
+          }
+        },
+        {
+          "api": "WriteFile",
+          "arguments": {
+            "handle": 64,
+            "bytes_transferred": 8
+          }
+        }
+      ],
+      "source": "https://attack.mitre.org/techniques/T1137/",
+      "definition_sha256": "fe82c5c14e2bf3f3894ab2bfd78d22ac98f8c33c1138a807470f676a2fa1c3b5"
+    },
+    {
+      "attack_id": "T1137.001",
+      "action": "write",
+      "pattern": "(?i)\\A[A-Z]:\\\\Users\\\\[^\\\\]+\\\\AppData\\\\Roaming\\\\Microsoft\\\\(?:Templates\\\\Normal\\.dotm|Excel\\\\XLSTART\\\\PERSONAL\\.XLSB)\\Z",
+      "positive": "C:\\Users\\lab\\AppData\\Roaming\\Microsoft\\Templates\\Normal.dotm",
+      "negative": "C:\\Users\\lab\\Documents\\normal.docx",
+      "note": "Writes a documented Office startup macro template; macro content and execution need qualification.",
+      "rule_id": "feasible-file-write-t1137-001",
+      "rule_name": "reference write bound file variant for Office Template Macros",
+      "rule_path": "feasible-variants/feasible-file-write-t1137-001.yml",
+      "family": "file",
+      "positive_calls": [
+        {
+          "api": "CreateFileW",
+          "arguments": {
+            "path": "C:\\Users\\lab\\AppData\\Roaming\\Microsoft\\Templates\\Normal.dotm",
+            "handle": 64
+          }
+        },
+        {
+          "api": "WriteFile",
+          "arguments": {
+            "handle": 64,
+            "bytes_transferred": 8
+          }
+        }
+      ],
+      "negative_calls": [
+        {
+          "api": "CreateFileW",
+          "arguments": {
+            "path": "C:\\Users\\lab\\Documents\\normal.docx",
+            "handle": 64
+          }
+        },
+        {
+          "api": "WriteFile",
+          "arguments": {
+            "handle": 64,
+            "bytes_transferred": 8
+          }
+        }
+      ],
+      "source": "https://attack.mitre.org/techniques/T1137/001/",
+      "definition_sha256": "554a84790b09d2d3fa069fb3f206a572e2b6a383aa30730bb9a73bd0d6e40c86"
+    },
+    {
+      "attack_id": "T1217",
+      "action": "read",
+      "pattern": "(?i)\\A[A-Z]:\\\\Users\\\\[^\\\\]+\\\\AppData\\\\Local\\\\(?:Google\\\\Chrome|Microsoft\\\\Edge)\\\\User Data\\\\(?:Default|Profile [0-9]+)\\\\(?:History|Bookmarks|Preferences)\\Z",
+      "positive": "C:\\Users\\lab\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
+      "negative": "C:\\Users\\lab\\Documents\\History.txt",
+      "note": "Reads nonempty browser history/bookmark/preference data from a bound profile file.",
+      "rule_id": "feasible-file-read-t1217",
+      "rule_name": "reference read bound file variant for Browser Information Discovery",
+      "rule_path": "feasible-variants/feasible-file-read-t1217.yml",
+      "family": "file",
+      "positive_calls": [
+        {
+          "api": "CreateFileW",
+          "arguments": {
+            "path": "C:\\Users\\lab\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History",
+            "handle": 64
+          }
+        },
+        {
+          "api": "ReadFile",
+          "arguments": {
+            "handle": 64,
+            "bytes_transferred": 8
+          }
+        }
+      ],
+      "negative_calls": [
+        {
+          "api": "CreateFileW",
+          "arguments": {
+            "path": "C:\\Users\\lab\\Documents\\History.txt",
+            "handle": 64
+          }
+        },
+        {
+          "api": "ReadFile",
+          "arguments": {
+            "handle": 64,
+            "bytes_transferred": 8
+          }
+        }
+      ],
+      "source": "https://attack.mitre.org/techniques/T1217/",
+      "definition_sha256": "0da2c9e4f360281e0439775da0c25289767bdd00e8d49f7f92e487f34a1a15ef"
+    },
+    {
+      "attack_id": "T1546.018",
+      "action": "write",
+      "pattern": "(?i)\\A[A-Z]:\\\\[^\\r\\n]+\\\\(?:site-packages\\\\)?(?:sitecustomize|usercustomize)\\.py\\Z",
+      "positive": "C:\\Python311\\Lib\\site-packages\\sitecustomize.py",
+      "negative": "C:\\temp\\normal.py",
+      "note": "Writes a Python startup-hook module; interpreter search-path membership and execution remain unproven.",
+      "rule_id": "feasible-file-write-t1546-018",
+      "rule_name": "reference write bound file variant for Python Startup Hooks",
+      "rule_path": "feasible-variants/feasible-file-write-t1546-018.yml",
+      "family": "file",
+      "positive_calls": [
+        {
+          "api": "CreateFileW",
+          "arguments": {
+            "path": "C:\\Python311\\Lib\\site-packages\\sitecustomize.py",
+            "handle": 64
+          }
+        },
+        {
+          "api": "WriteFile",
+          "arguments": {
+            "handle": 64,
+            "bytes_transferred": 8
+          }
+        }
+      ],
+      "negative_calls": [
+        {
+          "api": "CreateFileW",
+          "arguments": {
+            "path": "C:\\temp\\normal.py",
+            "handle": 64
+          }
+        },
+        {
+          "api": "WriteFile",
+          "arguments": {
+            "handle": 64,
+            "bytes_transferred": 8
+          }
+        }
+      ],
+      "source": "https://attack.mitre.org/techniques/T1546/018/",
+      "definition_sha256": "e6c6a3754cc3bae59c98fe6f3d77f16e4cac91db585302d6d8cdd9644cb49c0d"
+    },
+    {
+      "attack_id": "T1552",
+      "action": "read",
+      "pattern": "(?i)\\A[A-Z]:\\\\Users\\\\[^\\\\]+\\\\\\.aws\\\\credentials\\Z",
+      "positive": "C:\\Users\\lab\\.aws\\credentials",
+      "negative": "C:\\Users\\lab\\Documents\\credentials.txt",
+      "note": "Reads a concrete unsecured credential store, a direct parent-technique implementation.",
+      "rule_id": "feasible-file-read-t1552",
+      "rule_name": "reference read bound file variant for Unsecured Credentials",
+      "rule_path": "feasible-variants/feasible-file-read-t1552.yml",
+      "family": "file",
+      "positive_calls": [
+        {
+          "api": "CreateFileW",
+          "arguments": {
+            "path": "C:\\Users\\lab\\.aws\\credentials",
+            "handle": 64
+          }
+        },
+        {
+          "api": "ReadFile",
+          "arguments": {
+            "handle": 64,
+            "bytes_transferred": 8
+          }
+        }
+      ],
+      "negative_calls": [
+        {
+          "api": "CreateFileW",
+          "arguments": {
+            "path": "C:\\Users\\lab\\Documents\\credentials.txt",
+            "handle": 64
+          }
+        },
+        {
+          "api": "ReadFile",
+          "arguments": {
+            "handle": 64,
+            "bytes_transferred": 8
+          }
+        }
+      ],
+      "source": "https://attack.mitre.org/techniques/T1552/",
+      "definition_sha256": "bc1942caa8b05072d4ec8e74dfb966649c402f2b5e58b44f1a416cff2eb97930"
+    },
+    {
+      "attack_id": "T1552.003",
+      "action": "read",
+      "pattern": "(?i)\\A[A-Z]:\\\\Users\\\\[^\\\\]+\\\\AppData\\\\Roaming\\\\Microsoft\\\\Windows\\\\PowerShell\\\\PSReadLine\\\\ConsoleHost_history\\.txt\\Z",
+      "positive": "C:\\Users\\lab\\AppData\\Roaming\\Microsoft\\Windows\\PowerShell\\PSReadLine\\ConsoleHost_history.txt",
+      "negative": "C:\\Users\\lab\\Documents\\history.txt",
+      "note": "Reads a persistent PowerShell history file that may contain credentials.",
+      "rule_id": "feasible-file-read-t1552-003",
+      "rule_name": "reference read bound file variant for Shell History",
+      "rule_path": "feasible-variants/feasible-file-read-t1552-003.yml",
+      "family": "file",
+      "positive_calls": [
+        {
+          "api": "CreateFileW",
+          "arguments": {
+            "path": "C:\\Users\\lab\\AppData\\Roaming\\Microsoft\\Windows\\PowerShell\\PSReadLine\\ConsoleHost_history.txt",
+            "handle": 64
+          }
+        },
+        {
+          "api": "ReadFile",
+          "arguments": {
+            "handle": 64,
+            "bytes_transferred": 8
+          }
+        }
+      ],
+      "negative_calls": [
+        {
+          "api": "CreateFileW",
+          "arguments": {
+            "path": "C:\\Users\\lab\\Documents\\history.txt",
+            "handle": 64
+          }
+        },
+        {
+          "api": "ReadFile",
+          "arguments": {
+            "handle": 64,
+            "bytes_transferred": 8
+          }
+        }
+      ],
+      "source": "https://attack.mitre.org/techniques/T1552/003/",
+      "definition_sha256": "be186b97cc04e48021341e720a96a84f9b529abb94b82c8c5b14d081d41a6555"
+    },
+    {
+      "attack_id": "T1552.006",
+      "action": "read",
+      "pattern": "(?i)\\A\\\\\\\\[^\\\\]+\\\\SYSVOL\\\\[^\\\\]+\\\\Policies\\\\\\{[0-9a-f-]{36}\\}\\\\(?:Machine|User)\\\\Preferences\\\\(?:Groups\\\\Groups|Services\\\\Services|ScheduledTasks\\\\ScheduledTasks|Drives\\\\Drives)\\.xml\\Z",
+      "positive": "\\\\dc\\SYSVOL\\lab.local\\Policies\\{00000000-0000-0000-0000-000000000001}\\Machine\\Preferences\\Groups\\Groups.xml",
+      "negative": "\\\\dc\\share\\Groups.xml",
+      "note": "Reads a bound domain Group Policy Preferences credential-bearing artifact; an actual cpassword and decryption are unproven.",
+      "rule_id": "feasible-file-read-t1552-006",
+      "rule_name": "reference read bound file variant for Group Policy Preferences",
+      "rule_path": "feasible-variants/feasible-file-read-t1552-006.yml",
+      "family": "file",
+      "positive_calls": [
+        {
+          "api": "CreateFileW",
+          "arguments": {
+            "path": "\\\\dc\\SYSVOL\\lab.local\\Policies\\{00000000-0000-0000-0000-000000000001}\\Machine\\Preferences\\Groups\\Groups.xml",
+            "handle": 64
+          }
+        },
+        {
+          "api": "ReadFile",
+          "arguments": {
+            "handle": 64,
+            "bytes_transferred": 8
+          }
+        }
+      ],
+      "negative_calls": [
+        {
+          "api": "CreateFileW",
+          "arguments": {
+            "path": "\\\\dc\\share\\Groups.xml",
+            "handle": 64
+          }
+        },
+        {
+          "api": "ReadFile",
+          "arguments": {
+            "handle": 64,
+            "bytes_transferred": 8
+          }
+        }
+      ],
+      "source": "https://attack.mitre.org/techniques/T1552/006/",
+      "definition_sha256": "19bc398c95354cad2cfebb3d39a5a76797761c33cf229efc2f3d80061778d8b4"
+    },
+    {
+      "attack_id": "T1036",
+      "action": "write",
+      "pattern": "(?i)\\A[A-Z]:\\\\[^\\r\\n]+\\.(?:pdf|docx?|xlsx?|jpg|png)\\.(?:exe|scr)\\Z",
+      "positive": "C:\\stage\\report.pdf.exe",
+      "negative": "C:\\stage\\report.exe",
+      "note": "Writes a filename disguising an executable extension behind a document extension; file content and user presentation remain unproven.",
+      "rule_id": "feasible-file-write-t1036",
+      "rule_name": "reference write bound file variant for Masquerading",
+      "rule_path": "feasible-variants/feasible-file-write-t1036.yml",
+      "family": "file",
+      "positive_calls": [
+        {
+          "api": "CreateFileW",
+          "arguments": {
+            "path": "C:\\stage\\report.pdf.exe",
+            "handle": 64
+          }
+        },
+        {
+          "api": "WriteFile",
+          "arguments": {
+            "handle": 64,
+            "bytes_transferred": 8
+          }
+        }
+      ],
+      "negative_calls": [
+        {
+          "api": "CreateFileW",
+          "arguments": {
+            "path": "C:\\stage\\report.exe",
+            "handle": 64
+          }
+        },
+        {
+          "api": "WriteFile",
+          "arguments": {
+            "handle": 64,
+            "bytes_transferred": 8
+          }
+        }
+      ],
+      "source": "https://attack.mitre.org/techniques/T1036/",
+      "definition_sha256": "3fb598f027690e14b9817a5190d7bca618adbbe42da23883f67c0000707a6228"
+    },
+    {
+      "attack_id": "T1036.002",
+      "action": "write",
+      "pattern": "(?i)\\A[A-Z]:\\\\[^\\r\\n]*\u202e[^\\\\\\r\\n]+\\.(?:exe|scr)\\Z",
+      "positive": "C:\\stage\\report\u202efdp.exe",
+      "negative": "C:\\stage\\report.exe",
+      "note": "Writes a concrete filename containing the right-to-left override control character.",
+      "rule_id": "feasible-file-write-t1036-002",
+      "rule_name": "reference write bound file variant for Right-to-Left Override",
+      "rule_path": null,
+      "family": "file",
+      "positive_calls": [
+        {
+          "api": "CreateFileW",
+          "arguments": {
+            "path": "C:\\stage\\report\u202efdp.exe",
+            "handle": 64
+          }
+        },
+        {
+          "api": "WriteFile",
+          "arguments": {
+            "handle": 64,
+            "bytes_transferred": 8
+          }
+        }
+      ],
+      "negative_calls": [
+        {
+          "api": "CreateFileW",
+          "arguments": {
+            "path": "C:\\stage\\report.exe",
+            "handle": 64
+          }
+        },
+        {
+          "api": "WriteFile",
+          "arguments": {
+            "handle": 64,
+            "bytes_transferred": 8
+          }
+        }
+      ],
+      "source": "https://attack.mitre.org/techniques/T1036/002/",
+      "definition_sha256": "6c2688fa163c9b90271b774c9938762ebf052b5915b2d989079d024b74c26e66"
+    },
+    {
+      "attack_id": "T1036.007",
+      "action": "write",
+      "pattern": "(?i)\\A[A-Z]:\\\\[^\\r\\n]+\\.(?:pdf|docx?|xlsx?|jpg|png)\\.(?:exe|scr)\\Z",
+      "positive": "C:\\stage\\report.pdf.exe",
+      "negative": "C:\\stage\\report.exe",
+      "note": "Writes a document-like double-extension executable filename; the content and displayed disguise require qualification.",
+      "rule_id": "feasible-file-write-t1036-007",
+      "rule_name": "reference write bound file variant for Double File Extension",
+      "rule_path": "feasible-variants/feasible-file-write-t1036-007.yml",
+      "family": "file",
+      "positive_calls": [
+        {
+          "api": "CreateFileW",
+          "arguments": {
+            "path": "C:\\stage\\report.pdf.exe",
+            "handle": 64
+          }
+        },
+        {
+          "api": "WriteFile",
+          "arguments": {
+            "handle": 64,
+            "bytes_transferred": 8
+          }
+        }
+      ],
+      "negative_calls": [
+        {
+          "api": "CreateFileW",
+          "arguments": {
+            "path": "C:\\stage\\report.exe",
+            "handle": 64
+          }
+        },
+        {
+          "api": "WriteFile",
+          "arguments": {
+            "handle": 64,
+            "bytes_transferred": 8
+          }
+        }
+      ],
+      "source": "https://attack.mitre.org/techniques/T1036/007/",
+      "definition_sha256": "e711e92e3f0fc02eaba0644824f463c6d31df17fe560fb610469ff16fe26b544"
+    },
+    {
+      "attack_id": "T1539",
+      "action": "read",
+      "pattern": "(?i)\\A[A-Z]:\\\\Users\\\\[^\\\\]+\\\\AppData\\\\Local\\\\(?:Google\\\\Chrome|Microsoft\\\\Edge)\\\\User Data\\\\(?:Default|Profile [0-9]+)\\\\(?:Network\\\\)?Cookies\\Z",
+      "positive": "C:\\Users\\lab\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Network\\Cookies",
+      "negative": "C:\\Users\\lab\\Documents\\cookies.txt",
+      "note": "Reads a bound browser cookie store; actual session-token contents, extraction, and reuse remain unproven.",
+      "rule_id": "feasible-file-read-t1539",
+      "rule_name": "reference read bound file variant for Steal Web Session Cookie",
+      "rule_path": "feasible-variants/feasible-file-read-t1539.yml",
+      "family": "file",
+      "positive_calls": [
+        {
+          "api": "CreateFileW",
+          "arguments": {
+            "path": "C:\\Users\\lab\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Network\\Cookies",
+            "handle": 64
+          }
+        },
+        {
+          "api": "ReadFile",
+          "arguments": {
+            "handle": 64,
+            "bytes_transferred": 8
+          }
+        }
+      ],
+      "negative_calls": [
+        {
+          "api": "CreateFileW",
+          "arguments": {
+            "path": "C:\\Users\\lab\\Documents\\cookies.txt",
+            "handle": 64
+          }
+        },
+        {
+          "api": "ReadFile",
+          "arguments": {
+            "handle": 64,
+            "bytes_transferred": 8
+          }
+        }
+      ],
+      "source": "https://attack.mitre.org/techniques/T1539/",
+      "definition_sha256": "5ea40f15fe0e8a6190ad86ae12163c35935e1e8faf647d38f9e75e436f38bbdc"
+    },
+    {
+      "attack_id": "T1547.008",
+      "action": "write",
+      "pattern": "(?i)\\A[A-Z]:\\\\Windows\\\\System32\\\\(?:msv1_0|lsasrv|samsrv)\\.dll\\Z",
+      "positive": "C:\\Windows\\System32\\msv1_0.dll",
+      "negative": "C:\\stage\\normal.dll",
+      "note": "Writes an LSASS security-subsystem DLL path; existing identity, actual replacement, load, and persistence need qualification.",
+      "rule_id": "feasible-file-write-t1547-008",
+      "rule_name": "reference write bound file variant for LSASS Driver",
+      "rule_path": "feasible-variants/feasible-file-write-t1547-008.yml",
+      "family": "file",
+      "positive_calls": [
+        {
+          "api": "CreateFileW",
+          "arguments": {
+            "path": "C:\\Windows\\System32\\msv1_0.dll",
+            "handle": 64
+          }
+        },
+        {
+          "api": "WriteFile",
+          "arguments": {
+            "handle": 64,
+            "bytes_transferred": 8
+          }
+        }
+      ],
+      "negative_calls": [
+        {
+          "api": "CreateFileW",
+          "arguments": {
+            "path": "C:\\stage\\normal.dll",
+            "handle": 64
+          }
+        },
+        {
+          "api": "WriteFile",
+          "arguments": {
+            "handle": 64,
+            "bytes_transferred": 8
+          }
+        }
+      ],
+      "source": "https://attack.mitre.org/techniques/T1547/008/",
+      "definition_sha256": "3fdd47e351d516261c58dbaf31d064495add10845b83729c6e4157dc7df2d965"
+    },
+    {
+      "attack_id": "T1036.008",
+      "action": "write",
+      "pattern": "(?i)\\A[A-Z]:\\\\[^\\r\\n]+\\.(?:pdf|docx?|xlsx?|jpe?g|png)\\Z",
+      "positive": "C:\\stage\\invoice.pdf",
+      "negative": "C:\\stage\\program.exe",
+      "note": "Writes a structurally parsed PE under a document/image extension; an MZ string alone is insufficient.",
+      "payload_op": "pe_hex",
+      "positive_fixture": "local_group_capability.exe",
+      "rule_id": "feasible-file-write-t1036-008",
+      "rule_name": "reference write bound file variant for Masquerade File Type",
+      "rule_path": null,
+      "family": "file",
+      "positive_calls": [
+        {
+          "api": "CreateFileW",
+          "arguments": {
+            "path": "C:\\stage\\invoice.pdf",
+            "handle": 64
+          }
+        },
+        {
+          "api": "WriteFile",
+          "arguments": {
+            "handle": 64,
+            "bytes_transferred": "@fixture_size",
+            "buffer_hex": "@fixture:local_group_capability.exe"
+          }
+        }
+      ],
+      "negative_calls": [
+        {
+          "api": "CreateFileW",
+          "arguments": {
+            "path": "C:\\stage\\program.exe",
+            "handle": 64
+          }
+        },
+        {
+          "api": "WriteFile",
+          "arguments": {
+            "handle": 64,
+            "bytes_transferred": "@fixture_size",
+            "buffer_hex": "@fixture:local_group_capability.exe"
+          }
+        }
+      ],
+      "source": "https://attack.mitre.org/techniques/T1036/008/",
+      "definition_sha256": "959f941beec62e9169299e9ed866244ab1f8f3c398534c7a0f8a6c4565ff1fe3"
+    },
+    {
+      "attack_id": "T1036.005",
+      "action": "write",
+      "pattern": "(?i)\\A[A-Z]:\\\\Users\\\\[^\\\\]+\\\\(?:AppData\\\\Local\\\\Temp|Downloads)\\\\(?:lsass|svchost|winlogon)\\.exe\\Z",
+      "positive": "C:\\Users\\lab\\Downloads\\svchost.exe",
+      "negative": "C:\\Windows\\System32\\svchost.exe",
+      "note": "Writes a parsed PE with a core Windows process name outside its standard system location; publisher identity and deception intent are unproven.",
+      "payload_op": "pe_hex",
+      "positive_fixture": "local_group_capability.exe",
+      "rule_id": "feasible-file-write-t1036-005",
+      "rule_name": "reference write bound file variant for Match Legitimate Resource Name or Location",
+      "rule_path": null,
+      "family": "file",
+      "positive_calls": [
+        {
+          "api": "CreateFileW",
+          "arguments": {
+            "path": "C:\\Users\\lab\\Downloads\\svchost.exe",
+            "handle": 64
+          }
+        },
+        {
+          "api": "WriteFile",
+          "arguments": {
+            "handle": 64,
+            "bytes_transferred": "@fixture_size",
+            "buffer_hex": "@fixture:local_group_capability.exe"
+          }
+        }
+      ],
+      "negative_calls": [
+        {
+          "api": "CreateFileW",
+          "arguments": {
+            "path": "C:\\Windows\\System32\\svchost.exe",
+            "handle": 64
+          }
+        },
+        {
+          "api": "WriteFile",
+          "arguments": {
+            "handle": 64,
+            "bytes_transferred": "@fixture_size",
+            "buffer_hex": "@fixture:local_group_capability.exe"
+          }
+        }
+      ],
+      "source": "https://attack.mitre.org/techniques/T1036/005/",
+      "definition_sha256": "50c9551f550381c5bfa0e60e3844f3073c42107f4bd77afd9a24b1148e762b41"
+    },
+    {
+      "attack_id": "T1027.006",
+      "action": "write",
+      "pattern": "(?i)\\A[A-Z]:\\\\[^\\r\\n]+\\.html?\\Z",
+      "positive": "C:\\stage\\delivery.html",
+      "negative": "C:\\stage\\delivery.txt",
+      "note": "Writes HTML that constructs a Blob, creates its object URL, and assigns a download filename; payload identity and filter evasion remain unproven.",
+      "payload_pattern": "(?s)\\A(?=.{0,8192}new\\s+Blob\\s*\\()(?=.{0,8192}URL\\.createObjectURL\\s*\\()(?=.{0,8192}\\.download\\s*=)",
+      "positive_text": "<html><script>const blob = new Blob([bytes]); const u = URL.createObjectURL(blob); a.download = \"payload.bin\";</script></html>",
+      "negative_text": "<html><p>A normal download page</p></html>",
+      "rule_id": "feasible-file-write-t1027-006",
+      "rule_name": "reference write bound file variant for HTML Smuggling",
+      "rule_path": "feasible-variants/feasible-file-write-t1027-006.yml",
+      "family": "file",
+      "positive_calls": [
+        {
+          "api": "CreateFileW",
+          "arguments": {
+            "path": "C:\\stage\\delivery.html",
+            "handle": 64
+          }
+        },
+        {
+          "api": "WriteFile",
+          "arguments": {
+            "handle": 64,
+            "bytes_transferred": 126,
+            "buffer_hex": "3c68746d6c3e3c7363726970743e636f6e737420626c6f62203d206e657720426c6f62285b62797465735d293b20636f6e73742075203d2055524c2e6372656174654f626a65637455524c28626c6f62293b20612e646f776e6c6f6164203d20227061796c6f61642e62696e223b3c2f7363726970743e3c2f68746d6c3e"
+          }
+        }
+      ],
+      "negative_calls": [
+        {
+          "api": "CreateFileW",
+          "arguments": {
+            "path": "C:\\stage\\delivery.txt",
+            "handle": 64
+          }
+        },
+        {
+          "api": "WriteFile",
+          "arguments": {
+            "handle": 64,
+            "bytes_transferred": 126,
+            "buffer_hex": "3c68746d6c3e3c7363726970743e636f6e737420626c6f62203d206e657720426c6f62285b62797465735d293b20636f6e73742075203d2055524c2e6372656174654f626a65637455524c28626c6f62293b20612e646f776e6c6f6164203d20227061796c6f61642e62696e223b3c2f7363726970743e3c2f68746d6c3e"
+          }
+        }
+      ],
+      "source": "https://attack.mitre.org/techniques/T1027/006/",
+      "definition_sha256": "9397d7c144069ef67ed483013d448ae99ec2ca0fcb7a788688b25e44f05f6b45"
+    },
+    {
+      "attack_id": "T1027.017",
+      "action": "write",
+      "pattern": "(?i)\\A[A-Z]:\\\\[^\\r\\n]+\\.svg\\Z",
+      "positive": "C:\\stage\\image.svg",
+      "negative": "C:\\stage\\image.txt",
+      "note": "Writes SVG containing a script that constructs a downloadable Blob; static image markup alone is insufficient.",
+      "payload_pattern": "(?s)\\A(?=.{0,8192}<svg\\b)(?=.{0,8192}<script\\b)(?=.{0,8192}new\\s+Blob\\s*\\()(?=.{0,8192}URL\\.createObjectURL\\s*\\()",
+      "positive_text": "<svg xmlns=\"http://www.w3.org/2000/svg\"><script>const b = new Blob([bytes]); a.href = URL.createObjectURL(b);</script></svg>",
+      "negative_text": "<svg xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"10\" height=\"10\"/></svg>",
+      "rule_id": "feasible-file-write-t1027-017",
+      "rule_name": "reference write bound file variant for SVG Smuggling",
+      "rule_path": "feasible-variants/feasible-file-write-t1027-017.yml",
+      "family": "file",
+      "positive_calls": [
+        {
+          "api": "CreateFileW",
+          "arguments": {
+            "path": "C:\\stage\\image.svg",
+            "handle": 64
+          }
+        },
+        {
+          "api": "WriteFile",
+          "arguments": {
+            "handle": 64,
+            "bytes_transferred": 124,
+            "buffer_hex": "3c73766720786d6c6e733d22687474703a2f2f7777772e77332e6f72672f323030302f737667223e3c7363726970743e636f6e73742062203d206e657720426c6f62285b62797465735d293b20612e68726566203d2055524c2e6372656174654f626a65637455524c2862293b3c2f7363726970743e3c2f7376673e"
+          }
+        }
+      ],
+      "negative_calls": [
+        {
+          "api": "CreateFileW",
+          "arguments": {
+            "path": "C:\\stage\\image.txt",
+            "handle": 64
+          }
+        },
+        {
+          "api": "WriteFile",
+          "arguments": {
+            "handle": 64,
+            "bytes_transferred": 124,
+            "buffer_hex": "3c73766720786d6c6e733d22687474703a2f2f7777772e77332e6f72672f323030302f737667223e3c7363726970743e636f6e73742062203d206e657720426c6f62285b62797465735d293b20612e68726566203d2055524c2e6372656174654f626a65637455524c2862293b3c2f7363726970743e3c2f7376673e"
+          }
+        }
+      ],
+      "source": "https://attack.mitre.org/techniques/T1027/017/",
+      "definition_sha256": "12fbcfd1c81fb1ebe5cf5c36124c52bc95715f1d5971d9c3c93e2cbc8cc7305f"
+    },
+    {
+      "attack_id": "T1027.018",
+      "action": "write",
+      "pattern": "(?i)\\A[A-Z]:\\\\[^\\r\\n]+\\.(?:js|html?)\\Z",
+      "positive": "C:\\stage\\script.js",
+      "negative": "C:\\stage\\script.txt",
+      "note": "Writes a script with an invisible-character data sequence and dynamic evaluation; decoding/dataflow and malicious purpose still need qualification.",
+      "payload_pattern": "(?s)\\A(?=.{0,8192}[\u200b\u200c\u200d\u2060\ufe00-\ufe0f]{16})(?=.{0,8192}\\beval\\s*\\()",
+      "positive_text": "const hidden=\"\u200b\u200c\u200b\u200c\u200b\u200c\u200b\u200c\u200b\u200c\u200b\u200c\u200b\u200c\u200b\u200c\u200b\u200c\u200b\u200c\u200b\u200c\u200b\u200c\u200b\u200c\u200b\u200c\u200b\u200c\u200b\u200c\"; eval(decode(hidden));",
+      "negative_text": "const visible=\"ordinary text\"; console.log(visible);",
+      "rule_id": "feasible-file-write-t1027-018",
+      "rule_name": "reference write bound file variant for Invisible Unicode",
+      "rule_path": null,
+      "family": "file",
+      "positive_calls": [
+        {
+          "api": "CreateFileW",
+          "arguments": {
+            "path": "C:\\stage\\script.js",
+            "handle": 64
+          }
+        },
+        {
+          "api": "WriteFile",
+          "arguments": {
+            "handle": 64,
+            "bytes_transferred": 134,
+            "buffer_hex": "636f6e73742068696464656e3d22e2808be2808ce2808be2808ce2808be2808ce2808be2808ce2808be2808ce2808be2808ce2808be2808ce2808be2808ce2808be2808ce2808be2808ce2808be2808ce2808be2808ce2808be2808ce2808be2808ce2808be2808ce2808be2808c223b206576616c286465636f64652868696464656e29293b"
+          }
+        }
+      ],
+      "negative_calls": [
+        {
+          "api": "CreateFileW",
+          "arguments": {
+            "path": "C:\\stage\\script.txt",
+            "handle": 64
+          }
+        },
+        {
+          "api": "WriteFile",
+          "arguments": {
+            "handle": 64,
+            "bytes_transferred": 134,
+            "buffer_hex": "636f6e73742068696464656e3d22e2808be2808ce2808be2808ce2808be2808ce2808be2808ce2808be2808ce2808be2808ce2808be2808ce2808be2808ce2808be2808ce2808be2808ce2808be2808ce2808be2808ce2808be2808ce2808be2808ce2808be2808ce2808be2808c223b206576616c286465636f64652868696464656e29293b"
+          }
+        }
+      ],
+      "source": "https://attack.mitre.org/techniques/T1027/018/",
+      "definition_sha256": "677f190a6db54c8fb97fd4be2cb1587faea2a8b4b4151952e2b6a1c14a19633e"
+    },
+    {
+      "attack_id": "T1505.003",
+      "action": "write",
+      "pattern": "(?i)\\A[A-Z]:\\\\inetpub\\\\wwwroot\\\\[^\\r\\n]+\\.php\\Z",
+      "positive": "C:\\inetpub\\wwwroot\\lab.php",
+      "negative": "C:\\stage\\lab.php",
+      "note": "Writes PHP in a web-root location that passes a request parameter directly to an OS command sink; actual server configuration and remote execution remain unproven.",
+      "payload_pattern": "(?s)<\\?php\\s+(?:system|shell_exec|passthru)\\s*\\(\\s*\\$_(?:GET|POST|REQUEST)\\s*\\[\\s*[\\x27\"]\\w+[\\x27\"]\\s*\\]\\s*\\)",
+      "positive_text": "<?php system($_GET['cmd']); ?>",
+      "negative_text": "<?php echo 'Welcome'; ?>",
+      "rule_id": "feasible-file-write-t1505-003",
+      "rule_name": "reference write bound file variant for Web Shell",
+      "rule_path": "feasible-variants/feasible-file-write-t1505-003.yml",
+      "family": "file",
+      "positive_calls": [
+        {
+          "api": "CreateFileW",
+          "arguments": {
+            "path": "C:\\inetpub\\wwwroot\\lab.php",
+            "handle": 64
+          }
+        },
+        {
+          "api": "WriteFile",
+          "arguments": {
+            "handle": 64,
+            "bytes_transferred": 30,
+            "buffer_hex": "3c3f7068702073797374656d28245f4745545b27636d64275d293b203f3e"
+          }
+        }
+      ],
+      "negative_calls": [
+        {
+          "api": "CreateFileW",
+          "arguments": {
+            "path": "C:\\stage\\lab.php",
+            "handle": 64
+          }
+        },
+        {
+          "api": "WriteFile",
+          "arguments": {
+            "handle": 64,
+            "bytes_transferred": 30,
+            "buffer_hex": "3c3f7068702073797374656d28245f4745545b27636d64275d293b203f3e"
+          }
+        }
+      ],
+      "source": "https://attack.mitre.org/techniques/T1505/003/",
+      "definition_sha256": "22827b08b1a10f591b1c50b5d654f72a486c0651c48e5beea79501a3b0e59ece"
+    },
+    {
+      "attack_id": "T1565",
+      "action": "write",
+      "pattern": "(?i)\\A[A-Z]:\\\\Windows\\\\System32\\\\drivers\\\\etc\\\\hosts\\Z",
+      "positive": "C:\\Windows\\System32\\drivers\\etc\\hosts",
+      "negative": "C:\\stage\\hosts",
+      "note": "Writes concrete hostname-to-address mappings into the system hosts file; adversary intent and deviation from an authorized baseline remain unproven.",
+      "payload_pattern": "(?m)^[ \\t]*(?:[0-9]{1,3}\\.){3}[0-9]{1,3}[ \\t]+[A-Za-z0-9][A-Za-z0-9.-]+(?:[ \\t]*\\r?$)",
+      "positive_text": "192.0.2.1 portal.lab.local\n",
+      "negative_text": "# ordinary hosts comment\n",
+      "rule_id": "feasible-file-write-t1565",
+      "rule_name": "reference write bound file variant for Data Manipulation",
+      "rule_path": "feasible-variants/feasible-file-write-t1565.yml",
+      "family": "file",
+      "positive_calls": [
+        {
+          "api": "CreateFileW",
+          "arguments": {
+            "path": "C:\\Windows\\System32\\drivers\\etc\\hosts",
+            "handle": 64
+          }
+        },
+        {
+          "api": "WriteFile",
+          "arguments": {
+            "handle": 64,
+            "bytes_transferred": 27,
+            "buffer_hex": "3139322e302e322e3120706f7274616c2e6c61622e6c6f63616c0a"
+          }
+        }
+      ],
+      "negative_calls": [
+        {
+          "api": "CreateFileW",
+          "arguments": {
+            "path": "C:\\stage\\hosts",
+            "handle": 64
+          }
+        },
+        {
+          "api": "WriteFile",
+          "arguments": {
+            "handle": 64,
+            "bytes_transferred": 27,
+            "buffer_hex": "3139322e302e322e3120706f7274616c2e6c61622e6c6f63616c0a"
+          }
+        }
+      ],
+      "source": "https://attack.mitre.org/techniques/T1565/",
+      "definition_sha256": "2d4b2454ea48560d32aa40920bb489cf75f748dd87e263f1720daa01430e3a6c"
+    },
+    {
+      "attack_id": "T1565.001",
+      "action": "write",
+      "pattern": "(?i)\\A[A-Z]:\\\\Windows\\\\System32\\\\drivers\\\\etc\\\\hosts\\Z",
+      "positive": "C:\\Windows\\System32\\drivers\\etc\\hosts",
+      "negative": "C:\\stage\\hosts",
+      "note": "Writes hostname-resolution data into a bound hosts file, a concrete stored-data manipulation mechanism; authorization and malicious redirection need qualification.",
+      "payload_pattern": "(?m)^[ \\t]*(?:[0-9]{1,3}\\.){3}[0-9]{1,3}[ \\t]+[A-Za-z0-9][A-Za-z0-9.-]+(?:[ \\t]*\\r?$)",
+      "positive_text": "192.0.2.1 portal.lab.local\n",
+      "negative_text": "# ordinary hosts comment\n",
+      "rule_id": "feasible-file-write-t1565-001",
+      "rule_name": "reference write bound file variant for Stored Data Manipulation",
+      "rule_path": "feasible-variants/feasible-file-write-t1565-001.yml",
+      "family": "file",
+      "positive_calls": [
+        {
+          "api": "CreateFileW",
+          "arguments": {
+            "path": "C:\\Windows\\System32\\drivers\\etc\\hosts",
+            "handle": 64
+          }
+        },
+        {
+          "api": "WriteFile",
+          "arguments": {
+            "handle": 64,
+            "bytes_transferred": 27,
+            "buffer_hex": "3139322e302e322e3120706f7274616c2e6c61622e6c6f63616c0a"
+          }
+        }
+      ],
+      "negative_calls": [
+        {
+          "api": "CreateFileW",
+          "arguments": {
+            "path": "C:\\stage\\hosts",
+            "handle": 64
+          }
+        },
+        {
+          "api": "WriteFile",
+          "arguments": {
+            "handle": 64,
+            "bytes_transferred": 27,
+            "buffer_hex": "3139322e302e322e3120706f7274616c2e6c61622e6c6f63616c0a"
+          }
+        }
+      ],
+      "source": "https://attack.mitre.org/techniques/T1565/001/",
+      "definition_sha256": "f8488db3b50389b8d268b704ee4e72d48e37ded2fb4ffc9de262975aba6dbe96"
+    },
+    {
+      "attack_id": "T1056.003",
+      "action": "write",
+      "pattern": "(?i)\\A[A-Z]:\\\\inetpub\\\\wwwroot\\\\[^\\r\\n]*login\\.php\\Z",
+      "positive": "C:\\inetpub\\wwwroot\\login.php",
+      "negative": "C:\\stage\\login.php",
+      "note": "Writes a web-portal script that places submitted password data in an append-only capture file; legitimate portal baseline and actual credential interception remain unproven.",
+      "payload_pattern": "(?is)\\A.{0,8192}<\\?php\\s+file_put_contents\\s*\\(\\s*[\"'][^\"']+[\"']\\s*,\\s*\\$_POST\\s*\\[\\s*[\"']password[\"']\\s*\\]\\s*,\\s*FILE_APPEND\\s*\\)",
+      "positive_text": "<?php file_put_contents('captured.txt', $_POST['password'], FILE_APPEND); ?>",
+      "negative_text": "<?php echo 'Login'; ?>",
+      "rule_id": "feasible-file-write-t1056-003",
+      "rule_name": "reference write bound file variant for Web Portal Capture",
+      "rule_path": "feasible-variants/feasible-file-write-t1056-003.yml",
+      "family": "file",
+      "positive_calls": [
+        {
+          "api": "CreateFileW",
+          "arguments": {
+            "path": "C:\\inetpub\\wwwroot\\login.php",
+            "handle": 64
+          }
+        },
+        {
+          "api": "WriteFile",
+          "arguments": {
+            "handle": 64,
+            "bytes_transferred": 76,
+            "buffer_hex": "3c3f7068702066696c655f7075745f636f6e74656e7473282763617074757265642e747874272c20245f504f53545b2770617373776f7264275d2c2046494c455f415050454e44293b203f3e"
+          }
+        }
+      ],
+      "negative_calls": [
+        {
+          "api": "CreateFileW",
+          "arguments": {
+            "path": "C:\\stage\\login.php",
+            "handle": 64
+          }
+        },
+        {
+          "api": "WriteFile",
+          "arguments": {
+            "handle": 64,
+            "bytes_transferred": 76,
+            "buffer_hex": "3c3f7068702066696c655f7075745f636f6e74656e7473282763617074757265642e747874272c20245f504f53545b2770617373776f7264275d2c2046494c455f415050454e44293b203f3e"
+          }
+        }
+      ],
+      "source": "https://attack.mitre.org/techniques/T1056/003/",
+      "definition_sha256": "26843fb653adc001948dff0e64afa229085d751e9c1b3abfbc0dd8a49ff8eb66"
+    },
+    {
+      "attack_id": "T1187",
+      "action": "write",
+      "pattern": "(?i)\\A[A-Z]:\\\\[^\\r\\n]+\\.url\\Z",
+      "positive": "C:\\stage\\document.url",
+      "negative": "C:\\stage\\document.txt",
+      "note": "Writes an Internet Shortcut with a UNC icon resource that can initiate SMB authentication when rendered; actual rendering, authentication, and adversary control of the peer require qualification.",
+      "payload_pattern": "(?ims)\\A(?=.{0,8192}^\\[InternetShortcut\\]\\r?$)(?=.{0,8192}^IconFile=\\\\\\\\[^\\\\\\r\\n]+\\\\[^\\r\\n]+)",
+      "positive_text": "[InternetShortcut]\r\nURL=https://example.invalid/\r\nIconFile=\\\\fileserver\\icons\\icon.ico\r\n",
+      "negative_text": "[InternetShortcut]\r\nURL=https://example.invalid/\r\nIconFile=C:\\icons\\icon.ico\r\n",
+      "rule_id": "feasible-file-write-t1187",
+      "rule_name": "reference write bound file variant for Forced Authentication",
+      "rule_path": "feasible-variants/feasible-file-write-t1187.yml",
+      "family": "file",
+      "positive_calls": [
+        {
+          "api": "CreateFileW",
+          "arguments": {
+            "path": "C:\\stage\\document.url",
+            "handle": 64
+          }
+        },
+        {
+          "api": "WriteFile",
+          "arguments": {
+            "handle": 64,
+            "bytes_transferred": 88,
+            "buffer_hex": "5b496e7465726e657453686f72746375745d0d0a55524c3d68747470733a2f2f6578616d706c652e696e76616c69642f0d0a49636f6e46696c653d5c5c66696c657365727665725c69636f6e735c69636f6e2e69636f0d0a"
+          }
+        }
+      ],
+      "negative_calls": [
+        {
+          "api": "CreateFileW",
+          "arguments": {
+            "path": "C:\\stage\\document.txt",
+            "handle": 64
+          }
+        },
+        {
+          "api": "WriteFile",
+          "arguments": {
+            "handle": 64,
+            "bytes_transferred": 88,
+            "buffer_hex": "5b496e7465726e657453686f72746375745d0d0a55524c3d68747470733a2f2f6578616d706c652e696e76616c69642f0d0a49636f6e46696c653d5c5c66696c657365727665725c69636f6e735c69636f6e2e69636f0d0a"
+          }
+        }
+      ],
+      "source": "https://attack.mitre.org/techniques/T1187/",
+      "definition_sha256": "90b30b4ee47a823a0b5f9ab99a487f8a58f7f4c485e10d41f2586c0d3429fcbe"
+    },
+    {
+      "attack_id": "T1080",
+      "action": "write",
+      "pattern": "(?i)\\A\\\\\\\\[^\\\\]+\\\\[^\\\\]+\\\\[^\\r\\n]+\\.vbs\\Z",
+      "positive": "\\\\fileserver\\shared\\startup.vbs",
+      "negative": "C:\\stage\\startup.vbs",
+      "note": "Writes an executable command-launching script onto a shared location. Previously trusted content, victim invocation, and unauthorized tainting require qualification.",
+      "payload_pattern": "(?is)\\A(?=.{0,8192}CreateObject\\s*\\(\\s*[\"']WScript\\.Shell[\"']\\s*\\))(?=.{0,8192}\\.Run\\s+[\"'][^\"']+[\"'])",
+      "positive_text": "Set s = CreateObject(\"WScript.Shell\")\r\ns.Run \"cmd.exe /c whoami\"",
+      "negative_text": "WScript.Echo \"Welcome\"",
+      "rule_id": "feasible-file-write-t1080",
+      "rule_name": "reference write bound file variant for Taint Shared Content",
+      "rule_path": "feasible-variants/feasible-file-write-t1080.yml",
+      "family": "file",
+      "positive_calls": [
+        {
+          "api": "CreateFileW",
+          "arguments": {
+            "path": "\\\\fileserver\\shared\\startup.vbs",
+            "handle": 64
+          }
+        },
+        {
+          "api": "WriteFile",
+          "arguments": {
+            "handle": 64,
+            "bytes_transferred": 64,
+            "buffer_hex": "5365742073203d204372656174654f626a6563742822575363726970742e5368656c6c22290d0a732e52756e2022636d642e657865202f632077686f616d6922"
+          }
+        }
+      ],
+      "negative_calls": [
+        {
+          "api": "CreateFileW",
+          "arguments": {
+            "path": "C:\\stage\\startup.vbs",
+            "handle": 64
+          }
+        },
+        {
+          "api": "WriteFile",
+          "arguments": {
+            "handle": 64,
+            "bytes_transferred": 64,
+            "buffer_hex": "5365742073203d204372656174654f626a6563742822575363726970742e5368656c6c22290d0a732e52756e2022636d642e657865202f632077686f616d6922"
+          }
+        }
+      ],
+      "source": "https://attack.mitre.org/techniques/T1080/",
+      "definition_sha256": "42c19882c4b1ee3f5852d1a94e3903908f873de51815fcb9f60e7399613d9b4c"
+    },
+    {
+      "attack_id": "T1027.012",
+      "action": "write",
+      "pattern": "(?i)\\A[A-Z]:\\\\[^\\r\\n]+\\.lnk\\Z",
+      "positive": "C:\\stage\\shortcut.lnk",
+      "negative": "C:\\stage\\shortcut.txt",
+      "note": "Parses a complete LNK with a remote payload URL in its icon metadata and matching utility execution arguments. An arbitrary URL or icon string cannot satisfy this predicate; actual shell retrieval remains unproven.",
+      "payload_op": "lnk_icon_hex",
+      "positive_fixture": "feasible_icon.lnk",
+      "rule_id": "feasible-file-write-t1027-012",
+      "rule_name": "reference write bound file variant for LNK Icon Smuggling",
+      "rule_path": null,
+      "family": "file",
+      "positive_calls": [
+        {
+          "api": "CreateFileW",
+          "arguments": {
+            "path": "C:\\stage\\shortcut.lnk",
+            "handle": 64
+          }
+        },
+        {
+          "api": "WriteFile",
+          "arguments": {
+            "handle": 64,
+            "bytes_transferred": "@fixture_size",
+            "buffer_hex": "@fixture:feasible_icon.lnk"
+          }
+        }
+      ],
+      "negative_calls": [
+        {
+          "api": "CreateFileW",
+          "arguments": {
+            "path": "C:\\stage\\shortcut.txt",
+            "handle": 64
+          }
+        },
+        {
+          "api": "WriteFile",
+          "arguments": {
+            "handle": 64,
+            "bytes_transferred": "@fixture_size",
+            "buffer_hex": "@fixture:feasible_icon.lnk"
+          }
+        }
+      ],
+      "source": "https://attack.mitre.org/techniques/T1027/012/",
+      "definition_sha256": "828c23102e487463a3027a1f078aeba2c3cdcde0d7c0ac257fcb9920db8483e4"
+    },
+    {
+      "attack_id": "T1221",
+      "action": "write",
+      "pattern": "(?i)\\A[A-Z]:\\\\[^\\r\\n]+\\.(?:docx|docm)\\Z",
+      "positive": "C:\\stage\\document.docx",
+      "negative": "C:\\stage\\document.txt",
+      "note": "Parses an OOXML attached-template relationship with External mode and an HTTP macro-template target. Actual Office loading, macro execution, and malicious content remain unproven.",
+      "payload_op": "remote_template_hex",
+      "positive_fixture": "feasible_template.docx",
+      "rule_id": "feasible-file-write-t1221",
+      "rule_name": "reference write bound file variant for Template Injection",
+      "rule_path": null,
+      "family": "file",
+      "positive_calls": [
+        {
+          "api": "CreateFileW",
+          "arguments": {
+            "path": "C:\\stage\\document.docx",
+            "handle": 64
+          }
+        },
+        {
+          "api": "WriteFile",
+          "arguments": {
+            "handle": 64,
+            "bytes_transferred": "@fixture_size",
+            "buffer_hex": "@fixture:feasible_template.docx"
+          }
+        }
+      ],
+      "negative_calls": [
+        {
+          "api": "CreateFileW",
+          "arguments": {
+            "path": "C:\\stage\\document.txt",
+            "handle": 64
+          }
+        },
+        {
+          "api": "WriteFile",
+          "arguments": {
+            "handle": 64,
+            "bytes_transferred": "@fixture_size",
+            "buffer_hex": "@fixture:feasible_template.docx"
+          }
+        }
+      ],
+      "source": "https://attack.mitre.org/techniques/T1221/",
+      "definition_sha256": "69454fbed985c47bd4578bdbfac92658f439093839ec8ff6d81bf41c6255ab1f"
+    },
+    {
+      "attack_id": "T1027.003",
+      "action": "write",
+      "pattern": "(?i)\\A[A-Z]:\\\\[^\\r\\n]+\\.bmp\\Z",
+      "positive": "C:\\stage\\image.bmp",
+      "negative": "C:\\stage\\image.txt",
+      "note": "Parses an executable hidden in the pixel LSBs of a 24-bit BMP using one explicit length-prefixed variant. Random image entropy or arbitrary embedded strings do not qualify; intent and runtime extraction remain unproven.",
+      "payload_op": "bmp_hidden_pe_hex",
+      "positive_fixture": "feasible_hidden.bmp",
+      "rule_id": "feasible-file-write-t1027-003",
+      "rule_name": "reference write bound file variant for Steganography",
+      "rule_path": null,
+      "family": "file",
+      "positive_calls": [
+        {
+          "api": "CreateFileW",
+          "arguments": {
+            "path": "C:\\stage\\image.bmp",
+            "handle": 64
+          }
+        },
+        {
+          "api": "WriteFile",
+          "arguments": {
+            "handle": 64,
+            "bytes_transferred": "@fixture_size",
+            "buffer_hex": "@fixture:feasible_hidden.bmp"
+          }
+        }
+      ],
+      "negative_calls": [
+        {
+          "api": "CreateFileW",
+          "arguments": {
+            "path": "C:\\stage\\image.txt",
+            "handle": 64
+          }
+        },
+        {
+          "api": "WriteFile",
+          "arguments": {
+            "handle": 64,
+            "bytes_transferred": "@fixture_size",
+            "buffer_hex": "@fixture:feasible_hidden.bmp"
+          }
+        }
+      ],
+      "source": "https://attack.mitre.org/techniques/T1027/003/",
+      "definition_sha256": "2b063f4e50c1b5735ee14b78cdb9bc637ee0a7749d32e3b541042ba77f718ff2"
+    },
+    {
+      "attack_id": "T1556.007",
+      "action": "write",
+      "pattern": "(?i)\\A[A-Z]:\\\\Windows\\\\ADFS\\\\Microsoft\\.IdentityServer\\.Servicehost\\.exe\\.config\\Z",
+      "positive": "C:\\Windows\\ADFS\\Microsoft.IdentityServer.Servicehost.exe.config",
+      "negative": "C:\\stage\\service.config",
+      "note": "Writes an AD FS service configuration with actual runtime AppDomainManager assembly/type elements. A commented string cannot satisfy the XML parser. Existing service identity, malicious DLL behavior, load, and authentication bypass require qualification.",
+      "payload_op": "appdomain_config_hex",
+      "positive_fixture": "feasible_adfs.config",
+      "rule_id": "feasible-file-write-t1556-007",
+      "rule_name": "reference write bound file variant for Hybrid Identity",
+      "rule_path": null,
+      "family": "file",
+      "positive_calls": [
+        {
+          "api": "CreateFileW",
+          "arguments": {
+            "path": "C:\\Windows\\ADFS\\Microsoft.IdentityServer.Servicehost.exe.config",
+            "handle": 64
+          }
+        },
+        {
+          "api": "WriteFile",
+          "arguments": {
+            "handle": 64,
+            "bytes_transferred": "@fixture_size",
+            "buffer_hex": "@fixture:feasible_adfs.config"
+          }
+        }
+      ],
+      "negative_calls": [
+        {
+          "api": "CreateFileW",
+          "arguments": {
+            "path": "C:\\stage\\service.config",
+            "handle": 64
+          }
+        },
+        {
+          "api": "WriteFile",
+          "arguments": {
+            "handle": 64,
+            "bytes_transferred": "@fixture_size",
+            "buffer_hex": "@fixture:feasible_adfs.config"
+          }
+        }
+      ],
+      "source": "https://attack.mitre.org/techniques/T1556/007/",
+      "definition_sha256": "6482ed5ca71a9838fb4f4462376d3455e9ed43e502de3b9b0caf2585ab29624b"
+    },
+    {
+      "attack_id": "T1137.002",
+      "action": "set",
+      "key_pattern": "(?i)\\A(?:HKLM|HKEY_LOCAL_MACHINE)\\\\SOFTWARE\\\\Microsoft\\\\Office test\\\\Special\\Z",
+      "value_pattern": "(?i)\\APerf\\Z",
+      "data": "(?i)\\A[A-Z]:\\\\[^\\r\\n]+\\.dll\\Z",
+      "positive_key": "HKLM\\SOFTWARE\\Microsoft\\Office test\\Special",
+      "positive_value": "Perf",
+      "positive_data": "C:\\stage\\test.dll",
+      "negative_data": "C:\\stage\\test.txt",
+      "note": "Sets the Office Test Perf DLL value on its exact key, not an arbitrary Office setting.",
+      "rule_id": "feasible-registry-set-t1137-002",
+      "rule_name": "reference set bound registry variant for Office Test",
+      "rule_path": "feasible-variants/feasible-registry-set-t1137-002.yml",
+      "family": "registry",
+      "positive_calls": [
+        {
+          "api": "RegOpenKeyExW",
+          "arguments": {
+            "key_path": "HKLM\\SOFTWARE\\Microsoft\\Office test\\Special",
+            "key_handle": 64
+          }
+        },
+        {
+          "api": "RegSetValueExW",
+          "arguments": {
+            "key_handle": 64,
+            "value_name": "Perf",
+            "value_type": 1,
+            "value_data": "C:\\stage\\test.dll"
+          }
+        }
+      ],
+      "negative_calls": [
+        {
+          "api": "RegOpenKeyExW",
+          "arguments": {
+            "key_path": "HKLM\\SOFTWARE\\Microsoft\\Office test\\Special",
+            "key_handle": 64
+          }
+        },
+        {
+          "api": "RegSetValueExW",
+          "arguments": {
+            "key_handle": 64,
+            "value_name": "Perf",
+            "value_type": 1,
+            "value_data": "C:\\stage\\test.txt"
+          }
+        }
+      ],
+      "source": "https://attack.mitre.org/techniques/T1137/002/",
+      "definition_sha256": "2404d5ac4de25d5c2e2da804be977bd184960fb2f05b898a4e49e93276001552"
+    },
+    {
+      "attack_id": "T1176.001",
+      "action": "set",
+      "key_pattern": "(?i)\\A(?:HKLM|HKEY_LOCAL_MACHINE)\\\\SOFTWARE\\\\Policies\\\\(?:Google\\\\Chrome|Microsoft\\\\Edge)\\\\ExtensionInstallForcelist\\Z",
+      "value_pattern": "(?i)\\A[1-9][0-9]*\\Z",
+      "data": "\\A[a-p]{32};https://[^\\s]+\\Z",
+      "positive_key": "HKLM\\SOFTWARE\\Policies\\Google\\Chrome\\ExtensionInstallForcelist",
+      "positive_value": "1",
+      "positive_data": "abcdefghijklmnopabcdefghijklmnop;https://example.invalid/update.xml",
+      "negative_data": "not-an-extension",
+      "note": "Adds a force-installed browser extension policy with an extension ID and update URL; extension code and load require qualification.",
+      "rule_id": "feasible-registry-set-t1176-001",
+      "rule_name": "reference set bound registry variant for Browser Extensions",
+      "rule_path": "feasible-variants/feasible-registry-set-t1176-001.yml",
+      "family": "registry",
+      "positive_calls": [
+        {
+          "api": "RegOpenKeyExW",
+          "arguments": {
+            "key_path": "HKLM\\SOFTWARE\\Policies\\Google\\Chrome\\ExtensionInstallForcelist",
+            "key_handle": 64
+          }
+        },
+        {
+          "api": "RegSetValueExW",
+          "arguments": {
+            "key_handle": 64,
+            "value_name": "1",
+            "value_type": 1,
+            "value_data": "abcdefghijklmnopabcdefghijklmnop;https://example.invalid/update.xml"
+          }
+        }
+      ],
+      "negative_calls": [
+        {
+          "api": "RegOpenKeyExW",
+          "arguments": {
+            "key_path": "HKLM\\SOFTWARE\\Policies\\Google\\Chrome\\ExtensionInstallForcelist",
+            "key_handle": 64
+          }
+        },
+        {
+          "api": "RegSetValueExW",
+          "arguments": {
+            "key_handle": 64,
+            "value_name": "1",
+            "value_type": 1,
+            "value_data": "not-an-extension"
+          }
+        }
+      ],
+      "source": "https://attack.mitre.org/techniques/T1176/001/",
+      "definition_sha256": "f2add3d15823e294667fb5c1951bd4c6ede690ece7084361a43cb7b5d0d48fd6"
+    },
+    {
+      "attack_id": "T1505.005",
+      "action": "set",
+      "key_pattern": "(?i)\\A(?:HKLM|HKEY_LOCAL_MACHINE)\\\\SYSTEM\\\\CurrentControlSet\\\\Services\\\\TermService\\\\Parameters\\Z",
+      "value_pattern": "(?i)\\AServiceDll\\Z",
+      "data": "(?i)\\A[A-Z]:\\\\[^\\r\\n]+\\.dll\\Z",
+      "positive_key": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\TermService\\Parameters",
+      "positive_value": "ServiceDll",
+      "positive_data": "C:\\stage\\service.dll",
+      "negative_data": "C:\\stage\\service.txt",
+      "note": "Redirects the Terminal Services DLL configuration; later service loading and binary provenance remain unproven.",
+      "rule_id": "feasible-registry-set-t1505-005",
+      "rule_name": "reference set bound registry variant for Terminal Services DLL",
+      "rule_path": "feasible-variants/feasible-registry-set-t1505-005.yml",
+      "family": "registry",
+      "positive_calls": [
+        {
+          "api": "RegOpenKeyExW",
+          "arguments": {
+            "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\TermService\\Parameters",
+            "key_handle": 64
+          }
+        },
+        {
+          "api": "RegSetValueExW",
+          "arguments": {
+            "key_handle": 64,
+            "value_name": "ServiceDll",
+            "value_type": 1,
+            "value_data": "C:\\stage\\service.dll"
+          }
+        }
+      ],
+      "negative_calls": [
+        {
+          "api": "RegOpenKeyExW",
+          "arguments": {
+            "key_path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\TermService\\Parameters",
+            "key_handle": 64
+          }
+        },
+        {
+          "api": "RegSetValueExW",
+          "arguments": {
+            "key_handle": 64,
+            "value_name": "ServiceDll",
+            "value_type": 1,
+            "value_data": "C:\\stage\\service.txt"
+          }
+        }
+      ],
+      "source": "https://attack.mitre.org/techniques/T1505/005/",
+      "definition_sha256": "f8b0d80b014b6cd361c439f59ccf80a1751b8a7fc725979e6a1b72a60bbe56af"
+    },
+    {
+      "attack_id": "T1546.007",
+      "action": "set",
+      "key_pattern": "(?i)\\A(?:HKLM|HKEY_LOCAL_MACHINE)\\\\SOFTWARE\\\\Microsoft\\\\Netsh\\Z",
+      "value_pattern": "(?i)\\A[^\\\\\\r\\n]+\\Z",
+      "data": "(?i)\\A[A-Z]:\\\\[^\\r\\n]+\\.dll\\Z",
+      "positive_key": "HKLM\\SOFTWARE\\Microsoft\\Netsh",
+      "positive_value": "LabHelper",
+      "positive_data": "C:\\stage\\helper.dll",
+      "negative_data": "C:\\stage\\helper.txt",
+      "note": "Registers a DLL on the exact Netsh helper key, without inferring later execution.",
+      "rule_id": "feasible-registry-set-t1546-007",
+      "rule_name": "reference set bound registry variant for Netsh Helper DLL",
+      "rule_path": "feasible-variants/feasible-registry-set-t1546-007.yml",
+      "family": "registry",
+      "positive_calls": [
+        {
+          "api": "RegOpenKeyExW",
+          "arguments": {
+            "key_path": "HKLM\\SOFTWARE\\Microsoft\\Netsh",
+            "key_handle": 64
+          }
+        },
+        {
+          "api": "RegSetValueExW",
+          "arguments": {
+            "key_handle": 64,
+            "value_name": "LabHelper",
+            "value_type": 1,
+            "value_data": "C:\\stage\\helper.dll"
+          }
+        }
+      ],
+      "negative_calls": [
+        {
+          "api": "RegOpenKeyExW",
+          "arguments": {
+            "key_path": "HKLM\\SOFTWARE\\Microsoft\\Netsh",
+            "key_handle": 64
+          }
+        },
+        {
+          "api": "RegSetValueExW",
+          "arguments": {
+            "key_handle": 64,
+            "value_name": "LabHelper",
+            "value_type": 1,
+            "value_data": "C:\\stage\\helper.txt"
+          }
+        }
+      ],
+      "source": "https://attack.mitre.org/techniques/T1546/007/",
+      "definition_sha256": "312d68f393f4f5fcfc13f77c585689c2b55d4b3d9c21e200857b2aecac9dbbd9"
+    },
+    {
+      "attack_id": "T1553.003",
+      "action": "set",
+      "key_pattern": "(?i)\\A(?:HKLM|HKEY_LOCAL_MACHINE)\\\\SOFTWARE\\\\(?:WOW6432Node\\\\)?Microsoft\\\\Cryptography\\\\OID\\\\EncodingType 0\\\\(?:CryptSIPDllGetSignedDataMsg|CryptSIPDllVerifyIndirectData)\\\\\\{[0-9a-f-]{36}\\}\\Z",
+      "value_pattern": "(?i)\\ADll\\Z",
+      "data": "(?i)\\A[A-Z]:\\\\[^\\r\\n]+\\.dll\\Z",
+      "positive_key": "HKLM\\SOFTWARE\\Microsoft\\Cryptography\\OID\\EncodingType 0\\CryptSIPDllVerifyIndirectData\\{00000000-0000-0000-0000-000000000001}",
+      "positive_value": "Dll",
+      "positive_data": "C:\\stage\\provider.dll",
+      "negative_data": "unchanged",
+      "note": "Redirects a concrete signature-verification SIP DLL; its return behavior and trust bypass need qualification.",
+      "rule_id": "feasible-registry-set-t1553-003",
+      "rule_name": "reference set bound registry variant for SIP and Trust Provider Hijacking",
+      "rule_path": "feasible-variants/feasible-registry-set-t1553-003.yml",
+      "family": "registry",
+      "positive_calls": [
+        {
+          "api": "RegOpenKeyExW",
+          "arguments": {
+            "key_path": "HKLM\\SOFTWARE\\Microsoft\\Cryptography\\OID\\EncodingType 0\\CryptSIPDllVerifyIndirectData\\{00000000-0000-0000-0000-000000000001}",
+            "key_handle": 64
+          }
+        },
+        {
+          "api": "RegSetValueExW",
+          "arguments": {
+            "key_handle": 64,
+            "value_name": "Dll",
+            "value_type": 1,
+            "value_data": "C:\\stage\\provider.dll"
+          }
+        }
+      ],
+      "negative_calls": [
+        {
+          "api": "RegOpenKeyExW",
+          "arguments": {
+            "key_path": "HKLM\\SOFTWARE\\Microsoft\\Cryptography\\OID\\EncodingType 0\\CryptSIPDllVerifyIndirectData\\{00000000-0000-0000-0000-000000000001}",
+            "key_handle": 64
+          }
+        },
+        {
+          "api": "RegSetValueExW",
+          "arguments": {
+            "key_handle": 64,
+            "value_name": "Dll",
+            "value_type": 1,
+            "value_data": "unchanged"
+          }
+        }
+      ],
+      "source": "https://attack.mitre.org/techniques/T1553/003/",
+      "definition_sha256": "79aee2e32600a47b346fb05f5bd45944047ec278d53f45531750e711737d9d30"
+    },
+    {
+      "attack_id": "T1564.002",
+      "action": "set",
+      "key_pattern": "(?i)\\A(?:HKLM|HKEY_LOCAL_MACHINE)\\\\SOFTWARE\\\\Microsoft\\\\Windows NT\\\\CurrentVersion\\\\Winlogon\\\\SpecialAccounts\\\\UserList\\Z",
+      "value_pattern": "(?i)\\A[^\\\\\\r\\n]+\\Z",
+      "data": 0,
+      "positive_key": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\SpecialAccounts\\UserList",
+      "positive_value": "labuser",
+      "positive_data": 0,
+      "negative_data": 1,
+      "note": "Sets a named user logon-screen visibility DWORD to zero.",
+      "rule_id": "feasible-registry-set-t1564-002",
+      "rule_name": "reference set bound registry variant for Hidden Users",
+      "rule_path": "feasible-variants/feasible-registry-set-t1564-002.yml",
+      "family": "registry",
+      "positive_calls": [
+        {
+          "api": "RegOpenKeyExW",
+          "arguments": {
+            "key_path": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\SpecialAccounts\\UserList",
+            "key_handle": 64
+          }
+        },
+        {
+          "api": "RegSetValueExW",
+          "arguments": {
+            "key_handle": 64,
+            "value_name": "labuser",
+            "value_type": 4,
+            "value_data": 0
+          }
+        }
+      ],
+      "negative_calls": [
+        {
+          "api": "RegOpenKeyExW",
+          "arguments": {
+            "key_path": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\SpecialAccounts\\UserList",
+            "key_handle": 64
+          }
+        },
+        {
+          "api": "RegSetValueExW",
+          "arguments": {
+            "key_handle": 64,
+            "value_name": "labuser",
+            "value_type": 4,
+            "value_data": 1
+          }
+        }
+      ],
+      "source": "https://attack.mitre.org/techniques/T1564/002/",
+      "definition_sha256": "8d0276f56e8898d249dcc6a6f5012ac8a2161893d6e526bdd9dac1d978eabea5"
+    },
+    {
+      "attack_id": "T1574.014",
+      "action": "set",
+      "key_pattern": "(?i)\\A(?:HKCU|HKEY_CURRENT_USER)\\\\Environment\\Z",
+      "value_pattern": "(?i)\\AAPPDOMAIN_MANAGER_ASM\\Z",
+      "data": "\\A[A-Za-z_][\\w., =-]+\\Z",
+      "positive_key": "HKCU\\Environment",
+      "positive_value": "APPDOMAIN_MANAGER_ASM",
+      "positive_data": "LabManager, Version=1.0.0.0",
+      "negative_data": "",
+      "note": "Sets an AppDomainManager assembly-selection environment variable; the paired type, target .NET process, and assembly load remain unproven.",
+      "rule_id": "feasible-registry-set-t1574-014",
+      "rule_name": "reference set bound registry variant for AppDomainManager",
+      "rule_path": "feasible-variants/feasible-registry-set-t1574-014.yml",
+      "family": "registry",
+      "positive_calls": [
+        {
+          "api": "RegOpenKeyExW",
+          "arguments": {
+            "key_path": "HKCU\\Environment",
+            "key_handle": 64
+          }
+        },
+        {
+          "api": "RegSetValueExW",
+          "arguments": {
+            "key_handle": 64,
+            "value_name": "APPDOMAIN_MANAGER_ASM",
+            "value_type": 1,
+            "value_data": "LabManager, Version=1.0.0.0"
+          }
+        }
+      ],
+      "negative_calls": [
+        {
+          "api": "RegOpenKeyExW",
+          "arguments": {
+            "key_path": "HKCU\\Environment",
+            "key_handle": 64
+          }
+        },
+        {
+          "api": "RegSetValueExW",
+          "arguments": {
+            "key_handle": 64,
+            "value_name": "APPDOMAIN_MANAGER_ASM",
+            "value_type": 1,
+            "value_data": ""
+          }
+        }
+      ],
+      "source": "https://attack.mitre.org/techniques/T1574/014/",
+      "definition_sha256": "ca3cae5a1c0e123701de296c2cd9fddb5439503ed27dc498354faa030f01dbd3"
+    },
+    {
+      "attack_id": "T1552.002",
+      "action": "query",
+      "key_pattern": "(?i)\\A(?:HKCU|HKEY_CURRENT_USER)\\\\Software\\\\SimonTatham\\\\PuTTY\\\\Sessions\\\\[^\\\\]+\\Z",
+      "value_pattern": "(?i)\\APassword\\Z",
+      "data": "(?s)\\A.+\\Z",
+      "positive_key": "HKCU\\Software\\SimonTatham\\PuTTY\\Sessions\\Lab",
+      "positive_value": "Password",
+      "positive_data": "example-only",
+      "negative_data": "",
+      "note": "Reads an explicit password value from a PuTTY session key; credential use is not inferred.",
+      "rule_id": "feasible-registry-query-t1552-002",
+      "rule_name": "reference query bound registry variant for Credentials in Registry",
+      "rule_path": "feasible-variants/feasible-registry-query-t1552-002.yml",
+      "family": "registry",
+      "positive_calls": [
+        {
+          "api": "RegOpenKeyExW",
+          "arguments": {
+            "key_path": "HKCU\\Software\\SimonTatham\\PuTTY\\Sessions\\Lab",
+            "key_handle": 64
+          }
+        },
+        {
+          "api": "RegQueryValueExW",
+          "arguments": {
+            "key_handle": 64,
+            "value_name": "Password",
+            "value_type": 1,
+            "value_data": "example-only"
+          }
+        }
+      ],
+      "negative_calls": [
+        {
+          "api": "RegOpenKeyExW",
+          "arguments": {
+            "key_path": "HKCU\\Software\\SimonTatham\\PuTTY\\Sessions\\Lab",
+            "key_handle": 64
+          }
+        },
+        {
+          "api": "RegQueryValueExW",
+          "arguments": {
+            "key_handle": 64,
+            "value_name": "Password",
+            "value_type": 1,
+            "value_data": ""
+          }
+        }
+      ],
+      "source": "https://attack.mitre.org/techniques/T1552/002/",
+      "definition_sha256": "f730a570663f0dde8a62921c263041fb4acd255e5d27f472bf2de031b1eab783"
+    },
+    {
+      "attack_id": "T1518.002",
+      "action": "query",
+      "key_pattern": "(?i)\\A(?:HKLM|HKEY_LOCAL_MACHINE)\\\\SOFTWARE\\\\Veeam\\\\[^\\r\\n]+\\Z",
+      "value_pattern": "(?i)\\A(?:InstallPath|Version)\\Z",
+      "data": "(?s)\\A.+\\Z",
+      "positive_key": "HKLM\\SOFTWARE\\Veeam\\Veeam Backup and Replication",
+      "positive_value": "InstallPath",
+      "positive_data": "C:\\Program Files\\Veeam",
+      "negative_data": "",
+      "note": "Queries installation/version information on an exact backup software configuration key.",
+      "rule_id": "feasible-registry-query-t1518-002",
+      "rule_name": "reference query bound registry variant for Backup Software Discovery",
+      "rule_path": "feasible-variants/feasible-registry-query-t1518-002.yml",
+      "family": "registry",
+      "positive_calls": [
+        {
+          "api": "RegOpenKeyExW",
+          "arguments": {
+            "key_path": "HKLM\\SOFTWARE\\Veeam\\Veeam Backup and Replication",
+            "key_handle": 64
+          }
+        },
+        {
+          "api": "RegQueryValueExW",
+          "arguments": {
+            "key_handle": 64,
+            "value_name": "InstallPath",
+            "value_type": 1,
+            "value_data": "C:\\Program Files\\Veeam"
+          }
+        }
+      ],
+      "negative_calls": [
+        {
+          "api": "RegOpenKeyExW",
+          "arguments": {
+            "key_path": "HKLM\\SOFTWARE\\Veeam\\Veeam Backup and Replication",
+            "key_handle": 64
+          }
+        },
+        {
+          "api": "RegQueryValueExW",
+          "arguments": {
+            "key_handle": 64,
+            "value_name": "InstallPath",
+            "value_type": 1,
+            "value_data": ""
+          }
+        }
+      ],
+      "source": "https://attack.mitre.org/techniques/T1518/002/",
+      "definition_sha256": "78e0a450299be542c2e47edf7430d39a825cf42b947db541c59610632014e04d"
+    }
+  ]
+}

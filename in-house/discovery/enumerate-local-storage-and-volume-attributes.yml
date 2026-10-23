@@ -1,0 +1,25 @@
+rule:
+  meta:
+    name: enumerate local storage and volume attributes
+    namespace: in-house/discovery
+    authors:
+    - MalwareLab
+    description: Enumerates local drive/volume inventory or queries volume size and attributes explicitly covered
+      by Local Storage Discovery. Static matches are capability candidates; dynamic matches are observations from
+      successful calls, not proof of adversary intent or technique completion.
+    scopes:
+      static: function
+      dynamic: call
+    att&ck:
+    - Discovery::Local Storage Discovery [T1680]
+    references:
+    - https://attack.mitre.org/techniques/T1680/
+  features:
+  - or:
+    - api: GetLogicalDrives
+    - api: GetLogicalDriveStrings
+    - api: GetDiskFreeSpace
+    - api: GetDiskFreeSpaceEx
+    - api: GetVolumeInformation
+    - api: FindFirstVolume
+    - api: GetDriveType

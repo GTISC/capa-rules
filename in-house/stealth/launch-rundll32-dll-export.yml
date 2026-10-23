@@ -1,0 +1,26 @@
+rule:
+  meta:
+    name: launch rundll32 dll export
+    namespace: in-house/stealth
+    authors:
+    - MalwareLab
+    description: Launches an explicit DLL export through rundll32. Legitimate Control Panel or DLL administration
+      can also produce this candidate; successful export execution and intent remain unqualified. Static matches
+      are capability candidates; dynamic matches are observations from successful calls, not proof of adversary
+      intent or technique completion.
+    scopes:
+      static: function
+      dynamic: call
+    att&ck:
+    - Stealth::Rundll32 [T1218.011]
+    references:
+    - https://attack.mitre.org/techniques/T1218/011/
+  features:
+  - and:
+    - or:
+      - api: CreateProcess
+      - api: CreateProcessInternal
+      - api: CreateProcessAsUser
+      - api: CreateProcessWithToken
+    - string: /\A(?:"(?:[^"\r\n]*[\\/])?(?:rundll32)(?:\.exe)?"|(?:[^\\/\s"\r\n]+[\\/])*(?:rundll32)(?:\.exe)?)[
+        \t]+(?:"[^"\r\n]+\.dll"|[^\s,"\r\n]+\.dll),[A-Za-z_#][A-Za-z0-9_@#]*(?:[ \t]+[^\r\n]*)?[ \t]*\Z/i

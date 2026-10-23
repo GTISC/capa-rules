@@ -1,0 +1,26 @@
+rule:
+  meta:
+    name: request persistent system sleep prevention
+    namespace: in-house/persistence
+    authors:
+    - MalwareLab
+    description: Requests persistent ES_SYSTEM_REQUIRED sleep prevention with SetThreadExecutionState. Clearing
+      requirements and display-only requests do not match; the requested flags must be verified before effect credit.
+      Static matches are capability candidates; dynamic matches are observations from successful calls, not proof
+      of adversary intent or technique completion.
+    scopes:
+      static: function
+      dynamic: call
+    att&ck:
+    - Persistence::Power Settings [T1653]
+    references:
+    - https://attack.mitre.org/techniques/T1653/
+    - https://learn.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-setthreadexecutionstate
+  features:
+  - and:
+    - api: SetThreadExecutionState
+    - or:
+      - number: 2147483649
+      - number: 2147483651
+      - number: 2147483713
+      - number: 2147483715

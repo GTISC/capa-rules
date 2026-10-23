@@ -1,0 +1,25 @@
+rule:
+  meta:
+    name: launch regsvr32 remote scriptlet
+    namespace: in-house/stealth
+    authors:
+    - MalwareLab
+    description: Launches the remote scriptlet registration form using scrobj.dll, rather than treating arbitrary
+      DLL registration as this specific observation. Static matches are capability candidates; dynamic matches are
+      observations from successful calls, not proof of adversary intent or technique completion.
+    scopes:
+      static: function
+      dynamic: call
+    att&ck:
+    - Stealth::Regsvr32 [T1218.010]
+    references:
+    - https://attack.mitre.org/techniques/T1218/010/
+  features:
+  - and:
+    - or:
+      - api: CreateProcess
+      - api: CreateProcessInternal
+      - api: CreateProcessAsUser
+      - api: CreateProcessWithToken
+    - string: /\A(?:"(?:[^"\r\n]*[\\/])?(?:regsvr32)(?:\.exe)?"|(?:[^\\/\s"\r\n]+[\\/])*(?:regsvr32)(?:\.exe)?)[
+        \t]+/s[ \t]+/n[ \t]+/u[ \t]+/i:https?://[^\s"\r\n]+[ \t]+scrobj\.dll[ \t]*\Z/i

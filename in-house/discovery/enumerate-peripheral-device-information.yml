@@ -1,0 +1,20 @@
+rule:
+  meta:
+    name: enumerate peripheral device information
+    namespace: in-house/discovery
+    authors:
+    - MalwareLab
+    description: Creates a device information set and enumerates device records. This capability is common in legitimate
+      device-management tools. Static matches are capability candidates; dynamic matches are observations from successful
+      calls, not proof of adversary intent or technique completion.
+    scopes:
+      static: function
+      dynamic: span of calls
+    att&ck:
+    - Discovery::Peripheral Device Discovery [T1120]
+    references:
+    - https://attack.mitre.org/techniques/T1120/
+  features:
+  - and:
+    - api: SetupDiGetClassDevs
+    - api: SetupDiEnumDeviceInfo

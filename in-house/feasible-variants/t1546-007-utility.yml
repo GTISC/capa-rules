@@ -1,0 +1,27 @@
+rule:
+  meta:
+    name: request netsh helper dll via explicit utility command
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: Requests registration of a Netsh helper DLL; later load and execution are separate. Static function-local
+      references are capability candidates only. Dynamic observations require the separate typed launch contract;
+      neither proves utility completion or malicious intent.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Persistence::Event Triggered Execution::Netsh Helper DLL [T1546.007]
+    - Privilege Escalation::Event Triggered Execution::Netsh Helper DLL [T1546.007]
+    references:
+    - https://attack.mitre.org/techniques/T1546/007/
+  features:
+  - and:
+    - or:
+      - api: CreateProcess
+      - api: CreateProcessInternal
+      - api: CreateProcessAsUser
+      - api: CreateProcessWithToken
+      - api: CreateProcessWithLogon
+    - string: /\A(?:"(?:[^"\r\n]*[\\/])?netsh(?:\.exe)?"|(?:[^\\/\s"\r\n]+[\\/])*netsh(?:\.exe)?)[ \t]+add[ \t]+helper[
+        \t]+(?:"[^"\r\n]+\.dll"|[^\s"\r\n&|<>]+\.dll)[ \t]*\Z/i

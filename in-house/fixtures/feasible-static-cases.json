@@ -1,0 +1,301 @@
+{
+  "schema": 1,
+  "scope": "Static capability regression cases; never runtime evidence.",
+  "cases": [
+    {
+      "attack_id": "T1546.016",
+      "rule_name": "reference adding and scheduling an installer custom action",
+      "scope": "function",
+      "features": [
+        {
+          "api": "MsiOpenDatabase"
+        },
+        {
+          "api": "MsiDatabaseOpenView"
+        },
+        {
+          "api": "MsiViewExecute"
+        },
+        {
+          "api": "MsiDatabaseCommit"
+        },
+        {
+          "string": "/\\AINSERT INTO `CustomAction` /i"
+        },
+        {
+          "string": "/\\AINSERT INTO `InstallExecuteSequence` /i"
+        }
+      ],
+      "rule_path": "feasible-variants/feasible-static-t1546-016.yml",
+      "source": "https://attack.mitre.org/techniques/T1546/016/",
+      "definition_sha256": "a133da3d5d532d210f446e19544adc1f6bbc55d920f1900d5f68387d7aaf17db",
+      "note": "References transactional MSI modification, custom-action insertion, install-sequence insertion, and database commit in one function. Actual record bindings, package identity, action payload, elevation, and install triggering remain unproven."
+    },
+    {
+      "attack_id": "T1027.009",
+      "rule_name": "contain a nested PE payload",
+      "scope": "file",
+      "features": [
+        {
+          "format": "pe"
+        },
+        {
+          "characteristic": "embedded pe with valid sections"
+        }
+      ],
+      "rule_path": "feasible-variants/feasible-static-t1027-009.yml",
+      "source": "https://attack.mitre.org/techniques/T1027/009/",
+      "definition_sha256": "01957bfec006ae436d5e6e8dd79438e9e405bc9ddc22ae250bb71b5923118cfb",
+      "note": "A carved nested PE is an embedded-payload candidate; its maliciousness and execution are unproven."
+    },
+    {
+      "attack_id": "T1027.001",
+      "rule_name": "contain a large uniform PE overlay",
+      "scope": "file",
+      "features": [
+        {
+          "format": "pe"
+        },
+        {
+          "characteristic": "large uniform pe overlay"
+        }
+      ],
+      "rule_path": "feasible-variants/feasible-static-t1027-001.yml",
+      "source": "https://attack.mitre.org/techniques/T1027/001/",
+      "definition_sha256": "0c7817138e73ed4a13027bb7750303ec30e024156031954377a8e1df85692e76",
+      "note": "At least 64 KiB and one quarter of the file is uniform zero/FF overlay outside the certificate region. This is a structural padding candidate, not proof of deliberate scan evasion."
+    },
+    {
+      "attack_id": "T1027.016",
+      "rule_name": "contain a long run of executable no-operation instructions",
+      "scope": "basic block",
+      "features": [
+        {
+          "or": [
+            {
+              "arch": "i386"
+            },
+            {
+              "arch": "amd64"
+            }
+          ]
+        },
+        {
+          "count(mnemonic(nop))": "32 or more"
+        }
+      ],
+      "rule_path": "feasible-variants/feasible-static-t1027-016.yml",
+      "source": "https://attack.mitre.org/techniques/T1027/016/",
+      "definition_sha256": "73b066f506388b213ae03ed851dd62eeea88b107d9beff13c358a1fc51ec8c9f",
+      "note": "At least 32 decoded NOP instructions in a basic block are a junk-code candidate. Compiler alignment and benign code remain possible."
+    },
+    {
+      "attack_id": "T1021.003",
+      "rule_name": "reference remote MMC DCOM command activation",
+      "scope": "function",
+      "features": [
+        {
+          "api": "CoCreateInstanceEx"
+        },
+        {
+          "string": "MMC20.Application"
+        },
+        {
+          "string": "ExecuteShellCommand"
+        }
+      ],
+      "rule_path": "feasible-variants/feasible-static-t1021-003.yml",
+      "source": "https://attack.mitre.org/techniques/T1021/003/",
+      "definition_sha256": "aabaede3a7171166577e2fb0245e6424a7c86e39e9f2da415bc035b1a7506631",
+      "note": "References the MMC automation command method alongside extended COM activation in one function. Remote server identity, method dispatch, and execution need qualification."
+    },
+    {
+      "attack_id": "T1546.003",
+      "rule_name": "reference the three WMI subscription object roles",
+      "scope": "function",
+      "features": [
+        {
+          "api": "CoCreateInstance"
+        },
+        {
+          "string": "__EventFilter"
+        },
+        {
+          "string": "CommandLineEventConsumer"
+        },
+        {
+          "string": "__FilterToConsumerBinding"
+        }
+      ],
+      "rule_path": "feasible-variants/feasible-static-t1546-003.yml",
+      "source": "https://attack.mitre.org/techniques/T1546/003/",
+      "definition_sha256": "fca80f9aa922c1fc9fce71586c8844f67633184ea5abb9511d3c4278b2b92c40",
+      "note": "References the filter, executable consumer, and binding roles in a COM-capable function. Successful persistence requires inspection of actual WMI objects and their bindings."
+    },
+    {
+      "attack_id": "T1137.003",
+      "rule_name": "reference Outlook form script configuration",
+      "scope": "function",
+      "features": [
+        {
+          "api": "CoCreateInstance"
+        },
+        {
+          "string": "Outlook.Application"
+        },
+        {
+          "string": "FormDescription"
+        },
+        {
+          "string": "ScriptText"
+        }
+      ],
+      "rule_path": "feasible-variants/feasible-static-t1137-003.yml",
+      "source": "https://attack.mitre.org/techniques/T1137/003/",
+      "definition_sha256": "1bf3e1f24ccea0745094b9c8a01526ce413252d9277e1950d728b2ef5bac028f",
+      "note": "References Outlook custom-form script configuration in a COM-capable function; form publication, startup triggers, and malicious content are unproven."
+    },
+    {
+      "attack_id": "T1137.004",
+      "rule_name": "reference Outlook folder web-view configuration",
+      "scope": "function",
+      "features": [
+        {
+          "api": "CoCreateInstance"
+        },
+        {
+          "string": "Outlook.Application"
+        },
+        {
+          "string": "WebViewURL"
+        },
+        {
+          "string": "WebViewOn"
+        }
+      ],
+      "rule_path": "feasible-variants/feasible-static-t1137-004.yml",
+      "source": "https://attack.mitre.org/techniques/T1137/004/",
+      "definition_sha256": "efcf724f5aeaf0d076c2a88a936cea22e387991c2eb65614b00655b0c9e9bf35",
+      "note": "References both the URL and activation properties of an Outlook home page; actual property writes, page script, and startup execution need qualification."
+    },
+    {
+      "attack_id": "T1137.005",
+      "rule_name": "reference an Outlook rule application-start action",
+      "scope": "function",
+      "features": [
+        {
+          "api": "CoCreateInstance"
+        },
+        {
+          "string": "Outlook.Application"
+        },
+        {
+          "string": "Rules"
+        },
+        {
+          "string": "StartApplication"
+        }
+      ],
+      "rule_path": "feasible-variants/feasible-static-t1137-005.yml",
+      "source": "https://attack.mitre.org/techniques/T1137/005/",
+      "definition_sha256": "047dc0712ee4fd843b71ce014e0d36bb9c56a6ca1f5f145e036aca4c1c17c4eb",
+      "note": "References Outlook rules and an application-start action in one COM-capable function; saved rule configuration and trigger execution remain unproven."
+    },
+    {
+      "attack_id": "T1055.015",
+      "rule_name": "reference remote list-view sorting callback injection",
+      "scope": "function",
+      "features": [
+        {
+          "api": "OpenProcess"
+        },
+        {
+          "api": "WriteProcessMemory"
+        },
+        {
+          "api": "SendMessage"
+        },
+        {
+          "number": 4144
+        }
+      ],
+      "rule_path": "feasible-variants/feasible-static-t1055-015.yml",
+      "source": "https://attack.mitre.org/techniques/T1055/015/",
+      "definition_sha256": "1cf234c6547f02345841e30a5d0bb0997122efc60ba8f79a60db3774cffab929",
+      "note": "References remote memory writing and LVM_SORTITEMS (0x1030). A callback address, matching window/process identity, and control transfer still require qualification."
+    },
+    {
+      "attack_id": "T1056.004",
+      "rule_name": "reference patching a credential authentication API",
+      "scope": "function",
+      "features": [
+        {
+          "api": "GetProcAddress"
+        },
+        {
+          "string": "LsaLogonUser"
+        },
+        {
+          "api": "VirtualProtect"
+        },
+        {
+          "api": "WriteProcessMemory"
+        }
+      ],
+      "rule_path": "feasible-variants/feasible-static-t1056-004.yml",
+      "source": "https://attack.mitre.org/techniques/T1056/004/",
+      "definition_sha256": "d456291610ff06fdef50fd3f91fcc43866d0b897fd6a860c6a5c8292eb840cac",
+      "note": "References resolution of a credential API and memory patching in one function. Address/dataflow binding, hook installation, and credential interception remain unproven."
+    },
+    {
+      "attack_id": "T1574.013",
+      "rule_name": "reference a PEB callback-table modification workflow",
+      "scope": "function",
+      "features": [
+        {
+          "api": "NtQueryInformationProcess"
+        },
+        {
+          "api": "ReadProcessMemory"
+        },
+        {
+          "api": "WriteProcessMemory"
+        },
+        {
+          "api": "SendMessage"
+        },
+        {
+          "number": 74
+        },
+        {
+          "or": [
+            {
+              "and": [
+                {
+                  "arch": "i386"
+                },
+                {
+                  "offset": 44
+                }
+              ]
+            },
+            {
+              "and": [
+                {
+                  "arch": "amd64"
+                },
+                {
+                  "offset": 88
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "rule_path": "feasible-variants/feasible-static-t1574-013.yml",
+      "source": "https://attack.mitre.org/techniques/T1574/013/",
+      "definition_sha256": "3ab15bd88a7923c370f6c7cb82bff944e5a65a930ed5fd3a3708562cf3ee6009",
+      "note": "References the architecture-specific PEB KernelCallbackTable offset, remote memory operations, and WM_COPYDATA. Static co-occurrence cannot establish the actual pointer chain or callback execution."
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+rule:
+  meta:
+    name: reference query bound registry variant for Credentials in Registry
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: Reads an explicit password value from a PuTTY session key; credential use is not inferred. Static
+      references are function-local candidates; the bound dynamic contract is separate.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Credential Access::Unsecured Credentials::Credentials in Registry [T1552.002]
+    references:
+    - https://attack.mitre.org/techniques/T1552/002/
+  features:
+  - and:
+    - api: RegQueryValueEx
+    - string: /\A(?:HKCU|HKEY_CURRENT_USER)\\Software\\SimonTatham\\PuTTY\\Sessions\\[^\\]+\Z/i
+    - string: /\APassword\Z/i

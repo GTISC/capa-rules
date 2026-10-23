@@ -1,0 +1,23 @@
+rule:
+  meta:
+    name: reference write bound file variant for Web Portal Capture
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: Writes a web-portal script that places submitted password data in an append-only capture file;
+      legitimate portal baseline and actual credential interception remain unproven. Static references are function-local
+      candidates; the bound dynamic contract is separate.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Collection::Input Capture::Web Portal Capture [T1056.003]
+    - Credential Access::Input Capture::Web Portal Capture [T1056.003]
+    references:
+    - https://attack.mitre.org/techniques/T1056/003/
+  features:
+  - and:
+    - api: CreateFile
+    - api: WriteFile
+    - string: /\A[A-Z]:\\inetpub\\wwwroot\\[^\r\n]*login\.php\Z/i
+    - string: /(?is)\A.{0,8192}<\?php\s+file_put_contents\s*\(\s*["'][^"']+["']\s*,\s*\$_POST\s*\[\s*["']password["']\s*\]\s*,\s*FILE_APPEND\s*\)/i

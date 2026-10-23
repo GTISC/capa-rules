@@ -1,0 +1,20 @@
+rule:
+  meta:
+    name: clear windows event log records
+    namespace: in-house/defense-impairment
+    authors:
+    - MalwareLab
+    description: Invokes a Windows event-log clearing API. Log selection, privileges, and an independently verified
+      clearing effect remain required for stronger evidence. Static matches are capability candidates; dynamic matches
+      are observations from successful calls, not proof of adversary intent or technique completion.
+    scopes:
+      static: function
+      dynamic: call
+    att&ck:
+    - Defense Impairment::Clear Windows Event Logs [T1685.005]
+    references:
+    - https://attack.mitre.org/techniques/T1685/005/
+  features:
+  - or:
+    - api: ClearEventLog
+    - api: EvtClearLog

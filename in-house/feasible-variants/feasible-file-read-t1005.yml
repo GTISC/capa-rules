@@ -1,0 +1,20 @@
+rule:
+  meta:
+    name: reference read bound file variant for Data from Local System
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: Reads nonempty content from a bound user-document handle; collection intent is unproven. Static
+      references are function-local candidates; the bound dynamic contract is separate.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Collection::Data from Local System [T1005]
+    references:
+    - https://attack.mitre.org/techniques/T1005/
+  features:
+  - and:
+    - api: CreateFile
+    - api: ReadFile
+    - string: /\A[A-Z]:\\Users\\[^\\]+\\(?:Documents|Desktop)\\[^\r\n]+\.(?:docx?|xlsx?|pdf|txt|csv)\Z/i

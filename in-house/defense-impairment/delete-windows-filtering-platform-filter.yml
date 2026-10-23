@@ -1,0 +1,22 @@
+rule:
+  meta:
+    name: delete windows filtering platform filter
+    namespace: in-house/defense-impairment
+    authors:
+    - MalwareLab
+    description: Deletes a Windows Filtering Platform filter, a capability already mapped to the officially revoked
+      T1562.004. Only the active replacement T1686 is tagged; the filter purpose and policy effect remain unqualified.
+      Static matches are capability candidates; dynamic matches are observations from successful calls, not proof
+      of adversary intent or technique completion.
+    scopes:
+      static: function
+      dynamic: call
+    att&ck:
+    - Defense Impairment::Disable or Modify System Firewall [T1686]
+    references:
+    - https://attack.mitre.org/techniques/T1686/
+    - https://learn.microsoft.com/en-us/windows/win32/api/fwpmu/nf-fwpmu-fwpmfilterdeletebyid0
+  features:
+  - or:
+    - api: FwpmFilterDeleteById0
+    - api: FwpmFilterDeleteByKey0

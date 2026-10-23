@@ -1,0 +1,25 @@
+rule:
+  meta:
+    name: launch mavinject injectrunning
+    namespace: in-house/stealth
+    authors:
+    - MalwareLab
+    description: Launches the explicit Mavinject running-process DLL injection form. Target process identity and
+      the injected DLL load need separate qualification. Static matches are capability candidates; dynamic matches
+      are observations from successful calls, not proof of adversary intent or technique completion.
+    scopes:
+      static: function
+      dynamic: call
+    att&ck:
+    - Stealth::Mavinject [T1218.013]
+    references:
+    - https://attack.mitre.org/techniques/T1218/013/
+  features:
+  - and:
+    - or:
+      - api: CreateProcess
+      - api: CreateProcessInternal
+      - api: CreateProcessAsUser
+      - api: CreateProcessWithToken
+    - string: /\A(?:"(?:[^"\r\n]*[\\/])?(?:mavinject)(?:\.exe)?"|(?:[^\\/\s"\r\n]+[\\/])*(?:mavinject)(?:\.exe)?)[
+        \t]+[1-9][0-9]*[ \t]+/INJECTRUNNING[ \t]+(?:"[^"\r\n]+\.dll"|[^\s"\r\n]+\.dll)[ \t]*\Z/i

@@ -1,0 +1,23 @@
+rule:
+  meta:
+    name: reference the three WMI subscription object roles
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: References the filter, executable consumer, and binding roles in a COM-capable function. Successful
+      persistence requires inspection of actual WMI objects and their bindings. Static capability candidate only;
+      never qualified runtime evidence.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Persistence::Event Triggered Execution::Windows Management Instrumentation Event Subscription [T1546.003]
+    - Privilege Escalation::Event Triggered Execution::Windows Management Instrumentation Event Subscription [T1546.003]
+    references:
+    - https://attack.mitre.org/techniques/T1546/003/
+  features:
+  - and:
+    - api: CoCreateInstance
+    - string: __EventFilter
+    - string: CommandLineEventConsumer
+    - string: __FilterToConsumerBinding

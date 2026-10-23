@@ -1,0 +1,22 @@
+rule:
+  meta:
+    name: reference write bound file variant for Taint Shared Content
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: Writes an executable command-launching script onto a shared location. Previously trusted content,
+      victim invocation, and unauthorized tainting require qualification. Static references are function-local candidates;
+      the bound dynamic contract is separate.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Lateral Movement::Taint Shared Content [T1080]
+    references:
+    - https://attack.mitre.org/techniques/T1080/
+  features:
+  - and:
+    - api: CreateFile
+    - api: WriteFile
+    - string: /\A\\\\[^\\]+\\[^\\]+\\[^\r\n]+\.vbs\Z/i
+    - string: /(?is)\A(?=.{0,8192}CreateObject\s*\(\s*["']WScript\.Shell["']\s*\))(?=.{0,8192}\.Run\s+["'][^"']+["'])/i

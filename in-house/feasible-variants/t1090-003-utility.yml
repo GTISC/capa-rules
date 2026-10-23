@@ -1,0 +1,26 @@
+rule:
+  meta:
+    name: request multi-hop proxy via explicit utility command
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: Requests a two-jump SSH proxy chain; actual route and C2 use remain unproven. Static function-local
+      references are capability candidates only. Dynamic observations require the separate typed launch contract;
+      neither proves utility completion or malicious intent.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Command and Control::Proxy::Multi-hop Proxy [T1090.003]
+    references:
+    - https://attack.mitre.org/techniques/T1090/003/
+  features:
+  - and:
+    - or:
+      - api: CreateProcess
+      - api: CreateProcessInternal
+      - api: CreateProcessAsUser
+      - api: CreateProcessWithToken
+      - api: CreateProcessWithLogon
+    - string: /\A(?:"(?:[^"\r\n]*[\\/])?ssh(?:\.exe)?"|(?:[^\\/\s"\r\n]+[\\/])*ssh(?:\.exe)?)[ \t]+-J[ \t]+[\w.@-]+,[\w.@-]+[
+        \t]+[\w.@-]+[ \t]+-N[ \t]*\Z/i

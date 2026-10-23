@@ -1,0 +1,22 @@
+rule:
+  meta:
+    name: inject synthetic keyboard or mouse input
+    namespace: in-house/execution
+    authors:
+    - MalwareLab
+    description: Synthesizes keyboard or mouse input through dedicated Windows APIs. Accessibility and test automation
+      are common benign causes; the target and resulting actions remain unqualified. Static matches are capability
+      candidates; dynamic matches are observations from successful calls, not proof of adversary intent or technique
+      completion.
+    scopes:
+      static: function
+      dynamic: call
+    att&ck:
+    - Execution::Input Injection [T1674]
+    references:
+    - https://attack.mitre.org/techniques/T1674/
+  features:
+  - or:
+    - api: SendInput
+    - api: keybd_event
+    - api: mouse_event

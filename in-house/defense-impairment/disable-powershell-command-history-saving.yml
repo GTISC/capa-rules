@@ -1,0 +1,25 @@
+rule:
+  meta:
+    name: disable powershell command history saving
+    namespace: in-house/defense-impairment
+    authors:
+    - MalwareLab
+    description: Launches PowerShell with the explicit PSReadLine history-saving disable setting. Existing-history
+      removal is a different predicate and is excluded. Static matches are capability candidates; dynamic matches
+      are observations from successful calls, not proof of adversary intent or technique completion.
+    scopes:
+      static: function
+      dynamic: call
+    att&ck:
+    - Defense Impairment::Prevent Command History Logging [T1690]
+    references:
+    - https://attack.mitre.org/techniques/T1690/
+  features:
+  - and:
+    - or:
+      - api: CreateProcess
+      - api: CreateProcessInternal
+      - api: CreateProcessAsUser
+      - api: CreateProcessWithToken
+    - string: /\A(?:"(?:[^"\r\n]*[\\/])?(?:(?:powershell|pwsh))(?:\.exe)?"|(?:[^\\/\s"\r\n]+[\\/])*(?:(?:powershell|pwsh))(?:\.exe)?)[
+        \t]+-NoProfile[ \t]+-Command[ \t]+"Set-PSReadLineOption[ \t]+-HistorySaveStyle[ \t]+SaveNothing"[ \t]*\Z/i

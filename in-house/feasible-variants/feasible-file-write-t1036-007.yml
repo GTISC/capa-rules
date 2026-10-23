@@ -1,0 +1,21 @@
+rule:
+  meta:
+    name: reference write bound file variant for Double File Extension
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: Writes a document-like double-extension executable filename; the content and displayed disguise
+      require qualification. Static references are function-local candidates; the bound dynamic contract is separate.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Initial Access::Masquerading::Double File Extension [T1036.007]
+    - Stealth::Masquerading::Double File Extension [T1036.007]
+    references:
+    - https://attack.mitre.org/techniques/T1036/007/
+  features:
+  - and:
+    - api: CreateFile
+    - api: WriteFile
+    - string: /\A[A-Z]:\\[^\r\n]+\.(?:pdf|docx?|xlsx?|jpg|png)\.(?:exe|scr)\Z/i

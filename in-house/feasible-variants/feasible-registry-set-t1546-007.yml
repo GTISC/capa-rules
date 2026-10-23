@@ -1,0 +1,22 @@
+rule:
+  meta:
+    name: reference set bound registry variant for Netsh Helper DLL
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: Registers a DLL on the exact Netsh helper key, without inferring later execution. Static references
+      are function-local candidates; the bound dynamic contract is separate.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Persistence::Event Triggered Execution::Netsh Helper DLL [T1546.007]
+    - Privilege Escalation::Event Triggered Execution::Netsh Helper DLL [T1546.007]
+    references:
+    - https://attack.mitre.org/techniques/T1546/007/
+  features:
+  - and:
+    - api: RegSetValueEx
+    - string: /\A(?:HKLM|HKEY_LOCAL_MACHINE)\\SOFTWARE\\Microsoft\\Netsh\Z/i
+    - string: /\A[^\\\r\n]+\Z/i
+    - string: /\A[A-Z]:\\[^\r\n]+\.dll\Z/i

@@ -1,0 +1,22 @@
+rule:
+  meta:
+    name: reference write bound file variant for Stored Data Manipulation
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: Writes hostname-resolution data into a bound hosts file, a concrete stored-data manipulation mechanism;
+      authorization and malicious redirection need qualification. Static references are function-local candidates;
+      the bound dynamic contract is separate.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Impact::Data Manipulation::Stored Data Manipulation [T1565.001]
+    references:
+    - https://attack.mitre.org/techniques/T1565/001/
+  features:
+  - and:
+    - api: CreateFile
+    - api: WriteFile
+    - string: /\A[A-Z]:\\Windows\\System32\\drivers\\etc\\hosts\Z/i
+    - string: /(?m)^[ \t]*(?:[0-9]{1,3}\.){3}[0-9]{1,3}[ \t]+[A-Za-z0-9][A-Za-z0-9.-]+(?:[ \t]*\r?$)/i

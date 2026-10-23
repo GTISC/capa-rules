@@ -1,0 +1,21 @@
+rule:
+  meta:
+    name: reference lsass and process minidump in one function
+    namespace: in-house/credential-access
+    authors:
+    - MalwareLab
+    description: References both the LSASS image and the minidump API in one function. This does not prove that
+      the dump handle refers to LSASS; dynamic detection is disabled until handle-to-image binding exists. Static
+      matches are capability candidates; dynamic matches are observations from successful calls, not proof of adversary
+      intent or technique completion.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Credential Access::LSASS Memory [T1003.001]
+    references:
+    - https://attack.mitre.org/techniques/T1003/001/
+  features:
+  - and:
+    - api: MiniDumpWriteDump
+    - string: /(?:\A|[\\/])lsass\.exe\Z/i

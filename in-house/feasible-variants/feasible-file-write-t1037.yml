@@ -1,0 +1,22 @@
+rule:
+  meta:
+    name: reference write bound file variant for Boot or Logon Initialization Scripts
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: Writes a script in a concrete Group Policy boot/logon script directory; policy registration and
+      invocation need qualification. Static references are function-local candidates; the bound dynamic contract
+      is separate.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Persistence::Boot or Logon Initialization Scripts [T1037]
+    - Privilege Escalation::Boot or Logon Initialization Scripts [T1037]
+    references:
+    - https://attack.mitre.org/techniques/T1037/
+  features:
+  - and:
+    - api: CreateFile
+    - api: WriteFile
+    - string: /\A[A-Z]:\\Windows\\System32\\GroupPolicy\\(?:User|Machine)\\Scripts\\(?:Logon|Startup)\\[^\\]+\.(?:bat|cmd|ps1|vbs)\Z/i

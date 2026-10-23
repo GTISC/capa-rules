@@ -1,0 +1,27 @@
+rule:
+  meta:
+    name: request email forwarding rule via explicit utility command
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: Requests automatic forwarding of incoming mailbox messages. Static function-local references are
+      capability candidates only. Dynamic observations require the separate typed launch contract; neither proves
+      utility completion or malicious intent.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Collection::Email Collection::Email Forwarding Rule [T1114.003]
+    references:
+    - https://attack.mitre.org/techniques/T1114/003/
+  features:
+  - and:
+    - or:
+      - api: CreateProcess
+      - api: CreateProcessInternal
+      - api: CreateProcessAsUser
+      - api: CreateProcessWithToken
+      - api: CreateProcessWithLogon
+    - string: /\A(?:"(?:[^"\r\n]*[\\/])?powershell(?:\.exe)?"|(?:[^\\/\s"\r\n]+[\\/])*powershell(?:\.exe)?)[ \t]+-NoProfile[
+        \t]+-Command[ \t]+"Set-Mailbox[ \t]+-Identity[ \t]+[\w.@-]+[ \t]+-ForwardingSmtpAddress[ \t]+[\w.@-]+[ \t]+-DeliverToMailboxAndForward[
+        \t]+\$true"[ \t]*\Z/i

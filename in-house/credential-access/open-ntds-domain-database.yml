@@ -1,0 +1,20 @@
+rule:
+  meta:
+    name: open ntds domain database
+    namespace: in-house/credential-access
+    authors:
+    - MalwareLab
+    description: Opens the NTDS database filename documented by MITRE. Opening is a collection candidate; reading/copying
+      credential contents and domain-controller identity remain unqualified. Static matches are capability candidates;
+      dynamic matches are observations from successful calls, not proof of adversary intent or technique completion.
+    scopes:
+      static: function
+      dynamic: call
+    att&ck:
+    - Credential Access::NTDS [T1003.003]
+    references:
+    - https://attack.mitre.org/techniques/T1003/003/
+  features:
+  - and:
+    - api: CreateFile
+    - string: /(?:\A|[\\/])ntds\.dit\Z/i

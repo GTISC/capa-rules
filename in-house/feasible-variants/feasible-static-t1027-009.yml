@@ -1,0 +1,19 @@
+rule:
+  meta:
+    name: contain a nested PE payload
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: A carved nested PE is an embedded-payload candidate; its maliciousness and execution are unproven.
+      Static capability candidate only; never qualified runtime evidence.
+    scopes:
+      static: file
+      dynamic: unsupported
+    att&ck:
+    - Stealth::Obfuscated Files or Information::Embedded Payloads [T1027.009]
+    references:
+    - https://attack.mitre.org/techniques/T1027/009/
+  features:
+  - and:
+    - format: pe
+    - characteristic: embedded pe with valid sections

@@ -1,0 +1,29 @@
+rule:
+  meta:
+    name: request reversible encryption via explicit utility command
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: Requests enabling reversible password encryption for an AD account. Static function-local references
+      are capability candidates only. Dynamic observations require the separate typed launch contract; neither proves
+      utility completion or malicious intent.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Credential Access::Modify Authentication Process::Reversible Encryption [T1556.005]
+    - Defense Impairment::Modify Authentication Process::Reversible Encryption [T1556.005]
+    - Persistence::Modify Authentication Process::Reversible Encryption [T1556.005]
+    references:
+    - https://attack.mitre.org/techniques/T1556/005/
+  features:
+  - and:
+    - or:
+      - api: CreateProcess
+      - api: CreateProcessInternal
+      - api: CreateProcessAsUser
+      - api: CreateProcessWithToken
+      - api: CreateProcessWithLogon
+    - string: /\A(?:"(?:[^"\r\n]*[\\/])?powershell(?:\.exe)?"|(?:[^\\/\s"\r\n]+[\\/])*powershell(?:\.exe)?)[ \t]+-NoProfile[
+        \t]+-Command[ \t]+"Set-ADUser[ \t]+-Identity[ \t]+[\w.-]+[ \t]+-AllowReversiblePasswordEncryption[ \t]+\$true"[
+        \t]*\Z/i

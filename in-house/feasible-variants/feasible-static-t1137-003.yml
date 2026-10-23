@@ -1,0 +1,22 @@
+rule:
+  meta:
+    name: reference Outlook form script configuration
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: References Outlook custom-form script configuration in a COM-capable function; form publication,
+      startup triggers, and malicious content are unproven. Static capability candidate only; never qualified runtime
+      evidence.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Persistence::Office Application Startup::Outlook Forms [T1137.003]
+    references:
+    - https://attack.mitre.org/techniques/T1137/003/
+  features:
+  - and:
+    - api: CoCreateInstance
+    - string: Outlook.Application
+    - string: FormDescription
+    - string: ScriptText

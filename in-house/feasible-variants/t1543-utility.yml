@@ -1,0 +1,27 @@
+rule:
+  meta:
+    name: request create or modify system process via explicit utility command
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: Requests creation of a Windows system service, a concrete parent-technique mechanism. Static function-local
+      references are capability candidates only. Dynamic observations require the separate typed launch contract;
+      neither proves utility completion or malicious intent.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Persistence::Create or Modify System Process [T1543]
+    - Privilege Escalation::Create or Modify System Process [T1543]
+    references:
+    - https://attack.mitre.org/techniques/T1543/
+  features:
+  - and:
+    - or:
+      - api: CreateProcess
+      - api: CreateProcessInternal
+      - api: CreateProcessAsUser
+      - api: CreateProcessWithToken
+      - api: CreateProcessWithLogon
+    - string: /\A(?:"(?:[^"\r\n]*[\\/])?sc(?:\.exe)?"|(?:[^\\/\s"\r\n]+[\\/])*sc(?:\.exe)?)[ \t]+create[ \t]+[\w.-]+[
+        \t]+binPath=[ \t]*(?:"[^"\r\n]+"|[^\s"\r\n&|<>]+)[ \t]*\Z/i

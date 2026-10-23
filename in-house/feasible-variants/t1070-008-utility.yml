@@ -1,0 +1,26 @@
+rule:
+  meta:
+    name: request clear mailbox data via explicit utility command
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: Requests destructive mailbox content removal; server-side results are unproven. Static function-local
+      references are capability candidates only. Dynamic observations require the separate typed launch contract;
+      neither proves utility completion or malicious intent.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Stealth::Indicator Removal::Clear Mailbox Data [T1070.008]
+    references:
+    - https://attack.mitre.org/techniques/T1070/008/
+  features:
+  - and:
+    - or:
+      - api: CreateProcess
+      - api: CreateProcessInternal
+      - api: CreateProcessAsUser
+      - api: CreateProcessWithToken
+      - api: CreateProcessWithLogon
+    - string: /\A(?:"(?:[^"\r\n]*[\\/])?powershell(?:\.exe)?"|(?:[^\\/\s"\r\n]+[\\/])*powershell(?:\.exe)?)[ \t]+-NoProfile[
+        \t]+-Command[ \t]+"Search-Mailbox[ \t]+-Identity[ \t]+[\w.@-]+[ \t]+-DeleteContent[ \t]+-Force"[ \t]*\Z/i

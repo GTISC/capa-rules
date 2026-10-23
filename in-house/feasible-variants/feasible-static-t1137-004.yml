@@ -1,0 +1,22 @@
+rule:
+  meta:
+    name: reference Outlook folder web-view configuration
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: References both the URL and activation properties of an Outlook home page; actual property writes,
+      page script, and startup execution need qualification. Static capability candidate only; never qualified runtime
+      evidence.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Persistence::Office Application Startup::Outlook Home Page [T1137.004]
+    references:
+    - https://attack.mitre.org/techniques/T1137/004/
+  features:
+  - and:
+    - api: CoCreateInstance
+    - string: Outlook.Application
+    - string: WebViewURL
+    - string: WebViewOn

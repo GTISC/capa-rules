@@ -1,0 +1,20 @@
+rule:
+  meta:
+    name: reference write bound file variant for Office Template Macros
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: Writes a documented Office startup macro template; macro content and execution need qualification.
+      Static references are function-local candidates; the bound dynamic contract is separate.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Persistence::Office Application Startup::Office Template Macros [T1137.001]
+    references:
+    - https://attack.mitre.org/techniques/T1137/001/
+  features:
+  - and:
+    - api: CreateFile
+    - api: WriteFile
+    - string: /\A[A-Z]:\\Users\\[^\\]+\\AppData\\Roaming\\Microsoft\\(?:Templates\\Normal\.dotm|Excel\\XLSTART\\PERSONAL\.XLSB)\Z/i

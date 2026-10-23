@@ -1,0 +1,27 @@
+rule:
+  meta:
+    name: request ignore process interrupts via explicit utility command
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: Requests the PowerShell error-suppression form explicitly documented by ATT&CK; benign use is common.
+      Static function-local references are capability candidates only. Dynamic observations require the separate
+      typed launch contract; neither proves utility completion or malicious intent.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Persistence::Hide Artifacts::Ignore Process Interrupts [T1564.011]
+    - Stealth::Hide Artifacts::Ignore Process Interrupts [T1564.011]
+    references:
+    - https://attack.mitre.org/techniques/T1564/011/
+  features:
+  - and:
+    - or:
+      - api: CreateProcess
+      - api: CreateProcessInternal
+      - api: CreateProcessAsUser
+      - api: CreateProcessWithToken
+      - api: CreateProcessWithLogon
+    - string: /\A(?:"(?:[^"\r\n]*[\\/])?powershell(?:\.exe)?"|(?:[^\\/\s"\r\n]+[\\/])*powershell(?:\.exe)?)[ \t]+-NoProfile[
+        \t]+-Command[ \t]+"[^"\r\n]+[ \t]+-ErrorAction[ \t]+SilentlyContinue"[ \t]*\Z/i

@@ -1,0 +1,21 @@
+rule:
+  meta:
+    name: reference read bound file variant for Steal Web Session Cookie
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: Reads a bound browser cookie store; actual session-token contents, extraction, and reuse remain
+      unproven. Static references are function-local candidates; the bound dynamic contract is separate.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Credential Access::Steal Web Session Cookie [T1539]
+    references:
+    - https://attack.mitre.org/techniques/T1539/
+  features:
+  - and:
+    - api: CreateFile
+    - api: ReadFile
+    - string: /\A[A-Z]:\\Users\\[^\\]+\\AppData\\Local\\(?:Google\\Chrome|Microsoft\\Edge)\\User Data\\(?:Default|Profile
+        [0-9]+)\\(?:Network\\)?Cookies\Z/i

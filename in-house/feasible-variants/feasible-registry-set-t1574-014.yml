@@ -1,0 +1,23 @@
+rule:
+  meta:
+    name: reference set bound registry variant for AppDomainManager
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: Sets an AppDomainManager assembly-selection environment variable; the paired type, target .NET
+      process, and assembly load remain unproven. Static references are function-local candidates; the bound dynamic
+      contract is separate.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Execution::Hijack Execution Flow::AppDomainManager [T1574.014]
+    - Stealth::Hijack Execution Flow::AppDomainManager [T1574.014]
+    references:
+    - https://attack.mitre.org/techniques/T1574/014/
+  features:
+  - and:
+    - api: RegSetValueEx
+    - string: /\A(?:HKCU|HKEY_CURRENT_USER)\\Environment\Z/i
+    - string: /\AAPPDOMAIN_MANAGER_ASM\Z/i
+    - string: /\A[A-Za-z_][\w., =-]+\Z/i

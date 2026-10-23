@@ -1,0 +1,26 @@
+rule:
+  meta:
+    name: request vnc via explicit utility command
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: Requests a VNC session using the viewer address operand. Static function-local references are capability
+      candidates only. Dynamic observations require the separate typed launch contract; neither proves utility completion
+      or malicious intent.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Lateral Movement::Remote Services::VNC [T1021.005]
+    references:
+    - https://attack.mitre.org/techniques/T1021/005/
+  features:
+  - and:
+    - or:
+      - api: CreateProcess
+      - api: CreateProcessInternal
+      - api: CreateProcessAsUser
+      - api: CreateProcessWithToken
+      - api: CreateProcessWithLogon
+    - string: /\A(?:"(?:[^"\r\n]*[\\/])?vncviewer(?:\.exe)?"|(?:[^\\/\s"\r\n]+[\\/])*vncviewer(?:\.exe)?)[ \t]+[\w][\w.-]*(?::[0-9]+)?[
+        \t]*\Z/i

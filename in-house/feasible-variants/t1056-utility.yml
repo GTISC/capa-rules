@@ -1,0 +1,27 @@
+rule:
+  meta:
+    name: request input capture via explicit utility command
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: Requests a credential-input prompt and retains the supplied credential object; prompt deception
+      and later use are unproven. Static function-local references are capability candidates only. Dynamic observations
+      require the separate typed launch contract; neither proves utility completion or malicious intent.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Collection::Input Capture [T1056]
+    - Credential Access::Input Capture [T1056]
+    references:
+    - https://attack.mitre.org/techniques/T1056/
+  features:
+  - and:
+    - or:
+      - api: CreateProcess
+      - api: CreateProcessInternal
+      - api: CreateProcessAsUser
+      - api: CreateProcessWithToken
+      - api: CreateProcessWithLogon
+    - string: /\A(?:"(?:[^"\r\n]*[\\/])?powershell(?:\.exe)?"|(?:[^\\/\s"\r\n]+[\\/])*powershell(?:\.exe)?)[ \t]+-NoProfile[
+        \t]+-Command[ \t]+"\$cred[ \t]*=[ \t]*Get-Credential[ \t]+-Message[ \t]+\x27Windows Security\x27"[ \t]*\Z/i

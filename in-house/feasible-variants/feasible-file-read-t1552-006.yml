@@ -1,0 +1,21 @@
+rule:
+  meta:
+    name: reference read bound file variant for Group Policy Preferences
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: Reads a bound domain Group Policy Preferences credential-bearing artifact; an actual cpassword
+      and decryption are unproven. Static references are function-local candidates; the bound dynamic contract is
+      separate.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Credential Access::Unsecured Credentials::Group Policy Preferences [T1552.006]
+    references:
+    - https://attack.mitre.org/techniques/T1552/006/
+  features:
+  - and:
+    - api: CreateFile
+    - api: ReadFile
+    - string: /\A\\\\[^\\]+\\SYSVOL\\[^\\]+\\Policies\\\{[0-9a-f-]{36}\}\\(?:Machine|User)\\Preferences\\(?:Groups\\Groups|Services\\Services|ScheduledTasks\\ScheduledTasks|Drives\\Drives)\.xml\Z/i

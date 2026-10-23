@@ -1,0 +1,26 @@
+rule:
+  meta:
+    name: request subvert trust controls via explicit utility command
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: Requests signing a binary with supplied certificate material; malicious trust abuse is unproven.
+      Static function-local references are capability candidates only. Dynamic observations require the separate
+      typed launch contract; neither proves utility completion or malicious intent.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Defense Impairment::Subvert Trust Controls [T1553]
+    references:
+    - https://attack.mitre.org/techniques/T1553/
+  features:
+  - and:
+    - or:
+      - api: CreateProcess
+      - api: CreateProcessInternal
+      - api: CreateProcessAsUser
+      - api: CreateProcessWithToken
+      - api: CreateProcessWithLogon
+    - string: /\A(?:"(?:[^"\r\n]*[\\/])?signtool(?:\.exe)?"|(?:[^\\/\s"\r\n]+[\\/])*signtool(?:\.exe)?)[ \t]+sign[
+        \t]+/f[ \t]+(?:"[^"\r\n]+"|[^\s"\r\n&|<>]+)[ \t]+(?:"[^"\r\n]+\.exe"|[^\s"\r\n&|<>]+\.exe)[ \t]*\Z/i

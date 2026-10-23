@@ -1,0 +1,28 @@
+rule:
+  meta:
+    name: request domain controller authentication via explicit utility command
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: Requests Skeleton Key modification of domain-controller authentication; target DC role remains
+      unproven. Static function-local references are capability candidates only. Dynamic observations require the
+      separate typed launch contract; neither proves utility completion or malicious intent.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Credential Access::Modify Authentication Process::Domain Controller Authentication [T1556.001]
+    - Defense Impairment::Modify Authentication Process::Domain Controller Authentication [T1556.001]
+    - Persistence::Modify Authentication Process::Domain Controller Authentication [T1556.001]
+    references:
+    - https://attack.mitre.org/techniques/T1556/001/
+  features:
+  - and:
+    - or:
+      - api: CreateProcess
+      - api: CreateProcessInternal
+      - api: CreateProcessAsUser
+      - api: CreateProcessWithToken
+      - api: CreateProcessWithLogon
+    - string: /\A(?:"(?:[^"\r\n]*[\\/])?mimikatz(?:\.exe)?"|(?:[^\\/\s"\r\n]+[\\/])*mimikatz(?:\.exe)?)[ \t]+"misc::skeleton"[
+        \t]+"exit"[ \t]*\Z/i

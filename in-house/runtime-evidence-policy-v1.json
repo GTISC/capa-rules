@@ -1,0 +1,85 @@
+{
+  "schema": 1,
+  "scope": "Admission and ownership policy for GTISC dynamic behavior detectors. Detector matches are observation candidates; qualified runtime evidence and ATT&CK technique completion are separate Mal-S2E decisions.",
+  "evidence_levels": [
+    {
+      "id": "trace_observation",
+      "owner": "capa-rules",
+      "requirements": [
+        "paired API entry and return",
+        "successful return according to the API contract",
+        "one process, lifetime, thread or state stream as required by the detector",
+        "all concrete arguments, return values and bindings named by the detector"
+      ],
+      "credit": "observation_candidate"
+    },
+    {
+      "id": "qualified_runtime_evidence",
+      "owner": "Mal-S2E",
+      "requirements": [
+        "trace_observation or source-matched executed location",
+        "frozen sample identity",
+        "original-root or independently verified descendant caller provenance",
+        "technique-specific completed effect contract when the behavior changes OS state"
+      ],
+      "credit": "qualified_runtime_evidence"
+    },
+    {
+      "id": "technique_completion",
+      "owner": "Mal-S2E",
+      "requirements": [
+        "qualified_runtime_evidence",
+        "an explicit technique completion predicate",
+        "all required stages and resulting effects"
+      ],
+      "credit": "technique_completed"
+    }
+  ],
+  "detector_placement": {
+    "capa_yaml": "Use when capa can express every required feature within its dynamic scopes.",
+    "api_sequence_catalog": "Use when success, order, argument bindings, or same-stream constraints exceed capa YAML semantics.",
+    "mal_s2e_effect_contract": "Use for provenance, byte identity, OS effects, and technique completion. These conditions must not be encoded as capa tags."
+  },
+  "rule_admission": [
+    "Map an active ATT&CK ID directly in the detector; never inherit an ID from Mal-Taxonomy by rule name.",
+    "Provide a positive trace fixture and at least one negative fixture that differs in a required success, order, argument, binding, or effect condition.",
+    "Declare the emitted evidence level as observation_candidate.",
+    "List required trace fields and reject unknown or symbolic placeholders for fields used by the predicate.",
+    "Keep detector matching, runtime qualification, and technique completion as distinct report fields."
+  ],
+  "blocked_detector_backlog": [
+    {
+      "attack_id": "T1027.007",
+      "name": "Dynamic API Resolution",
+      "reason": "GetProcAddress or LoadLibrary alone is common runtime linking and does not establish obfuscated resolution.",
+      "required_observables": [
+        "resolved module identity",
+        "function-name or hash provenance",
+        "returned function address",
+        "subsequent invocation bound to that returned address"
+      ]
+    },
+    {
+      "attack_id": "T1497.002",
+      "name": "User Activity Based Checks",
+      "reason": "Repeated input APIs alone do not prove that the program compared user activity or gated execution on it.",
+      "required_observables": [
+        "successful GetCursorPos or GetLastInputInfo returns",
+        "concrete returned coordinates or last-input timestamp",
+        "same-state temporal comparison",
+        "a branch or later behavior data-dependent on the comparison"
+      ]
+    },
+    {
+      "attack_id": "T1496",
+      "name": "Resource Hijacking",
+      "reason": "Cryptocurrency strings, a process launch, or network traffic alone do not establish that the sample consumed victim resources for mining.",
+      "required_observables": [
+        "a concrete mining command line, workload, or protocol exchange",
+        "the destination and payload when a mining protocol is used",
+        "resource consumption attributable to the same process lineage",
+        "original-root or verified descendant provenance"
+      ]
+    }
+  ]
+}

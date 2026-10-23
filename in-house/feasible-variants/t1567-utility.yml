@@ -1,0 +1,27 @@
+rule:
+  meta:
+    name: request exfiltration over web service via explicit utility command
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: Requests uploading a local file through a concrete web-service webhook API; data sensitivity, unauthorized
+      disclosure, and actual upload need qualification. Static function-local references are capability candidates
+      only. Dynamic observations require the separate typed launch contract; neither proves utility completion or
+      malicious intent.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Exfiltration::Exfiltration Over Web Service [T1567]
+    references:
+    - https://attack.mitre.org/techniques/T1567/
+  features:
+  - and:
+    - or:
+      - api: CreateProcess
+      - api: CreateProcessInternal
+      - api: CreateProcessAsUser
+      - api: CreateProcessWithToken
+      - api: CreateProcessWithLogon
+    - string: /\A(?:"(?:[^"\r\n]*[\\/])?curl(?:\.exe)?"|(?:[^\\/\s"\r\n]+[\\/])*curl(?:\.exe)?)[ \t]+-F[ \t]+file=@[A-Z]:\\[^\s"]+[
+        \t]+https://(?:discord\.com|discordapp\.com)/api/webhooks/[0-9]+/[A-Za-z0-9_-]+[ \t]*\Z/i

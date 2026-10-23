@@ -1,0 +1,27 @@
+rule:
+  meta:
+    name: request shell history via explicit utility command
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: Requests access to persistent shell history, a potential credential source. Static function-local
+      references are capability candidates only. Dynamic observations require the separate typed launch contract;
+      neither proves utility completion or malicious intent.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Credential Access::Unsecured Credentials::Shell History [T1552.003]
+    references:
+    - https://attack.mitre.org/techniques/T1552/003/
+  features:
+  - and:
+    - or:
+      - api: CreateProcess
+      - api: CreateProcessInternal
+      - api: CreateProcessAsUser
+      - api: CreateProcessWithToken
+      - api: CreateProcessWithLogon
+    - string: /\A(?:"(?:[^"\r\n]*[\\/])?powershell(?:\.exe)?"|(?:[^\\/\s"\r\n]+[\\/])*powershell(?:\.exe)?)[ \t]+-NoProfile[
+        \t]+-Command[ \t]+"Get-Content[ \t]+\$env:APPDATA\\Microsoft\\Windows\\PowerShell\\PSReadLine\\ConsoleHost_history\.txt"[
+        \t]*\Z/i

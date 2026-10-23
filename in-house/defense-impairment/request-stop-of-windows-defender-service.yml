@@ -1,0 +1,25 @@
+rule:
+  meta:
+    name: request stop of windows defender service
+    namespace: in-house/defense-impairment
+    authors:
+    - MalwareLab
+    description: Launches an explicit stop request for a named Microsoft Defender service. Service-controller success
+      and actual security-tool state remain unqualified. Static matches are capability candidates; dynamic matches
+      are observations from successful calls, not proof of adversary intent or technique completion.
+    scopes:
+      static: function
+      dynamic: call
+    att&ck:
+    - Defense Impairment::Disable or Modify Tools [T1685]
+    references:
+    - https://attack.mitre.org/techniques/T1685/
+  features:
+  - and:
+    - or:
+      - api: CreateProcess
+      - api: CreateProcessInternal
+      - api: CreateProcessAsUser
+      - api: CreateProcessWithToken
+    - string: /\A(?:"(?:[^"\r\n]*[\\/])?(?:sc)(?:\.exe)?"|(?:[^\\/\s"\r\n]+[\\/])*(?:sc)(?:\.exe)?)[ \t]+stop[ \t]+(?:WinDefend|WdNisSvc|Sense)[
+        \t]*\Z/i

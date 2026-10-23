@@ -1,0 +1,25 @@
+rule:
+  meta:
+    name: launch installutil uninstall handler
+    namespace: in-house/stealth
+    authors:
+    - MalwareLab
+    description: Launches InstallUtil in uninstall mode with an assembly operand. The assembly callback and child
+      effects remain separate evidence. Static matches are capability candidates; dynamic matches are observations
+      from successful calls, not proof of adversary intent or technique completion.
+    scopes:
+      static: function
+      dynamic: call
+    att&ck:
+    - Stealth::InstallUtil [T1218.004]
+    references:
+    - https://attack.mitre.org/techniques/T1218/004/
+  features:
+  - and:
+    - or:
+      - api: CreateProcess
+      - api: CreateProcessInternal
+      - api: CreateProcessAsUser
+      - api: CreateProcessWithToken
+    - string: /\A(?:"(?:[^"\r\n]*[\\/])?(?:InstallUtil)(?:\.exe)?"|(?:[^\\/\s"\r\n]+[\\/])*(?:InstallUtil)(?:\.exe)?)[
+        \t]+/U[ \t]+(?:"[^"\r\n]+\.(?:exe|dll)"|[^\s"\r\n]+\.(?:exe|dll))[ \t]*\Z/i

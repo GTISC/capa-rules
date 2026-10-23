@@ -1,0 +1,26 @@
+rule:
+  meta:
+    name: request network service discovery via explicit utility command
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: Requests a TCP service-port scan of an explicit target; discovered services and network impact
+      remain unproven. Static function-local references are capability candidates only. Dynamic observations require
+      the separate typed launch contract; neither proves utility completion or malicious intent.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Discovery::Network Service Discovery [T1046]
+    references:
+    - https://attack.mitre.org/techniques/T1046/
+  features:
+  - and:
+    - or:
+      - api: CreateProcess
+      - api: CreateProcessInternal
+      - api: CreateProcessAsUser
+      - api: CreateProcessWithToken
+      - api: CreateProcessWithLogon
+    - string: /\A(?:"(?:[^"\r\n]*[\\/])?nmap(?:\.exe)?"|(?:[^\\/\s"\r\n]+[\\/])*nmap(?:\.exe)?)[ \t]+-sT[ \t]+-p[
+        \t]+[0-9]+-[0-9]+[ \t]+[\w.-]+[ \t]*\Z/i

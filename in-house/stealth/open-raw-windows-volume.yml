@@ -1,0 +1,21 @@
+rule:
+  meta:
+    name: open raw windows volume
+    namespace: in-house/stealth
+    authors:
+    - MalwareLab
+    description: Opens a raw physical drive or drive-letter volume rather than a normal file. Reads, writes, access
+      masks, and bypass of file access controls require separate effect evidence. Static matches are capability
+      candidates; dynamic matches are observations from successful calls, not proof of adversary intent or technique
+      completion.
+    scopes:
+      static: function
+      dynamic: call
+    att&ck:
+    - Stealth::Direct Volume Access [T1006]
+    references:
+    - https://attack.mitre.org/techniques/T1006/
+  features:
+  - and:
+    - api: CreateFile
+    - string: /\A\\\\\.\\(?:PhysicalDrive[0-9]+|[A-Z]:)\Z/i

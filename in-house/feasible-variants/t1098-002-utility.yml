@@ -1,0 +1,28 @@
+rule:
+  meta:
+    name: request additional email delegate permissions via explicit utility command
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: Requests an additional mailbox delegate with full access. Static function-local references are
+      capability candidates only. Dynamic observations require the separate typed launch contract; neither proves
+      utility completion or malicious intent.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Persistence::Account Manipulation::Additional Email Delegate Permissions [T1098.002]
+    - Privilege Escalation::Account Manipulation::Additional Email Delegate Permissions [T1098.002]
+    references:
+    - https://attack.mitre.org/techniques/T1098/002/
+  features:
+  - and:
+    - or:
+      - api: CreateProcess
+      - api: CreateProcessInternal
+      - api: CreateProcessAsUser
+      - api: CreateProcessWithToken
+      - api: CreateProcessWithLogon
+    - string: /\A(?:"(?:[^"\r\n]*[\\/])?powershell(?:\.exe)?"|(?:[^\\/\s"\r\n]+[\\/])*powershell(?:\.exe)?)[ \t]+-NoProfile[
+        \t]+-Command[ \t]+"Add-MailboxPermission[ \t]+-Identity[ \t]+[\w.@-]+[ \t]+-User[ \t]+[\w.@-]+[ \t]+-AccessRights[
+        \t]+FullAccess"[ \t]*\Z/i

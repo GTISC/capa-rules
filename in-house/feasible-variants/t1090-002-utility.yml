@@ -1,0 +1,27 @@
+rule:
+  meta:
+    name: request external proxy via explicit utility command
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: Requests a public Quick Tunnel proxy to a local service. The actual external endpoint, routing,
+      program identity, and C2 purpose remain unproven. Static function-local references are capability candidates
+      only. Dynamic observations require the separate typed launch contract; neither proves utility completion or
+      malicious intent.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Command and Control::Proxy::External Proxy [T1090.002]
+    references:
+    - https://attack.mitre.org/techniques/T1090/002/
+  features:
+  - and:
+    - or:
+      - api: CreateProcess
+      - api: CreateProcessInternal
+      - api: CreateProcessAsUser
+      - api: CreateProcessWithToken
+      - api: CreateProcessWithLogon
+    - string: /\A(?:"(?:[^"\r\n]*[\\/])?cloudflared(?:\.exe)?"|(?:[^\\/\s"\r\n]+[\\/])*cloudflared(?:\.exe)?)[ \t]+tunnel[
+        \t]+--url[ \t]+http://(?:127\.0\.0\.1|localhost):[0-9]+[ \t]*\Z/i

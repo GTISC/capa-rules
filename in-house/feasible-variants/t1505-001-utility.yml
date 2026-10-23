@@ -1,0 +1,26 @@
+rule:
+  meta:
+    name: request sql stored procedures via explicit utility command
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: Requests automatic startup execution of a named stored procedure; its payload and server state
+      remain unproven. Static function-local references are capability candidates only. Dynamic observations require
+      the separate typed launch contract; neither proves utility completion or malicious intent.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Persistence::Server Software Component::SQL Stored Procedures [T1505.001]
+    references:
+    - https://attack.mitre.org/techniques/T1505/001/
+  features:
+  - and:
+    - or:
+      - api: CreateProcess
+      - api: CreateProcessInternal
+      - api: CreateProcessAsUser
+      - api: CreateProcessWithToken
+      - api: CreateProcessWithLogon
+    - string: /\A(?:"(?:[^"\r\n]*[\\/])?sqlcmd(?:\.exe)?"|(?:[^\\/\s"\r\n]+[\\/])*sqlcmd(?:\.exe)?)[ \t]+-S[ \t]+[\w.\\-]+[
+        \t]+-Q[ \t]+"EXEC[ \t]+sp_procoption[ \t]+\x27[\w]+\x27,[ \t]*\x27startup\x27,[ \t]*\x27on\x27;"[ \t]*\Z/i

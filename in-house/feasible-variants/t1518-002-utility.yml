@@ -1,0 +1,26 @@
+rule:
+  meta:
+    name: request backup software discovery via explicit utility command
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: Requests discovery of installed backup software configuration. Static function-local references
+      are capability candidates only. Dynamic observations require the separate typed launch contract; neither proves
+      utility completion or malicious intent.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Discovery::Software Discovery::Backup Software Discovery [T1518.002]
+    references:
+    - https://attack.mitre.org/techniques/T1518/002/
+  features:
+  - and:
+    - or:
+      - api: CreateProcess
+      - api: CreateProcessInternal
+      - api: CreateProcessAsUser
+      - api: CreateProcessWithToken
+      - api: CreateProcessWithLogon
+    - string: /\A(?:"(?:[^"\r\n]*[\\/])?reg(?:\.exe)?"|(?:[^\\/\s"\r\n]+[\\/])*reg(?:\.exe)?)[ \t]+query[ \t]+"HKLM\\SOFTWARE\\Veeam(?:\\[^"\r\n]+)?"(?:[
+        \t]+/s)?[ \t]*\Z/i

@@ -1,0 +1,25 @@
+rule:
+  meta:
+    name: launch mshta remote hta
+    namespace: in-house/stealth
+    authors:
+    - MalwareLab
+    description: Launches mshta with a remote HTA operand. Downloaded HTA execution and malicious script content
+      are not inferred. Static matches are capability candidates; dynamic matches are observations from successful
+      calls, not proof of adversary intent or technique completion.
+    scopes:
+      static: function
+      dynamic: call
+    att&ck:
+    - Stealth::Mshta [T1218.005]
+    references:
+    - https://attack.mitre.org/techniques/T1218/005/
+  features:
+  - and:
+    - or:
+      - api: CreateProcess
+      - api: CreateProcessInternal
+      - api: CreateProcessAsUser
+      - api: CreateProcessWithToken
+    - string: /\A(?:"(?:[^"\r\n]*[\\/])?(?:mshta)(?:\.exe)?"|(?:[^\\/\s"\r\n]+[\\/])*(?:mshta)(?:\.exe)?)[ \t]+https?://[^\s"\r\n]+\.hta(?:\?[^\s"\r\n]*)?[
+        \t]*\Z/i

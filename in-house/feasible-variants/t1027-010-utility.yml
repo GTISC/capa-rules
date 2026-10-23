@@ -1,0 +1,26 @@
+rule:
+  meta:
+    name: request command obfuscation via explicit utility command
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: Requests decoding and executing an encoded PowerShell command, not just a Base64-like string. Static
+      function-local references are capability candidates only. Dynamic observations require the separate typed
+      launch contract; neither proves utility completion or malicious intent.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Stealth::Obfuscated Files or Information::Command Obfuscation [T1027.010]
+    references:
+    - https://attack.mitre.org/techniques/T1027/010/
+  features:
+  - and:
+    - or:
+      - api: CreateProcess
+      - api: CreateProcessInternal
+      - api: CreateProcessAsUser
+      - api: CreateProcessWithToken
+      - api: CreateProcessWithLogon
+    - string: /\A(?:"(?:[^"\r\n]*[\\/])?powershell(?:\.exe)?"|(?:[^\\/\s"\r\n]+[\\/])*powershell(?:\.exe)?)[ \t]+-NoProfile[
+        \t]+-EncodedCommand[ \t]+[A-Za-z0-9+/]{20,}={0,2}[ \t]*\Z/i

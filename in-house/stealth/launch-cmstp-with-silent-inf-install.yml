@@ -1,0 +1,25 @@
+rule:
+  meta:
+    name: launch cmstp with silent inf install
+    namespace: in-house/stealth
+    authors:
+    - MalwareLab
+    description: Launches the silent INF installation form documented for CMSTP proxy execution. INF content and
+      its launched payload still need inspection. Static matches are capability candidates; dynamic matches are
+      observations from successful calls, not proof of adversary intent or technique completion.
+    scopes:
+      static: function
+      dynamic: call
+    att&ck:
+    - Stealth::CMSTP [T1218.003]
+    references:
+    - https://attack.mitre.org/techniques/T1218/003/
+  features:
+  - and:
+    - or:
+      - api: CreateProcess
+      - api: CreateProcessInternal
+      - api: CreateProcessAsUser
+      - api: CreateProcessWithToken
+    - string: /\A(?:"(?:[^"\r\n]*[\\/])?(?:cmstp)(?:\.exe)?"|(?:[^\\/\s"\r\n]+[\\/])*(?:cmstp)(?:\.exe)?)[ \t]+/s[
+        \t]+(?:"[^"\r\n]+\.inf"|[^\s"\r\n]+\.inf)[ \t]*\Z/i

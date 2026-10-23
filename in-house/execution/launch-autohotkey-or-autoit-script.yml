@@ -1,0 +1,25 @@
+rule:
+  meta:
+    name: launch autohotkey or autoit script
+    namespace: in-house/execution
+    authors:
+    - MalwareLab
+    description: Launches an AutoHotkey or AutoIt interpreter with a script operand. Utility names alone do not
+      match. Static matches are capability candidates; dynamic matches are observations from successful calls, not
+      proof of adversary intent or technique completion.
+    scopes:
+      static: function
+      dynamic: call
+    att&ck:
+    - Execution::AutoHotKey & AutoIT [T1059.010]
+    references:
+    - https://attack.mitre.org/techniques/T1059/010/
+  features:
+  - and:
+    - or:
+      - api: CreateProcess
+      - api: CreateProcessInternal
+      - api: CreateProcessAsUser
+      - api: CreateProcessWithToken
+    - string: /\A(?:"(?:[^"\r\n]*[\\/])?(?:(?:AutoHotkey(?:64|32)?|AutoIt3(?:_x64)?))(?:\.exe)?"|(?:[^\\/\s"\r\n]+[\\/])*(?:(?:AutoHotkey(?:64|32)?|AutoIt3(?:_x64)?))(?:\.exe)?)[
+        \t]+(?:(?:"[^"\r\n]+\.(?:ahk|au3)")|(?:[^\s"\r\n]+\.(?:ahk|au3)))[ \t]*\Z/i

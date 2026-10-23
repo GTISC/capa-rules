@@ -1,6 +1,15 @@
 {
   "schema": 1,
   "scope": "Evidence-backed Windows API sequences. Matches are observed trace candidates, not qualified execution coverage.",
+  "evidence_level": "observation_candidate",
+  "required_trace_semantics": [
+    "paired entry and return",
+    "API-specific successful return",
+    "same process, lifetime, and execution state",
+    "ordered calls",
+    "concrete arguments required by each stage",
+    "stable binding across stages"
+  ],
   "rules": [
     {
       "id": "sam-and-system-hive-saves",

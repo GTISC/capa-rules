@@ -1,0 +1,28 @@
+rule:
+  meta:
+    name: request scheduled transfer via explicit utility command
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: Requests a daily scheduled local-file upload. Task registration, later triggering, remote acceptance,
+      and exfiltration intent require qualification. Static function-local references are capability candidates
+      only. Dynamic observations require the separate typed launch contract; neither proves utility completion or
+      malicious intent.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Exfiltration::Scheduled Transfer [T1029]
+    references:
+    - https://attack.mitre.org/techniques/T1029/
+  features:
+  - and:
+    - or:
+      - api: CreateProcess
+      - api: CreateProcessInternal
+      - api: CreateProcessAsUser
+      - api: CreateProcessWithToken
+      - api: CreateProcessWithLogon
+    - string: /\A(?:"(?:[^"\r\n]*[\\/])?schtasks(?:\.exe)?"|(?:[^\\/\s"\r\n]+[\\/])*schtasks(?:\.exe)?)[ \t]+/Create[
+        \t]+/TN[ \t]+[\w.-]+[ \t]+/SC[ \t]+DAILY[ \t]+/ST[ \t]+(?:[01][0-9]|2[0-3]):[0-5][0-9][ \t]+/TR[ \t]+"curl\.exe[
+        \t]+-F[ \t]+file=@C:\\[^\s"]+[ \t]+https://[^\s"]+/upload"[ \t]*\Z/i

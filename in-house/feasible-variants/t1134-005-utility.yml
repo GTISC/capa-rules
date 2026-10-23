@@ -1,0 +1,27 @@
+rule:
+  meta:
+    name: request sid-history injection via explicit utility command
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: Requests addition of a SID to an account SID history. Static function-local references are capability
+      candidates only. Dynamic observations require the separate typed launch contract; neither proves utility completion
+      or malicious intent.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Privilege Escalation::Access Token Manipulation::SID-History Injection [T1134.005]
+    - Stealth::Access Token Manipulation::SID-History Injection [T1134.005]
+    references:
+    - https://attack.mitre.org/techniques/T1134/005/
+  features:
+  - and:
+    - or:
+      - api: CreateProcess
+      - api: CreateProcessInternal
+      - api: CreateProcessAsUser
+      - api: CreateProcessWithToken
+      - api: CreateProcessWithLogon
+    - string: /\A(?:"(?:[^"\r\n]*[\\/])?mimikatz(?:\.exe)?"|(?:[^\\/\s"\r\n]+[\\/])*mimikatz(?:\.exe)?)[ \t]+"sid::add[
+        \t]+/sam:[\w.-]+[ \t]+/new:S-[0-9-]+"[ \t]+"exit"[ \t]*\Z/i

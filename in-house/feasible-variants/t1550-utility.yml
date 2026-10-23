@@ -1,0 +1,27 @@
+rule:
+  meta:
+    name: request use alternate authentication material via explicit utility command
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: Requests reuse of supplied Kerberos authentication material. Static function-local references are
+      capability candidates only. Dynamic observations require the separate typed launch contract; neither proves
+      utility completion or malicious intent.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Credential Access::Use Alternate Authentication Material [T1550]
+    - Lateral Movement::Use Alternate Authentication Material [T1550]
+    references:
+    - https://attack.mitre.org/techniques/T1550/
+  features:
+  - and:
+    - or:
+      - api: CreateProcess
+      - api: CreateProcessInternal
+      - api: CreateProcessAsUser
+      - api: CreateProcessWithToken
+      - api: CreateProcessWithLogon
+    - string: /\A(?:"(?:[^"\r\n]*[\\/])?rubeus(?:\.exe)?"|(?:[^\\/\s"\r\n]+[\\/])*rubeus(?:\.exe)?)[ \t]+ptt[ \t]+/ticket:[^\s&|<>]+[
+        \t]*\Z/i

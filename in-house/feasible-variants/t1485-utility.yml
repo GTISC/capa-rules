@@ -1,0 +1,26 @@
+rule:
+  meta:
+    name: request data destruction via explicit utility command
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: Requests destructive overwrite deletion of a file operand. Static function-local references are
+      capability candidates only. Dynamic observations require the separate typed launch contract; neither proves
+      utility completion or malicious intent.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Impact::Data Destruction [T1485]
+    references:
+    - https://attack.mitre.org/techniques/T1485/
+  features:
+  - and:
+    - or:
+      - api: CreateProcess
+      - api: CreateProcessInternal
+      - api: CreateProcessAsUser
+      - api: CreateProcessWithToken
+      - api: CreateProcessWithLogon
+    - string: /\A(?:"(?:[^"\r\n]*[\\/])?sdelete(?:\.exe)?"|(?:[^\\/\s"\r\n]+[\\/])*sdelete(?:\.exe)?)[ \t]+-p[ \t]+[1-9][0-9]*[
+        \t]+(?:"[^"\r\n]+"|[^\s"\r\n&|<>]+)[ \t]*\Z/i

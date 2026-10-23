@@ -1,0 +1,22 @@
+rule:
+  meta:
+    name: reference an Outlook rule application-start action
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: References Outlook rules and an application-start action in one COM-capable function; saved rule
+      configuration and trigger execution remain unproven. Static capability candidate only; never qualified runtime
+      evidence.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Persistence::Office Application Startup::Outlook Rules [T1137.005]
+    references:
+    - https://attack.mitre.org/techniques/T1137/005/
+  features:
+  - and:
+    - api: CoCreateInstance
+    - string: Outlook.Application
+    - string: Rules
+    - string: StartApplication

@@ -1,0 +1,27 @@
+rule:
+  meta:
+    name: request system script proxy execution via explicit utility command
+    namespace: in-house/feasible-variants
+    authors:
+    - MalwareLab
+    description: Requests a system administration script with a scriptlet moniker. Static function-local references
+      are capability candidates only. Dynamic observations require the separate typed launch contract; neither proves
+      utility completion or malicious intent.
+    scopes:
+      static: function
+      dynamic: unsupported
+    att&ck:
+    - Stealth::System Script Proxy Execution [T1216]
+    references:
+    - https://attack.mitre.org/techniques/T1216/
+  features:
+  - and:
+    - or:
+      - api: CreateProcess
+      - api: CreateProcessInternal
+      - api: CreateProcessAsUser
+      - api: CreateProcessWithToken
+      - api: CreateProcessWithLogon
+    - string: /\A(?:"(?:[^"\r\n]*[\\/])?cscript(?:\.exe)?"|(?:[^\\/\s"\r\n]+[\\/])*cscript(?:\.exe)?)[ \t]+(?://nologo[
+        \t]+)?(?:"[^"\r\n]*[\\/])?pubprn\.vbs"?[ \t]+[^\s"]+[ \t]+(?:"[^"\r\n]+"|[^\s"\r\n&|<>]+)[ \t]+script:https?://[^\s"]+[
+        \t]*\Z/i
